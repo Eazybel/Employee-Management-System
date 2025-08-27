@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a modern, elegant font like 'Poppins' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body class="font-['Poppins'] bg-[#eef2f6] text-[#334155] min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Message Box -->
+    <div id="message-box" class="message-box"></div>
+
+    <!-- Main Content Section -->
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-lg w-full">
+        <h1 class="text-4xl font-bold text-gray-800 text-center mb-2">Welcome Back!</h1>
+        <p class="text-center text-gray-500 mb-8">Sign in to your company's admin account.</p>
+
+        <form id="login-form" action="#" method="POST" class="space-y-6">
+
+            <!-- Email Input -->
+            <div>
+                <label for="admin-email" class="block text-sm font-medium text-gray-600 mb-1">Email Address</label>
+                <div class="relative">
+                    <i class="fas fa-user-shield absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="email" id="admin-email" name="adminEmail" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., admin@company.com">
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div>
+                <label for="admin-password" class="block text-sm font-medium text-gray-600 mb-1">Password</label>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="admin-password" name="adminPassword" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="Enter your password">
+                </div>
+            </div>
+            <!-- Forgot Password -->
+            <div class="text-right">
+                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200 text-sm">Forgot your password?</a>
+            </div>
+            <!-- Login Button -->
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+            </div>
+            <!-- Registration Link -->
+            <p class="text-center text-gray-500 mt-4 text-sm">
+                Want to register your company? <a href="./Company-Profile.html" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">Register here</a>
+            </p>
+        </form>
+    </div>
+    <!-- Script for form submission -->
+    <script>
+        
+    </script>
+</body>
+</html>
