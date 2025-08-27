@@ -1,3 +1,6 @@
+// Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+// initialisation of the tags
 const messageBox = document.getElementById("message-box");
 const registrationForm = document.getElementById("registration-form");
 // Company Information
@@ -19,3 +22,14 @@ const hrPhone = document.getElementById("hr-phone");
 const adminEmail = document.getElementById("admin-email");
 const adminPassword = document.getElementById("admin-password");
 const confirmPassword = document.getElementById("confirm-password");
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBKSuvaWfC7v1bwH12pVJTilwyk3mamxxI",
+    authDomain: "employee-managment-syste-fdd4c.firebaseapp.com",
+    projectId: "employee-managment-syste-fdd4c",
+    storageBucket: "employee-managment-syste-fdd4c.firebasestorage.app",
+    messagingSenderId: "1016929288920",
+    appId: "1:1016929288920:web:0cc4e437af745933430dad"
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);

@@ -24,7 +24,7 @@
         <h1 class="text-4xl font-bold text-gray-800 text-center mb-2">Welcome Back!</h1>
         <p class="text-center text-gray-500 mb-8">Sign in to your company's admin account.</p>
 
-        <form id="login-form" action="#" method="POST" class="space-y-6">
+        <form >
 
             <!-- Email Input -->
             <div>
@@ -34,7 +34,6 @@
                     <input type="email" id="admin-email" name="adminEmail" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., admin@company.com">
                 </div>
             </div>
-
             <!-- Password Input -->
             <div>
                 <label for="admin-password" class="block text-sm font-medium text-gray-600 mb-1">Password</label>
@@ -49,7 +48,7 @@
             </div>
             <!-- Login Button -->
             <div class="pt-2">
-                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
+                <button id="btn" type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
                     <i class="fas fa-sign-in-alt mr-2"></i>Sign In
                 </button>
             </div>
