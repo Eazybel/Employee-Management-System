@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a modern, elegant font like 'Poppins' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="font-['Poppins'] bg-[#eef2f6] text-[#334155] min-h-screen flex flex-col items-center">
+
+    <!-- Message Box -->
+    <div id="message-box" class="message-box"></div>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto p-4 md:p-8 lg:p-12 w-full max-w-4xl flex-grow">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 lg:p-14">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-6">Company Registration</h1>
+            <p class="text-center text-gray-500 mb-8">Please provide your company's information to get started.</p>
+
+            <form id="registration-form" action="#" method="POST" class="space-y-8">
+
+                <!-- Company Information Section -->
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-200">Company Information</h2>
+                    
+                    <!-- Company Name & Sector -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="company-name" class="block text-sm font-medium text-gray-600 mb-1">Company Name</label>
+                            <div class="relative">
+                                <i class="fas fa-building absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="company-name" name="companyName" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Syntax Solutions">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="sector" class="block text-sm font-medium text-gray-600 mb-1">Sector</label>
+                            <div class="relative">
+                                <i class="fas fa-industry absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="sector" name="sector" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Technology">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Address & Number of Employees -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-600 mb-1">Address</label>
+                            <div class="relative">
+                                <i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" id="address" name="address" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 123 Corporate Blvd">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="employees" class="block text-sm font-medium text-gray-600 mb-1">Number of Employees</label>
+                            <div class="relative">
+                                <i class="fas fa-users absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="number" id="employees" name="employees" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Logo & Date of Foundation -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="logo" class="block text-sm font-medium text-gray-600 mb-1">Company Logo</label>
+                            <input type="file" id="logo" name="logo" class="block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-indigo-50 file:text-indigo-700
+                                hover:file:bg-indigo-100 transition-colors duration-200">
+                        </div>
+                        <div>
+                            <label for="foundation-date" class="block text-sm font-medium text-gray-600 mb-1">Date of Foundation</label>
+                            <div class="relative">
+                                <i class="fas fa-calendar-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="date" id="foundation-date" name="foundationDate" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Primary Contact & HR Information Section -->
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-200">Contact Information</h2>
+
+                    <!-- Primary Contact -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-medium text-gray-600">Primary Contact</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="primary-name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+                                <div class="relative">
+                                    <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" id="primary-name" name="primaryName" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Jane Doe">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="primary-email" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                                <div class="relative">
+                                    <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="email" id="primary-email" name="primaryEmail" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., jane@company.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="primary-phone" class="block text-sm font-medium text-gray-600 mb-1">Phone</label>
+                                <div class="relative">
+                                    <i class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="tel" id="primary-phone" name="primaryPhone" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., +1 (555) 123-4567">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- HR Contact -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-medium text-gray-600">HR Contact</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="hr-name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+                                <div class="relative">
+                                    <i class="fas fa-user-tie absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" id="hr-name" name="hrName" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., David Chen">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="hr-email" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+                                <div class="relative">
+                                    <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="email" id="hr-email" name="hrEmail" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., hr@company.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="hr-phone" class="block text-sm font-medium text-gray-600 mb-1">Phone</label>
+                                <div class="relative">
+                                    <i class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                    <input type="tel" id="hr-phone" name="hrPhone" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., +1 (555) 987-6543">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Account Section -->
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-200">Admin Account</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="admin-email" class="block text-sm font-medium text-gray-600 mb-1">Administrator Email</label>
+                            <div class="relative">
+                                <i class="fas fa-user-shield absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" id="admin-email" name="adminEmail" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., admin@company.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="admin-password" class="block text-sm font-medium text-gray-600 mb-1">Password</label>
+                            <div class="relative">
+                                <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" id="admin-password" name="adminPassword" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="Set a strong password">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-600 mb-1">Confirm Password</label>
+                            <div class="relative">
+                                <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" id="confirm-password" name="confirmPassword" required class="w-full rounded-lg border-2 border-gray-200 pl-10 pr-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="Re-enter password">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-6">
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
+                        <i class="fas fa-user-plus mr-2"></i>Register Company
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12 w-full">
+        <div class="container mx-auto px-6 md:px-12 lg:px-20">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-sm mt-2">
+                    Developed by <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-200">Syntax Designs</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- A simple script to handle form submission -->
+    <script>
+       
+    </script>
+</body>
+</html>
