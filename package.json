@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "name": "employee-management-system",
+  "version": "1.0.0",
+  "description": "Welcome to the **Employee Management System** — a modern solution for managing workforce data with clarity, security, and scalability. This project is built to help organizations streamline employee records, track performance, and handle file uploads with ease.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon servver.js",
+    "start": "node servver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eazybel/Employee-Management-System.git"
+  },
+  "author": "Ezedin Kamil Yassin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eazybel/Employee-Management-System/issues"
+  },
+  "homepage": "https://github.com/Eazybel/Employee-Management-System#readme"
+}
