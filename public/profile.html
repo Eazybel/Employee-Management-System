@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a modern, elegant font like 'Poppins' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="font-['Poppins'] bg-[#eef2f6] text-[#334155] min-h-screen flex flex-col items-center">
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto p-4 md:p-8 lg:p-12 w-full max-w-4xl flex-grow">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 lg:p-14">
+            
+            <!-- Header and Save Button -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-gray-200">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Employee Profile</h1>
+                <button id="saveBtn" class="mt-4 sm:mt-0 bg-green-600 text-white font-medium py-2 px-6 rounded-full shadow-md hover:bg-green-700 transition-colors duration-300 transform hover:scale-105">
+                    <i class="fas fa-save mr-2"></i>Save Changes
+                </button>
+            </div>
+            
+            <!-- Profile Details Section -->
+            <div class="space-y-8">
+                
+                <!-- Profile Photo Section -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center text-center relative">
+                    <button class="absolute top-4 right-4 text-indigo-500 hover:text-indigo-700 edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <label class="cursor-pointer">
+                        <img src="https://placehold.co/150x150/6d28d9/ffffff?text=JD" alt="Employee Profile Photo" class="w-40 h-40 rounded-full border-4 border-indigo-400 shadow-lg mb-4 hover:border-indigo-600 transition-colors duration-200">
+                        <input type="file" class="hidden file-input" accept="image/*">
+                    </label>
+                    <h2 class="text-3xl font-bold text-gray-900">John Doe</h2>
+                    <p class="text-lg text-indigo-600 font-medium">Software Engineer</p>
+                </div>
+                
+                <!-- Personal Information Section -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Personal Information</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
+                        <!-- Full Name -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Full Name</p>
+                                <p class="text-base font-medium text-gray-800">John Doe</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Gender -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Gender</p>
+                                <p class="text-base font-medium text-gray-800">Male</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Birthdate -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Birthdate</p>
+                                <p class="text-base font-medium text-gray-800">1990-05-20</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Marital Status -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Marital Status</p>
+                                <p class="text-base font-medium text-gray-800">Married</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Email Address -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Email Address</p>
+                                <p class="text-base font-medium text-gray-800">john.doe@example.com</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Address -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Address</p>
+                                <p class="text-base font-medium text-gray-800">123 Corporate Blvd, Business City</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Emergency Contact Section -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Emergency Contact</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
+                        <!-- Contact Name -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Contact Name</p>
+                                <p class="text-base font-medium text-gray-800">Jane Doe</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Contact Phone -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Contact Phone</p>
+                                <p class="text-base font-medium text-gray-800">+1 (555) 987-6543</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employment Details Section -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Employment Details</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
+                        <!-- Job Title -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Job Title</p>
+                                <p class="text-base font-medium text-gray-800">Software Engineer</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Employee Type -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Employee Type</p>
+                                <p class="text-base font-medium text-gray-800">Full-time</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Date of Hire -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Date of Hire</p>
+                                <p class="text-base font-medium text-gray-800">2020-03-15</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <!-- Bank Account Number -->
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Bank Account Number</p>
+                                <p class="text-base font-medium text-gray-800">1234567890</p>
+                            </div>
+                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Documents Section -->
+                <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Documents</h3>
+                    <div class="flex items-center justify-between flex-wrap gap-4">
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="bg-indigo-50 text-indigo-700 py-2 px-4 rounded-full font-medium text-sm hover:bg-indigo-100 transition-colors duration-200">
+                                <i class="fas fa-file-alt mr-2"></i>View CV
+                            </a>
+                            <a href="#" class="bg-indigo-50 text-indigo-700 py-2 px-4 rounded-full font-medium text-sm hover:bg-indigo-100 transition-colors duration-200">
+                                <i class="fas fa-certificate mr-2"></i>View Certifications
+                            </a>
+                        </div>
+                        <button class="text-sm text-indigo-500 hover:text-indigo-700 font-medium transition-colors duration-200 edit-btn">
+                            <i class="fas fa-edit mr-1"></i>Edit Documents
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12 w-full">
+        <div class="container mx-auto px-6 md:px-12 lg:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Our Company</h4>
+                    <p class="text-sm">We are a leading provider of innovative employee management solutions, dedicated to empowering businesses to thrive.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Services</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-white mb-4">Contact Info</h4>
+                    <p class="text-sm">123 Corporate Blvd, Suite 456<br>Business City, BC 78901<br>info@company.com<br>+1 (800) 555-0199</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-sm text-gray-500">&copy; 2024 Your Company. All rights reserved.</p>
+                <p class="text-sm mt-2">
+                    Developed by <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-200">Syntax Designs</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Script for the buttons -->
+    <script>
+    </script>
+</body>
+</html>
