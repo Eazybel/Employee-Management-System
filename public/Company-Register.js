@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 // initialisation of the tags
 const messageBox = document.getElementById("message-box");
 const registrationForm = document.getElementById("registration-form");
+const btn=document.getElementById("btn")
 // Company Information
 const companyName = document.getElementById("company-name");
 const sector = document.getElementById("sector");
@@ -19,9 +21,7 @@ const hrName = document.getElementById("hr-name");
 const hrEmail = document.getElementById("hr-email");
 const hrPhone = document.getElementById("hr-phone");
 // Admin Account
-const adminEmail = document.getElementById("admin-email");
-const adminPassword = document.getElementById("admin-password");
-const confirmPassword = document.getElementById("confirm-password");
+
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyBKSuvaWfC7v1bwH12pVJTilwyk3mamxxI",
@@ -32,4 +32,26 @@ const confirmPassword = document.getElementById("confirm-password");
     appId: "1:1016929288920:web:0cc4e437af745933430dad"
   };
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+btn.onclick=(e)=>{
+const email = document.getElementById("admin-email").value.trim();
+const password = document.getElementById("admin-password").value.trim();
+const passwordConfirm = document.getElementById("confirm-password").value.trim();
+    e.preventDefault()
+    if (password!==passwordConfirm) {
+       return alert("Password Missmatch")
+    }else if(password===passwordConfirm){
+        createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+       alert("Registered")
+       console.log(user.uid)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    }
+  }
