@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  const express=require("express")
+  
 // initialisation of the tags
 const messageBox = document.getElementById("message-box");
 const registrationForm = document.getElementById("registration-form");
