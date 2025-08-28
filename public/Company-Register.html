@@ -22,7 +22,7 @@
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-6">Company Registration</h1>
             <p class="text-center text-gray-500 mb-8">Please provide your company's information to get started.</p>
 
-            <form >
+            <form id="form">
 
                 <div class="space-y-6">
                     <h2 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-200">Company Information</h2>
@@ -63,7 +63,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="logo" class="block text-sm font-medium text-gray-600 mb-1">Company Logo</label>
-                            <input type="file" id="logo" name="logo" class="block w-full text-sm text-gray-500
+                            <input type="file" id="logo" name="image" class="block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
@@ -162,15 +162,15 @@
                         </div>
                     </div>
                 </div>
-           
                 <div class="pt-6">
                     <button id="btn" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
                         <i class="fas fa-user-plus mr-2"></i>Register Company
                     </button>
                 </div>
-            <p class="text-center text-gray-500 mt-4 text-sm">
- <a href="./logIn.html" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">Back to login</a>
-            </p>
+                <p class="text-center text-gray-500 mt-4 text-sm">
+                    <a href="./logIn.html" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">Back to login</a>
+                </p>
+            </form>
         </div>
     </main>
 

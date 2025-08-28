@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-  const express=require("express")
-  
 // initialisation of the tags
 const messageBox = document.getElementById("message-box");
 const registrationForm = document.getElementById("registration-form");
@@ -34,24 +32,40 @@ const hrPhone = document.getElementById("hr-phone");
     appId: "1:1016929288920:web:0cc4e437af745933430dad"
   };
   // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const form=document.getElementById("form")
 btn.onclick=(e)=>{
+     const forms=new FormData(form)
+  e.preventDefault()
 const email = document.getElementById("admin-email").value.trim();
 const password = document.getElementById("admin-password").value.trim();
 const passwordConfirm = document.getElementById("confirm-password").value.trim();
-    e.preventDefault()
     if (password!==passwordConfirm) {
        return alert("Password Missmatch")
     }else if(password===passwordConfirm){
         createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        alert("Registered")
+        forms.append("companyUID",user.uid)
    
+      }).then(()=>{
+        fetch("/",{
+          method:"POST",
+          body:forms
+        })
+        .then((res)=>{
+          return res.text()
+        }).then(data=>{
+          console.log(data)
+        })
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
     }
+
+
   }

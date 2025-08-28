@@ -1,4 +1,38 @@
+const Company=require("../model/Company-Schema")
 const companyPost=(req,res)=>{
-res.send("post sucessfull")
+const company=new Company({
+    companyName:req.body.companyName,
+    companyUID:req.body.companyUID,
+    sector:req.body.sector,
+    address:req.body.address,
+    employees:req.body.employees,
+    companyLogo: {
+    path: req.file.path,
+    originalName: req.file.filename
+  },
+  foundationDate:req.body.foundationDate,
+  primaryContact: {
+    fullName:req.body.primaryName,
+    email:req.body.primaryEmail,
+    phone:req.body.primaryPhone
+  },
+  hrContact: {
+    fullName:req.body.hrName,
+    email:req.body.hrEmail,
+    phone:req.body.hrPhone
+  },
+   adminAccount: {
+    email:req.body.adminEmail,
+    password:req.body.adminPassword
+},
+ companyUID:req.body.companyUID,
+})
+company.save()
+.then(()=>{
+    console.log("saved")
+}).catch((err)=>{
+    console.log(err)
+})
+res.send("Sucessfull")
 }
 module.exports=companyPost
