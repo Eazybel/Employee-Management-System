@@ -85,6 +85,6 @@ const companySchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const Company = mongoose.model('Company', companySchema);
+const Company = mongoose.model('Company', companySchema,"Companys");
 
 module.exports=Company

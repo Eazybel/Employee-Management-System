@@ -39,10 +39,11 @@ const form = document.getElementById('form');
     fetch("/employeeRegister",{
         method:"POST",
         body:forms
-    }).then(res=>{
-        return res.json()
-    }).then(data=>{
-        console.table(data)
+    }).then(()=>{
+        alert("Employee Registered Sucessully")
+        window.location="./Employee-Register.html"
+    }).catch(err=>{
+        console.log(err)
     })
 }
     } else {
