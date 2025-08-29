@@ -64,14 +64,15 @@ const EmployeeSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    documents: [{
+    document: {
       path: {
         type: String
       },
       originalname: {
         type: String
       }
-    }]
+    },
+    
   }
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps

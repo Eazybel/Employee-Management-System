@@ -8,18 +8,28 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
     messagingSenderId: "1016929288920",
     appId: "1:1016929288920:web:0cc4e437af745933430dad"
   };
+// Variables initialization
+const addEmployeeBtn = document.getElementById('addEmployeeBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// Get the filter input elements by their IDs
+const nameFilter = document.getElementById('name-filter');
+const jobTitleFilter = document.getElementById('job-title-filter');
+const jobTypeFilter = document.getElementById('job-type-filter');
+
+// Get the filter and employee list elements
+const filterBtn = document.getElementById('filterBtn');
+const employeeList = document.getElementById('employee-list');
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    fetch("/employees")
-    .then((res)=>{
-      return res.text()
-    }).catch((err)=>{
-      console.log(err)
-    })
+  addEmployeeBtn.onclick=()=>{
+    window.location="./Employee-Register.html"
+  }
+    console.log("sucess")
   } else {
      window.location="./logIn.html"
   }

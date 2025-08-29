@@ -29,14 +29,14 @@
                     <!-- Full Name -->
                     <div>
                         <label for="full-name" class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
-                        <input type="text" id="full-name" name="fullName" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., John Doe">
+                        <input type="text" id="full-name" name="fullName"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., John Doe">
                     </div>
 
                     <!-- Gender & Birthdate -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="gender" class="block text-sm font-medium text-gray-600 mb-1">Gender</label>
-                            <select id="gender" name="gender" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                            <select id="gender" name="gender"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
                                 <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -46,13 +46,13 @@
                         <div class="relative">
                             <label for="birthdate" class="block text-sm font-medium text-gray-600 mb-1">Birthdate</label>
                             <!-- The native calendar icon is handled by the browser and cannot be removed with Tailwind alone. -->
-                            <input type="date" id="birthdate" name="birthdate" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                            <input type="date" id="birthdate" name="birthdate"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
                         </div>
                     </div>
                     <!-- Marital Status -->
                     <div>
                         <label for="marital-status" class="block text-sm font-medium text-gray-600 mb-1">Marital Status</label>
-                        <select id="marital-status" name="maritalStatus" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                        <select id="marital-status" name="maritalStatus"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
                             <option value="">Select Marital Status</option>
                             <option value="Single">Single</option>
                             <option value="Married">Married</option>
@@ -76,39 +76,37 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., john.doe@example.com">
+                            <input type="email" id="email" name="email"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., john.doe@example.com">
                         </div>
                         <div>
                             <label for="address" class="block text-sm font-medium text-gray-600 mb-1">Address</label>
-                            <input type="text" id="address" name="address" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 123 Main St, Anytown">
+                            <input type="text" id="address" name="address"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 123 Main St, Anytown">
                         </div>
-                    </div>
-                    
+                    </div>                   
                     <!-- Emergency Contact -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="emergency-name" class="block text-sm font-medium text-gray-600 mb-1">Emergency Contact Name</label>
-                            <input type="text" id="emergency-name" name="emergencyName" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Jane Doe">
+                            <input type="text" id="emergency-name" name="emergencyName"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Jane Doe">
                         </div>
                         <div>
                             <label for="emergency-phone" class="block text-sm font-medium text-gray-600 mb-1">Emergency Contact Phone</label>
-                            <input type="tel" id="emergency-phone" name="emergencyPhone" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., +1 (555) 987-6543">
+                            <input type="tel" id="emergency-phone" name="emergencyPhone"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., +1 (555) 987-6543">
                         </div>
                     </div>
                 </div>
                 <!-- Employment Details Section -->
                 <div class="space-y-4 pt-6">
                     <h2 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-200">Employment Details</h2>
-                    
                     <!-- Job Title & Employee Type -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="job-title" class="block text-sm font-medium text-gray-600 mb-1">Job Title</label>
-                            <input type="text" id="job-title" name="jobTitle" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Software Engineer">
+                            <input type="text" id="job-title" name="jobTitle"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., Software Engineer">
                         </div>
                         <div>
                             <label for="employee-type" class="block text-sm font-medium text-gray-600 mb-1">Employee Type</label>
-                            <select id="employee-type" name="employeeType" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                            <select id="employee-type" name="employeeType"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
                                 <option value="">Select Type</option>
                                 <option value="Full-time">Full-time</option>
                                 <option value="Part-time">Part-time</option>
@@ -116,23 +114,22 @@
                             </select>
                         </div>
                     </div>
-
                     <!-- Date of Hire & Bank Account Number -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="relative">
                             <label for="date-of-hire" class="block text-sm font-medium text-gray-600 mb-1">Date of Hire</label>
-                            <input type="date" id="date-of-hire" name="dateOfHire" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
+                            <input type="date" id="date-of-hire" name="dateOfHire"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
                         </div>
                         <div>
                             <label for="bank-account" class="block text-sm font-medium text-gray-600 mb-1">Bank Account Number</label>
-                            <input type="text" id="bank-account" name="bankAccount" required class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 1234567890">
+                            <input type="text" id="bank-account" name="bankAccount"  class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200" placeholder="e.g., 1234567890">
                         </div>
                     </div>
 
                     <!-- Documents -->
                     <div>
-                        <label for="documents" class="block text-sm font-medium text-gray-600 mb-1">Documents (CV, Certifications)</label>
-                        <input type="file" id="documents" name="documents" multiple class="block w-full text-sm text-gray-500
+                        <label for="document" class="block text-sm font-medium text-gray-600 mb-1">CV, Certifications</label>
+                        <input type="file" id="document" name="document" class="block w-full text-sm text-gray-500
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
                             file:text-sm file:font-semibold
@@ -140,10 +137,9 @@
                             hover:file:bg-indigo-100 transition-colors duration-200">
                     </div>
                 </div>
-
                 <!-- Submit Button -->
                 <div class="pt-6">
-                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
+                    <button id="btn" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
                         <i class="fas fa-user-plus mr-2"></i>Register Employee
                     </button>
                 </div>
@@ -180,7 +176,6 @@
             </div>
         </div>
     </footer>
-
     <!-- A simple script to handle form submission -->
    <script type="module" src="Employee-Register.js"></script>
 </body>

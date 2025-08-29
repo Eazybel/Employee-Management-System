@@ -13,9 +13,25 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
+  const fullName = document.getElementById('full-name').value.trim();
+const gender = document.getElementById('gender').value.trim();
+const birthdate = document.getElementById('birthdate').value.trim();
+const maritalStatus = document.getElementById('marital-status').value.trim();
+const profilePhoto = document.getElementById('profile-photo').value.trim();
+const email = document.getElementById('email').value.trim();
+const address = document.getElementById('address').value.trim();
+const emergencyName = document.getElementById('emergency-name').value.trim();
+const emergencyPhone = document.getElementById('emergency-phone').value.trim();
+const jobTitle = document.getElementById('job-title').value.trim();
+const employeeType = document.getElementById('employee-type').value.trim();
+const dateOfHire = document.getElementById('date-of-hire').value.trim();
+const bankAccount = document.getElementById('bank-account').value.trim();
+const documents = document.getElementById('document').value.trim();
   if (user) {
     const uid = user.uid;
-    alert("sucess")
+btn.onclick=()=>{
+  console.log(fullName,gender,birthdate,maritalStatus,profilePhoto,email,address,emergencyName,emergencyPhone,jobTitle,employeeType,dateOfHire,bankAccount,documents)
+}
   } else {
      window.location="./logIn.html"
   }
