@@ -20,8 +20,8 @@ const password = document.getElementById("admin-password").value.trim();
 signInWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
 const user = userCredential.user;
-alert("logged Ined")
-console.log(user.uid)
+localStorage.setItem("UID",user.uid)
+window.location="./index.html"
  }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;

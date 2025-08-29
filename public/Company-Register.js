@@ -58,7 +58,7 @@ const passwordConfirm = document.getElementById("confirm-password").value.trim()
         .then((res)=>{
           return res.text()
         }).then(data=>{
-          console.log(data)
+          window.location="./logIn.html"
         })
       })
       .catch((error) => {

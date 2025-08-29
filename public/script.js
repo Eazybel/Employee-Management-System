@@ -15,7 +15,6 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    alert("sucess")
   } else {
      window.location="./logIn.html"
   }
