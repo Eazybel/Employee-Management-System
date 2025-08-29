@@ -41,6 +41,10 @@ btn.onclick=(e)=>{
 const email = document.getElementById("admin-email").value.trim();
 const password = document.getElementById("admin-password").value.trim();
 const passwordConfirm = document.getElementById("confirm-password").value.trim();
+if(!form.checkValidity()){
+  form.reportValidity()
+  return
+}
     if (password!==passwordConfirm) {
        return alert("Password Missmatch")
     }else if(password===passwordConfirm){
