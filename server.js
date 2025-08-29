@@ -1,6 +1,7 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const companyPost=require("./controllers/Company-Post")
+const employeesFetch=require("./controllers/employeesFetch")
 const multer=require("multer")
 const path=require("path")
 require("dotenv").config()
@@ -31,6 +32,7 @@ mongoose.connect(string)
 app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"public/index.html"))
 })
+app.get("/employeesFee",employeesFetch)
 app.post("/",upload.single("image"),companyPost)
 app.listen(5000,()=>{
     console.log("Server Listening to Port 5000")

@@ -14,7 +14,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    const uid = user.uid;
+    fetch("/employees")
+    .then((res)=>{
+      return res.text()
+    }).catch((err)=>{
+      console.log(err)
+    })
   } else {
      window.location="./logIn.html"
   }
