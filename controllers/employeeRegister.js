@@ -4,6 +4,40 @@ const mongoose=require("mongoose")
 
 const employeeRegister=async(req,res)=>{
     const companyName=await Company.findOne({"companyUID":`${req.body.UID}`})
-    res.send(req.file)
+    const employeeModel=mongoose.model("employeeModel",EmployeeSchema,`${companyName.companyName}`)
+    const newEmployee=new employeeModel({
+         personalInfo: {
+            fullName:req.body.fullName,
+            gender:req.body.gender,
+            birthdate:req.body.birthdate,
+            maritalStatus:req.body.maritalStatus,
+            profilePhoto: {
+              path:req.body.path,
+              originalname:req.body.filename
+            },
+            email:req.body.email,
+            address:req.body.address,
+            emergencyContact: {
+              name:req.body.emergencyName,
+              phone:req.body.emergencyPhone
+            }
+          },
+          employmentDetails: {
+            jobTitle:req.body.jobTitle,
+            employeeType:req.body.employeeType,
+            dateOfHire:req.body.dateOfHire,
+            bankAccount:req.body.bankAccount,
+            document: {
+              path:req.body.path,
+              originalname:req.body.filename
+            },
+            
+          }
+    })
+    newEmployee.save()
+    .then(()=>{
+        console.log(`Employee Saved For ${companyName.companyName}`)
+    })
+    res.send(req.body)
 }
 module.exports=employeeRegister

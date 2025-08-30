@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const EmployeeSchema = new mongoose.Schema({
   personalInfo: {
     fullName: {
@@ -29,7 +28,6 @@ const EmployeeSchema = new mongoose.Schema({
     email: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true
     },
     address: {

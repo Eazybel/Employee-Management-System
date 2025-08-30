@@ -30,7 +30,8 @@ const form = document.getElementById('form');
         return res.text()
     }).then((data)=>{
         console.log(data)
-        alert("Employee Registered Sucessully")
+        alert("Employee Registered Sucessully You Can Add-More")
+        form.reset()
     }).catch(err=>{
         console.log(err)
     })
