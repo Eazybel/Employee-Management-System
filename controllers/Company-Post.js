@@ -29,6 +29,7 @@ const company=new Company({
 })
 company.save()
 .then(()=>{
+  res.send("Sucess")
   console.log("Saved")
 }).catch((err)=>{
   console.log(err)

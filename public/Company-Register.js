@@ -58,9 +58,7 @@ if(!form.checkValidity()){
           method:"POST",
           body:forms
         })
-        .then((res)=>{
-          return res.text()
-        }).then(data=>{
+        .then(()=>{
           alert("Company Registered Sucessfully")
           window.location="./logIn.html"
         })
