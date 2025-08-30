@@ -4,7 +4,6 @@ const mongoose=require("mongoose")
 
 const employeeRegister=async(req,res)=>{
     const companyName=await Company.findOne({"companyUID":`${req.body.UID}`})
-    console.log(companyName.companyName)
-    res.send(companyName.companyName)
+    res.send(req.file)
 }
 module.exports=employeeRegister
