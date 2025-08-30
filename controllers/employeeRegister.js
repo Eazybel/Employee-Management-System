@@ -3,8 +3,8 @@ const Company=require("../model/Company-Schema")
 const mongoose=require("mongoose")
 
 const employeeRegister=async(req,res)=>{
-    const companyName=await Company.find()
+    const companyName=await Company.findOne()
 
-    res.send(req.body.companyName)
+    res.send(companyName)
 }
 module.exports=employeeRegister

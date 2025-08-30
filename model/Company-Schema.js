@@ -42,7 +42,6 @@ const companySchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true,
-      unique: true,
       lowercase: true
     },
     phone: {
@@ -61,7 +60,6 @@ const companySchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true,
-      unique: true,
       lowercase: true
     },
     phone: {

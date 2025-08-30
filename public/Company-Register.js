@@ -58,16 +58,17 @@ if(!form.checkValidity()){
           method:"POST",
           body:forms
         })
-        .then(()=>{
-           alert("Company Registered Sucessfully")
-        }).then(()=>{
+        .then((res)=>{
+          return res.text()
+        }).then(data=>{
+          alert("Company Registered Sucessfully")
           window.location="./logIn.html"
         })
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage)
+        alert(errorMessage)
       });
     }
 

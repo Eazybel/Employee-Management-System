@@ -29,10 +29,9 @@ const company=new Company({
 })
 company.save()
 .then(()=>{
-    console.log("saved")
+  console.log("Saved")
 }).catch((err)=>{
-    console.log(err)
+  console.log(err)
 })
-res.send("Sucessfull")
 }
 module.exports=companyPost
