@@ -2,7 +2,9 @@ const EmployeeSchema=require("../model/Employee-Schema")
 const Company=require("../model/Company-Schema")
 const mongoose=require("mongoose")
 
-const employeeRegister=(req,res)=>{
-    res.json(req.body)
+const employeeRegister=async(req,res)=>{
+    const companyName=await Company.find()
+
+    res.send(req.body.companyName)
 }
 module.exports=employeeRegister

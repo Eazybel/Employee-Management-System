@@ -31,6 +31,7 @@ const form = document.getElementById('form');
     if (user) {
     submitBtn.onclick=(e)=>{
     const forms=new FormData(form)
+    forms.append("UID",user.uid)
     if(!form.checkValidity()){
         form.reportValidity()
         return
@@ -39,7 +40,10 @@ const form = document.getElementById('form');
     fetch("/employeeRegister",{
         method:"POST",
         body:forms
-    }).then(()=>{
+    }).then((res)=>{
+        return res.text()
+    }).then((data)=>{
+        console.log(data)
         alert("Employee Registered Sucessully")
         window.location="./Employee-Register.html"
     }).catch(err=>{
