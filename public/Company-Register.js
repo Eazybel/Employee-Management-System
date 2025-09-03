@@ -2,25 +2,13 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 // initialisation of the tags
-const messageBox = document.getElementById("message-box");
-const registrationForm = document.getElementById("registration-form");
+
 const btn=document.getElementById("btn")
 // Company Information
-const companyName = document.getElementById("company-name");
-const sector = document.getElementById("sector");
-const address = document.getElementById("address");
-const employees = document.getElementById("employees");
+
 const logo = document.getElementById("logo");
-const foundationDate = document.getElementById("foundation-date");
+
 // Primary Contact
-const primaryName = document.getElementById("primary-name");
-const primaryEmail = document.getElementById("primary-email");
-const primaryPhone = document.getElementById("primary-phone");
-// HR Contact
-const hrName = document.getElementById("hr-name");
-const hrEmail = document.getElementById("hr-email");
-const hrPhone = document.getElementById("hr-phone");
-// Admin Account
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
