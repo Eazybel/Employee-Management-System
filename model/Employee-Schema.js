@@ -17,14 +17,7 @@ const EmployeeSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    profilePhoto: {
-      path: {
-        type: String
-      },
-      originalname: {
-        type: String
-      }
-    },
+    profilePhoto: String,
     email: {
       type: String,
       required: true,
@@ -62,14 +55,7 @@ const EmployeeSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    document: {
-      path: {
-        type: String
-      },
-      originalname: {
-        type: String
-      }
-    },
+    document: String,
     
   }
 }, {

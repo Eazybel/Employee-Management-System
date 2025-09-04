@@ -6,7 +6,7 @@
 const btn=document.getElementById("btn")
 // Company Information
 
-const logo = document.getElementById("logo");
+
 
 // Primary Contact
 
@@ -22,8 +22,9 @@ const logo = document.getElementById("logo");
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  btn.onclick=async(e)=>{
   const form=document.getElementById("form")
-btn.onclick=(e)=>{
+  const file = document.getElementById("logo").files[0];
      const forms=new FormData(form)
   e.preventDefault()
 const email = document.getElementById("admin-email").value.trim();
@@ -35,19 +36,45 @@ if(!form.checkValidity()){
 }
     if (password!==passwordConfirm) {
        return alert("Password Missmatch")
-    }else if(password===passwordConfirm){
-        createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    }
+       const userAuther=await createUserWithEmailAndPassword(auth, email, password)
+           .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              alert(errorMessage)
+            });
+        const user = userAuther.user;
         forms.append("companyUID",user.uid)
-   
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage)
-      });
+    
+      try {
+        const cloudinary=new FormData(form)
+        cloudinary.append("file",file)
+        cloudinary.append("upload_preset","companysLogo")
+         
+       await fetch("https://api.cloudinary.com/v1_1/dgietnwua/image/upload",{
+          method:"POST",
+          body:cloudinary
+        })
+        .then((res)=>{
+          return res.json()
+        }).then(data=>{
+          forms.append("imageUrl",data.url)
+          alert("Company Registered Sucessfully")
+        })
+
+       await fetch("/",{
+          method:"POST",
+          body:forms
+        }).then(()=>{
+          window.location="./logIn.html"
+        })
+        
+      } catch (error) {
+        console.log(error)
+      }
+      
+  
     }
 
 
-  }
+  

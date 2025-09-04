@@ -6,10 +6,7 @@ const company=new Company({
     sector:req.body.sector,
     address:req.body.address,
     employees:req.body.employees,
-    companyLogo: {
-    path: req.file.path,
-    originalName: req.file.filename
-  },
+    companyLogo: req.body.imageUrl,
   foundationDate:req.body.foundationDate,
   primaryContact: {
     fullName:req.body.primaryName,

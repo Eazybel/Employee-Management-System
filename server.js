@@ -1,9 +1,10 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const companyPost=require("./controllers/Company-Post")
-const employeesFetch=require("./controllers/employeesFetch")
 const employeeRegister=require("./controllers/employeeRegister")
 const companyFetch=require("./controllers/companyFetch")
+const multer=require("multer")
+const upload=multer()
 const path=require("path")
 require("dotenv").config()
 const string=process.env.STRING
@@ -22,8 +23,11 @@ app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"public/index.html"))
 })
 app.get("/companyFetch",companyFetch)
-app.post("/employeeRegister",employeeRegister)
-app.post("/",companyPost)
+app.post("/employeeRegister",upload.fields([
+   { name:"profilePhoto",maxCount:1},
+   { name:"document",maxCount:1}
+]),employeeRegister)
+app.post("/",upload.single("image"),companyPost)
 app.listen(5000,()=>{
     console.log("Server Listening to Port 5000")
 })

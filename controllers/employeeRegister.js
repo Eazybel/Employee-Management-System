@@ -11,10 +11,7 @@ const employeeRegister=async(req,res)=>{
             gender:req.body.gender,
             birthdate:req.body.birthdate,
             maritalStatus:req.body.maritalStatus,
-            profilePhoto: {
-              path:req.body.path,
-              originalname:req.body.filename
-            },
+            profilePhoto:req.body.profileUrl,
             email:req.body.email,
             address:req.body.address,
             emergencyContact: {
@@ -27,10 +24,7 @@ const employeeRegister=async(req,res)=>{
             employeeType:req.body.employeeType,
             dateOfHire:req.body.dateOfHire,
             bankAccount:req.body.bankAccount,
-            document: {
-              path:req.body.path,
-              originalname:req.body.filename
-            },
+            document: req.body.documentUrl,
             
           }
     })

@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebas
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 const submitBtn = document.getElementById('btn');
 const form = document.getElementById('form');
+
  const firebaseConfig = {
     apiKey: "AIzaSyBKSuvaWfC7v1bwH12pVJTilwyk3mamxxI",
     authDomain: "employee-managment-syste-fdd4c.firebaseapp.com",
@@ -15,7 +16,7 @@ const form = document.getElementById('form');
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
-    submitBtn.onclick=(e)=>{
+    submitBtn.onclick=async(e)=>{
     const forms=new FormData(form)
     forms.append("UID",user.uid)
     if(!form.checkValidity()){
@@ -23,18 +24,45 @@ const form = document.getElementById('form');
         return
     }
     e.preventDefault()
-    fetch("/employeeRegister",{
+try {
+    
+    const cv=document.getElementById("document").files[0]
+    const cloudinary1=new FormData()
+        cloudinary1.append("file",cv)
+        cloudinary1.append("upload_preset","employeeDocument")
+        
+    const cloudinary2=new FormData()
+const profileImage=document.getElementById("profile-photo").files[0]
+        cloudinary2.append("file",profileImage)
+        cloudinary2.append("upload_preset","employeeProfile")
+
+const [cvRes,profileRes]=await Promise.all([
+     fetch("https://api.cloudinary.com/v1_1/dgietnwua/raw/upload",{
+        method:"POST",
+        body:cloudinary1
+    }),
+    fetch("https://api.cloudinary.com/v1_1/dgietnwua/image/upload",{
+            method:"POST",
+            body:cloudinary2
+        })
+])
+const data1=await cvRes.json()
+const data2=await profileRes.json()
+forms.append("documentUrl",data1.url)
+forms.append("profileUrl",data2.url)
+const toTheBackend=fetch("/employeeRegister",{
         method:"POST",
         body:forms
-    }).then((res)=>{
-        return res.text()
-    }).then((data)=>{
-        console.log(data)
+    })
+    const res3=await toTheBackend
+    const data3=await res3.json()
+    .then(()=>{
         alert("Employee Registered Sucessully You Can Add-More")
         form.reset()
-    }).catch(err=>{
-        console.log(err)
     })
+} catch (error) {
+    console.log(error)
+}
 }
     } else {
        window.location="./logIn.html"

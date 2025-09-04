@@ -24,10 +24,7 @@ const companySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  companyLogo: {
-    path: String,
-    originalName: String
-  },
+  companyLogo:String,
   foundationDate: {
     type: Date,
     required: true
