@@ -41,15 +41,6 @@ if(!form.checkValidity()){
         const user = userCredential.user;
         forms.append("companyUID",user.uid)
    
-      }).then(()=>{
-        fetch("/",{
-          method:"POST",
-          body:forms
-        })
-        .then(()=>{
-          alert("Company Registered Sucessfully")
-          window.location="./logIn.html"
-        })
       })
       .catch((error) => {
         const errorCode = error.code;
