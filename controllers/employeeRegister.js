@@ -9,6 +9,7 @@ const employeeRegister=async(req,res)=>{
          personalInfo: {
             fullName:req.body.fullName,
             gender:req.body.gender,
+            phone:req.body.phone,
             birthdate:req.body.birthdate,
             maritalStatus:req.body.maritalStatus,
             profilePhoto:req.body.profileUrl,

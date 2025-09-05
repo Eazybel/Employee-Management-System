@@ -41,14 +41,14 @@ fetch("/myEmployees",{
   for (let i = 0; i < data.length; i++) {
    employeeList.insertAdjacentHTML("beforeend",`<div class="employee-card bg-white rounded-3xl shadow-xl p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center"
                  data-name="John Doe" data-job-title="Software Engineer" data-job-type="Full-time">
-                <img src="${data[i].profilePhoto}" alt="${data[i].personalInfo.fullName}" class="w-24 h-24 rounded-full border-4 border-indigo-400 mb-4 shadow-lg">
+                <img src="${data[i].personalInfo.profilePhoto}" alt="${data[i].personalInfo.fullName}" class="w-24 h-24 rounded-full border-4 border-indigo-400 mb-4 shadow-lg">
                 <h3 class="text-2xl font-bold text-gray-900">${data[i].personalInfo.fullName}</h3>
                 <p class="text-indigo-600 font-medium mb-2">${data[i].employmentDetails.jobTitle}</p>
                 <div class="text-sm text-gray-600 mb-4 space-y-1">
-                    <p><i class="fas fa-envelope mr-2"></i>${data[i].email}</p>
-                    <p><i class="fas fa-phone-alt mr-2"></i>${data[i].email}</p>
-                    <p><i class="fas fa-venus-mars mr-2"></i>Male</p>
-                    <p><i class="fas fa-calendar-alt mr-2"></i>Hired: 2020-03-15</p>
+                    <p><i class="fas fa-envelope mr-2"></i>${data[i].personalInfo.email}</p>
+                    <p><i class="fas fa-phone-alt mr-2"></i>${data[i].personalInfo.phone}</p>
+                    <p><i class="fas fa-venus-mars mr-2"></i>${data[i].personalInfo.gender}</p>
+                    <p><i class="fas fa-calendar-alt mr-2"></i>Hired: ${data[i].employmentDetails.dateOfHire.slice(0,10)}</p>
                 </div>
                 <button class="see-profile-btn bg-indigo-600 text-white w-full py-3 rounded-xl font-medium shadow-md hover:bg-indigo-700 transition-colors duration-300">
                     See Full Profile
