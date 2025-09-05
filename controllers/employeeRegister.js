@@ -1,4 +1,4 @@
-const EmployeeSchema=require("../model/Employee-Schema")
+const {EmployeeSchema}=require("../model/Employee-Schema")
 const Company=require("../model/Company-Schema")
 const mongoose=require("mongoose")
 

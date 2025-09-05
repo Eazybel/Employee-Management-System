@@ -61,5 +61,5 @@ const EmployeeSchema = new mongoose.Schema({
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
-
-module.exports = EmployeeSchema;
+const employeesModel=mongoose.model("employeesModel",EmployeeSchema)
+module.exports = {employeesModel,EmployeeSchema};
