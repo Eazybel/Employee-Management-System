@@ -11,6 +11,17 @@ const form = document.getElementById('form');
     messagingSenderId: "1016929288920",
     appId: "1:1016929288920:web:0cc4e437af745933430dad"
   };
+  let cloudImage;
+  let cloudRaw;
+fetch("/hide")
+.then(res=>{
+  return res.json()
+})
+.then(data=>{
+cloudImage=data.urlImage
+cloudRaw=data.urlRaw
+
+})
   const app = initializeApp(firebaseConfig);
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth();
@@ -37,11 +48,11 @@ const profileImage=document.getElementById("profile-photo").files[0]
         cloudinary2.append("upload_preset","employeeProfile")
 
 const [cvRes,profileRes]=await Promise.all([
-     fetch("https://api.cloudinary.com/v1_1/dgietnwua/raw/upload",{
+     fetch(cloudRaw,{
         method:"POST",
         body:cloudinary1
     }),
-    fetch("https://api.cloudinary.com/v1_1/dgietnwua/image/upload",{
+    fetch(cloudImage,{
             method:"POST",
             body:cloudinary2
         })

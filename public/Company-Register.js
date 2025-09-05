@@ -5,7 +5,14 @@
 
 const btn=document.getElementById("btn")
 // Company Information
-
+let cloudImage;
+fetch("/hide")
+.then(res=>{
+  return res.json()
+})
+.then(data=>{
+cloudImage=data.urlImage
+})
 
 
 // Primary Contact
@@ -51,7 +58,7 @@ if(!form.checkValidity()){
         cloudinary.append("file",file)
         cloudinary.append("upload_preset","companysLogo")
          
-       await fetch("https://api.cloudinary.com/v1_1/dgietnwua/image/upload",{
+       await fetch(cloudImage,{
           method:"POST",
           body:cloudinary
         })
