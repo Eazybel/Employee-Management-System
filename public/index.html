@@ -13,7 +13,7 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="min-h-screen flex flex-col">
+<body id="body" class="min-h-screen flex flex-col">
 
     <!-- Header Section -->
     <header class="bg-white shadow-lg py-4 px-6 md:px-12 lg:px-20 sticky top-0 z-50">
@@ -57,17 +57,8 @@
             <!-- Job Type Filter -->
             <div class="flex-grow">
                 <label for="job-type-filter" class="block text-sm font-medium text-gray-600 mb-1">By-Job Type</label>
-                <select id="job-type-filter" class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200">
-                    <option value="">All</option>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Contract">Contract</option>
-                </select>
-            </div>
-
-            <button id="filterBtn" class="bg-indigo-500 text-white font-medium py-2 px-6 rounded-lg shadow-md hover:bg-indigo-600 transition-colors duration-300 transform hover:scale-105 self-end md:self-auto">
-                <i class="fas fa-filter mr-2"></i>Filter
-            </button>
+                <input type="text" id="job-type-filter" placeholder="e.g., Full-time" class="w-full rounded-lg border-2 border-gray-200 px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors duration-200"/>
+        </div>
         </div>
 
         <!-- Employee Cards Section -->
