@@ -62,7 +62,6 @@ fetch("/myEmployees",{
   </button>
 </div>
 `) 
-    
   }
   }).then(()=>{
  const jobTitles=document.querySelectorAll("p.jobTitles")
