@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { signOut,getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
  const firebaseConfig = {
     apiKey: "AIzaSyBKSuvaWfC7v1bwH12pVJTilwyk3mamxxI",
     authDomain: "employee-managment-syste-fdd4c.firebaseapp.com",
@@ -37,8 +37,8 @@ fetch("/myEmployees",{
     return res.json()
   })
   .then(data=>{
-    console.log(data)
-  for (let i = 0; i < data.length; i++) {
+   if (data.length>0) {
+    for (let i = 0; i < data.length; i++) {
    employeeList.insertAdjacentHTML("beforeend",`<div class="employee-card bg-white rounded-3xl shadow-xl p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center"
      data-name="${data[i].personalInfo.fullName}" 
      data-job-title="${data[i].employmentDetails.jobTitle}" 
@@ -63,6 +63,19 @@ fetch("/myEmployees",{
 </div>
 `) 
   }
+   }else{
+    employeeList.insertAdjacentHTML("beforeend",
+      `  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
+                No employees registered, please add employees
+            </h1>
+            <p class="text-sm text-gray-600">
+                Get started by adding your first employee to the system.
+            </p>
+        </div>`
+    )
+   }
+  
   }).then(()=>{
  const jobTitles=document.querySelectorAll("p.jobTitles")
  const names=document.querySelectorAll("h3.names")
@@ -110,6 +123,12 @@ fetch("/myEmployees",{
   .catch(err=>{
     console.log(err)
   })
+  logoutBtn.onclick=()=>{
+      signOut(auth)
+      .then(()=>{
+        window.location="./logIn.html"
+      })
+  }
   addEmployeeBtn.onclick=()=>{
     window.location="./Employee-Register.html"
   }
