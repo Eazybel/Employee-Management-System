@@ -22,8 +22,8 @@
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <img src="https://placehold.co/120x120/a855f7/ffffff?text=JD" alt="Company Logo" class="w-12 h-12 rounded-lg">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight">
-                    Employee Management System
+                <h1 class="text-xl md:text-4xl font-bold text-gray-800 tracking-tight">
+                    Employee Management
                 </h1>
             </div>
             
@@ -48,8 +48,12 @@
                     </div>
                 </div>
 
-                <button id="addEmployeeBtn" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105 hidden md:flex items-center">
-                    <i class="fas fa-plus mr-2"></i>Add Employee
+                <button id="addEmployeeBtn" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105 flex items-center">
+                    <i class="fas fa-plus mr-2 hidden md:inline-block"></i>
+                    <span class="md:hidden">
+                       <i class="fas fa-user-plus"></i>
+                    </span>
+                    <span class="hidden md:inline-block">Add Employee</span>
                 </button>
             </div>
         </div>
@@ -58,25 +62,25 @@
     <main class="flex-grow container mx-auto p-4 md:p-8 lg:p-12">
 
        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-4">
-    <button class="bg-blue-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-user-shield mr-1"></i> Manage Admins
-    </button>
-    <button class="bg-green-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-green-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-calendar-check mr-1"></i> Manage Leave Requests
-    </button>
-    <button class="bg-yellow-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-yellow-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-user-slash mr-1"></i> Manage Absence
-    </button>
-    <button class="bg-indigo-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-clock mr-1"></i> Manage Late Arrival
-    </button>
-    <button class="bg-purple-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-history mr-1"></i> Overtime Management
-    </button>
-    <button class="bg-orange-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-orange-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
-        <i class="fas fa-star mr-1"></i> Promotion Management
-    </button>
-</div>
+            <button class="bg-blue-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-user-shield mr-1"></i> Manage Admins
+            </button>
+            <button class="bg-green-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-green-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-calendar-check mr-1"></i> Manage Leave Requests
+            </button>
+            <button class="bg-yellow-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-yellow-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-user-slash mr-1"></i> Manage Absence
+            </button>
+            <button class="bg-indigo-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-clock mr-1"></i> Manage Late Arrival
+            </button>
+            <button class="bg-purple-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-history mr-1"></i> Overtime Management
+            </button>
+            <button class="bg-orange-600 text-white font-medium py-2 px-3 rounded-xl shadow-md hover:bg-orange-700 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center text-sm">
+                <i class="fas fa-star mr-1"></i> Promotion Management
+            </button>
+        </div>
         
         <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-6">
             <h2 class="text-xl font-semibold text-gray-700">Filter Employees</h2>

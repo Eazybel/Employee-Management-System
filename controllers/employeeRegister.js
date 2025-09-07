@@ -21,6 +21,7 @@ const employeeRegister=async(req,res)=>{
             }
           },
           employmentDetails: {
+             employeeID:req.body.employeeID,
             jobTitle:req.body.jobTitle,
             employeeType:req.body.employeeType,
             dateOfHire:req.body.dateOfHire,

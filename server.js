@@ -25,7 +25,7 @@ app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"public/index.html"))
 })
 app.post("/myEmployees",myEmployees)
-app.get("/companyFetch",companyFetch)
+app.get("/companyFetch/:uid",companyFetch)
 app.get("/hide",hide)
 app.post("/employeeRegister",upload.fields([
    { name:"profilePhoto",maxCount:1},

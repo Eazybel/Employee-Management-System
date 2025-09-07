@@ -20,13 +20,26 @@ fetch("/hide")
 .then(data=>{
 cloudImage=data.urlImage
 cloudRaw=data.urlRaw
-
 })
   const app = initializeApp(firebaseConfig);
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      let employeeID;
+        fetch(`/companyFetch/${user.uid}`)
+        .then((res)=>{
+           return res.text()
+        })
+        .then((data)=>{
+          let companyAbr=data
+            const now= new Date()
+            const year=now.getFullYear()
+            let employeeNumber=localStorage.getItem("numberOfEmployee").padStart(3,"0")
+            employeeNumber=Number(employeeNumber)+1
+            employeeNumber=String(employeeNumber).padStart(3,"0")
+        employeeID=`${companyAbr.slice(0,3)}${year}${employeeNumber}`
+        })
     submitBtn.onclick=async(e)=>{
     const forms=new FormData(form)
     forms.append("UID",user.uid)
@@ -61,6 +74,7 @@ const data1=await cvRes.json()
 const data2=await profileRes.json()
 forms.append("documentUrl",data1.url)
 forms.append("profileUrl",data2.url)
+forms.append("employeeID",employeeID)
 const toTheBackend=fetch("/employeeRegister",{
         method:"POST",
         body:forms

@@ -37,6 +37,7 @@ fetch("/myEmployees",{
     return res.json()
   })
   .then(data=>{
+   localStorage.setItem("numberOfEmployee",data.length)
    if (data.length>0) {
     for (let i = 0; i < data.length; i++) {
    employeeList.insertAdjacentHTML("beforeend",`<div class="employee-card bg-white rounded-3xl shadow-xl p-6 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex flex-col items-center text-center"
@@ -46,18 +47,19 @@ fetch("/myEmployees",{
 
   <img src="${data[i].personalInfo.profilePhoto}" alt="${data[i].personalInfo.fullName}" class="w-24 h-24 rounded-full border-4 border-indigo-400 mb-4 shadow-lg">
 
-  <h3 class="text-2xl font-bold text-gray-900 names">${data[i].personalInfo.fullName}</h3>
+  <h3 class="text-lg font-bold text-gray-900 names">${data[i].personalInfo.fullName}</h3>
   <p class="text-indigo-600 font-medium mb-2 jobTitles">${data[i].employmentDetails.jobTitle}</p>
-  <p class="text-gray-500 font-semibold mb-2 jobType">${data[i].employmentDetails.employeeType}</p> <!-- 👈 Job Type added -->
+  <p class="text-gray-500 font-semibold mb-2 jobType">${data[i].employmentDetails.employeeType}</p>
 
   <div class="text-sm text-gray-600 mb-4 space-y-1">
+    <p><i class="fas fa-id-badge mr-2"></i>ID: ${data[i].employmentDetails.employeeID}</p> <!-- 👈 Employee ID added -->
     <p><i class="fas fa-envelope mr-2"></i>${data[i].personalInfo.email}</p>
     <p><i class="fas fa-phone-alt mr-2"></i>${data[i].personalInfo.phone}</p>
     <p><i class="fas fa-venus-mars mr-2"></i>${data[i].personalInfo.gender}</p>
     <p><i class="fas fa-calendar-alt mr-2"></i>Hired: ${data[i].employmentDetails.dateOfHire.slice(0,10)}</p>
   </div>
 
-  <button class="see-profile-btn bg-indigo-600 text-white w-full py-3 rounded-xl font-medium shadow-md hover:bg-indigo-700 transition-colors duration-300">
+  <button id="profileBtn" class="see-profile-btn bg-indigo-600 text-white w-full py-3 rounded-xl font-medium shadow-md hover:bg-indigo-700 transition-colors duration-300">
     See Full Profile
   </button>
 </div>
@@ -80,6 +82,7 @@ fetch("/myEmployees",{
  const jobTitles=document.querySelectorAll("p.jobTitles")
  const names=document.querySelectorAll("h3.names")
  const jobType=document.querySelectorAll("p.jobType")
+const profileBtn=document.querySelectorAll("#profileBtn")
 
   jobTitleFilter.addEventListener("keyup",(e)=>{
     let target=e.target.value
@@ -117,8 +120,11 @@ fetch("/myEmployees",{
     }
    });
   })
-  
-
+  profileBtn.forEach(btns=>{
+  btns.onclick=()=>{
+    window.location="./Employee-Profile.html"
+  }
+  })
   })
   .catch(err=>{
     console.log(err)
