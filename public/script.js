@@ -52,7 +52,7 @@ fetch("/myEmployees",{
   <p class="text-gray-500 font-semibold mb-2 jobType">${data[i].employmentDetails.employeeType}</p>
 
   <div class="text-sm text-gray-600 mb-4 space-y-1">
-    <p><i class="fas fa-id-badge mr-2"></i>ID: ${data[i].employmentDetails.employeeID}</p> <!-- 👈 Employee ID added -->
+    <p class="employeeID"><i class="fas fa-id-badge mr-2" ></i>ID: ${data[i].employmentDetails.employeeID}</p> <!-- 👈 Employee ID added -->
     <p><i class="fas fa-envelope mr-2"></i>${data[i].personalInfo.email}</p>
     <p><i class="fas fa-phone-alt mr-2"></i>${data[i].personalInfo.phone}</p>
     <p><i class="fas fa-venus-mars mr-2"></i>${data[i].personalInfo.gender}</p>
@@ -122,7 +122,9 @@ const profileBtn=document.querySelectorAll("#profileBtn")
   })
   profileBtn.forEach(btns=>{
   btns.onclick=()=>{
-    window.location="./Employee-Profile.html"
+   const profilerID=btns.parentElement.querySelector("p.employeeID").innerText.replace("ID: ","")
+   localStorage.setItem("profilerID",profilerID)
+   window.location="./Employee-Profile.html"
   }
   })
   })
