@@ -8,8 +8,4 @@ const myEmployees=async(req,res)=>{
     const allEmployees=await myEmployeeModel.find()
 res.json(allEmployees)
 }
-const employeeProfile=async(req,res)=>{
-    
-    res.send()
-}
-module.exports={myEmployees,employeeProfile}
+module.exports=myEmployees

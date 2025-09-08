@@ -16,89 +16,89 @@
         <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 lg:p-14">
             
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-gray-200">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Employee Profile</h1>
+                <h1 id="profile-title" class="text-3xl md:text-4xl font-bold text-gray-800">Employee Profile</h1>
                 <button id="saveBtn" class="mt-4 sm:mt-0 bg-green-600 text-white font-medium py-2 px-6 rounded-full shadow-md hover:bg-green-700 transition-colors duration-300 transform hover:scale-105">
-                    <i class="fas fa-save mr-2"></i>Save Changes
+                    <i class="fas fa-save mr-2"></i><span id="save-btn-text">Save Changes</span>
                 </button>
             </div>
             
             <div class="space-y-8">
                 
                 <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center text-center relative">
-                    <button class="absolute top-4 right-4 text-indigo-500 hover:text-indigo-700 edit-btn">
+                    <button id="edit-profile-btn" class="absolute top-4 right-4 text-indigo-500 hover:text-indigo-700 edit-btn">
                         <i class="fas fa-edit"></i>
                     </button>
                     <label class="cursor-pointer">
-                        <img src="https://placehold.co/150x150/6d28d9/ffffff?text=JD" alt="Employee Profile Photo" class="w-40 h-40 rounded-full border-4 border-indigo-400 shadow-lg mb-4 hover:border-indigo-600 transition-colors duration-200">
+                        <img id="profile-photo" alt="Employee Profile Photo" class="w-40 h-40 rounded-full border-4 border-indigo-400 shadow-lg mb-4 hover:border-indigo-600 transition-colors duration-200">
                         <input type="file" class="hidden file-input" accept="image/*">
                     </label>
-                    <h2 class="text-3xl font-bold text-gray-900">John Doe</h2>
-                    <p class="text-lg text-indigo-600 font-medium">Software Engineer</p>
+                    <h2 id="employee-name-heading" class="text-3xl font-bold text-gray-900"></h2>
+                    <p id="employee-title" class="text-lg text-indigo-600 font-medium"></p>
                 </div>
                 
                 <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
-                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Personal Information</h3>
+                    <h3 id="personal-info-heading" class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Personal Information</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Full Name</p>
-                                <p class="text-base font-medium text-gray-800">John Doe</p>
+                                <p id="full-name-label" class="text-sm text-gray-500">Full Name</p>
+                                <p id="full-name-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-full-name-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Gender</p>
-                                <p class="text-base font-medium text-gray-800">Male</p>
+                                <p id="gender-label" class="text-sm text-gray-500">Gender</p>
+                                <p id="gender-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-gender-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Phone</p>
-                                <p class="text-base font-medium text-gray-800">00000000</p>
+                                <p id="phone-label" class="text-sm text-gray-500">Phone</p>
+                                <p id="phone-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-phone-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Birthdate</p>
-                                <p class="text-base font-medium text-gray-800">1990-05-20</p>
+                                <p id="birthdate-label" class="text-sm text-gray-500">Birthdate</p>
+                                <p id="birthdate-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-birthdate-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Marital Status</p>
-                                <p class="text-base font-medium text-gray-800">Married</p>
+                                <p id="marital-status-label" class="text-sm text-gray-500">Marital Status</p>
+                                <p id="marital-status-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-marital-status-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Email Address</p>
-                                <p class="text-base font-medium text-gray-800">john.doe@example.com</p>
+                                <p id="email-label" class="text-sm text-gray-500">Email Address</p>
+                                <p id="email-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-email-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Address</p>
-                                <p class="text-base font-medium text-gray-800">123 Corporate Blvd, Business City</p>
+                                <p id="address-label" class="text-sm text-gray-500">Address</p>
+                                <p id="address-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-address-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
@@ -106,23 +106,23 @@
                 </div>
                 
                 <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
-                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Emergency Contact</h3>
+                    <h3 id="emergency-contact-heading" class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Emergency Contact</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Contact Name</p>
-                                <p class="text-base font-medium text-gray-800">Jane Doe</p>
+                                <p id="contact-name-label" class="text-sm text-gray-500">Contact Name</p>
+                                <p id="contact-name-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-contact-name-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Contact Phone</p>
-                                <p class="text-base font-medium text-gray-800">+1 (555) 987-6543</p>
+                                <p id="contact-phone-label" class="text-sm text-gray-500">Contact Phone</p>
+                                <p id="contact-phone-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-contact-phone-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
@@ -130,41 +130,47 @@
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
-                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Employment Details</h3>
+                    <h3 id="employment-details-heading" class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Employment Details</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Job Title</p>
-                                <p class="text-base font-medium text-gray-800">Software Engineer</p>
+                                <p id="job-title-label" class="text-sm text-gray-500">Job Title</p>
+                                <p id="job-title-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-job-title-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Employee Type</p>
-                                <p class="text-base font-medium text-gray-800">Full-time</p>
+                                <p id="employee-id-label" class="text-sm text-gray-500">Employee ID</p>
+                                <p id="employee-id-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p id="employee-type-label" class="text-sm text-gray-500">Employee Type</p>
+                                <p id="employee-type-value" class="text-base font-medium text-gray-800"></p>
+                            </div>
+                            <button id="edit-employee-type-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Date of Hire</p>
-                                <p class="text-base font-medium text-gray-800">2020-03-15</p>
+                                <p id="hire-date-label" class="text-sm text-gray-500">Date of Hire</p>
+                                <p id="hire-date-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-hire-date-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm text-gray-500">Bank Account Number</p>
-                                <p class="text-base font-medium text-gray-800">1234567890</p>
+                                <p id="bank-account-label" class="text-sm text-gray-500">Bank Account Number</p>
+                                <p id="bank-account-value" class="text-base font-medium text-gray-800"></p>
                             </div>
-                            <button class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
+                            <button id="edit-bank-account-btn" class="text-sm text-indigo-500 hover:text-indigo-700 edit-btn">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
@@ -172,29 +178,25 @@
                 </div>
                 
                 <div class="bg-white rounded-3xl shadow-lg p-6 space-y-4">
-                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Documents</h3>
+                    <h3 id="documents-heading" class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Documents</h3>
                     <div class="flex items-center justify-between flex-wrap gap-4">
                         <div class="flex items-center gap-4">
-                            <a href="#" class="bg-indigo-50 text-indigo-700 py-2 px-4 rounded-full font-medium text-sm hover:bg-indigo-100 transition-colors duration-200">
+                            <a id="view-cv-link" href="#" class="bg-indigo-50 text-indigo-700 py-2 px-4 rounded-full font-medium text-sm hover:bg-indigo-100 transition-colors duration-200">
                                 <i class="fas fa-file-alt mr-2"></i>View CV
                             </a>
-                            <a href="#" class="bg-indigo-50 text-indigo-700 py-2 px-4 rounded-full font-medium text-sm hover:bg-indigo-100 transition-colors duration-200">
-                                <i class="fas fa-certificate mr-2"></i>View Certifications
-                            </a>
                         </div>
-                        <button class="text-sm text-indigo-500 hover:text-indigo-700 font-medium transition-colors duration-200 edit-btn">
+                        <button id="edit-documents-btn" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium transition-colors duration-200 edit-btn">
                             <i class="fas fa-edit mr-1"></i>Edit Documents
                         </button>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-lg p-6 space-y-8">
-                    <h3 class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Employee History</h3>
+                    <h3 id="history-heading" class="text-2xl font-semibold text-gray-700 pb-2 border-b border-gray-100">Employee History</h3>
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xl font-semibold text-gray-600">Absences</h4>
-                            
+                            <h4 id="absences-heading" class="text-xl font-semibold text-gray-600">Absences</h4>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left table-auto">
@@ -207,14 +209,14 @@
                                 </thead>
                                 <tbody>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-05-10</td>
-                                        <td class="py-3 px-4 text-gray-800">Sick Leave</td>
-                                        <td class="py-3 px-4"><span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Unexcused</span></td>
+                                        <td id="absence-date-1" class="py-3 px-4 text-gray-800">2024-05-10</td>
+                                        <td id="absence-reason-1" class="py-3 px-4 text-gray-800">Sick Leave</td>
+                                        <td class="py-3 px-4"><span id="absence-status-1" class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Unexcused</span></td>
                                     </tr>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-03-22</td>
-                                        <td class="py-3 px-4 text-gray-800">Family Emergency</td>
-                                        <td class="py-3 px-4"><span class="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Excused</span></td>
+                                        <td id="absence-date-2" class="py-3 px-4 text-gray-800">2024-03-22</td>
+                                        <td id="absence-reason-2" class="py-3 px-4 text-gray-800">Family Emergency</td>
+                                        <td class="py-3 px-4"><span id="absence-status-2" class="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Excused</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -223,8 +225,7 @@
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xl font-semibold text-gray-600">Late Arrivals</h4>
-                            
+                            <h4 id="late-arrivals-heading" class="text-xl font-semibold text-gray-600">Late Arrivals</h4>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left table-auto">
@@ -236,12 +237,12 @@
                                 </thead>
                                 <tbody>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-06-01</td>
-                                        <td class="py-3 px-4 text-gray-800">15 min</td>
+                                        <td id="late-arrival-date-1" class="py-3 px-4 text-gray-800">2024-06-01</td>
+                                        <td id="late-arrival-minutes-1" class="py-3 px-4 text-gray-800">15 min</td>
                                     </tr>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-05-28</td>
-                                        <td class="py-3 px-4 text-gray-800">5 min</td>
+                                        <td id="late-arrival-date-2" class="py-3 px-4 text-gray-800">2024-05-28</td>
+                                        <td id="late-arrival-minutes-2" class="py-3 px-4 text-gray-800">5 min</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -250,8 +251,7 @@
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xl font-semibold text-gray-600">Overtime</h4>
-                            
+                            <h4 id="overtime-heading" class="text-xl font-semibold text-gray-600">Overtime</h4>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left table-auto">
@@ -264,14 +264,14 @@
                                 </thead>
                                 <tbody>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-05-30</td>
-                                        <td class="py-3 px-4 text-gray-800">2.5 hours</td>
-                                        <td class="py-3 px-4"><span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
+                                        <td id="overtime-date-1" class="py-3 px-4 text-gray-800">2024-05-30</td>
+                                        <td id="overtime-hours-1" class="py-3 px-4 text-gray-800">2.5 hours</td>
+                                        <td class="py-3 px-4"><span id="overtime-status-1" class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
                                     </tr>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-05-25</td>
-                                        <td class="py-3 px-4 text-gray-800">1 hour</td>
-                                        <td class="py-3 px-4"><span class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
+                                        <td id="overtime-date-2" class="py-3 px-4 text-gray-800">2024-05-25</td>
+                                        <td id="overtime-hours-2" class="py-3 px-4 text-gray-800">1 hour</td>
+                                        <td class="py-3 px-4"><span id="overtime-status-2" class="bg-blue-100 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -280,8 +280,7 @@
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xl font-semibold text-gray-600">Leave Requests</h4>
-                            
+                            <h4 id="leave-requests-heading" class="text-xl font-semibold text-gray-600">Leave Requests</h4>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left table-auto">
@@ -295,22 +294,22 @@
                                 </thead>
                                 <tbody>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-07-01</td>
-                                        <td class="py-3 px-4 text-gray-800">2024-07-05</td>
-                                        <td class="py-3 px-4 text-gray-800">Vacation</td>
-                                        <td class="py-3 px-4"><span class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span></td>
+                                        <td id="leave-start-1" class="py-3 px-4 text-gray-800">2024-07-01</td>
+                                        <td id="leave-end-1" class="py-3 px-4 text-gray-800">2024-07-05</td>
+                                        <td id="leave-type-1" class="py-3 px-4 text-gray-800">Vacation</td>
+                                        <td class="py-3 px-4"><span id="leave-status-1" class="bg-orange-100 text-orange-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span></td>
                                     </tr>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-04-10</td>
-                                        <td class="py-3 px-4 text-gray-800">2024-04-12</td>
-                                        <td class="py-3 px-4 text-gray-800">Sick Leave</td>
-                                        <td class="py-3 px-4"><span class="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
+                                        <td id="leave-start-2" class="py-3 px-4 text-gray-800">2024-04-10</td>
+                                        <td id="leave-end-2" class="py-3 px-4 text-gray-800">2024-04-12</td>
+                                        <td id="leave-type-2" class="py-3 px-4 text-gray-800">Sick Leave</td>
+                                        <td class="py-3 px-4"><span id="leave-status-2" class="bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Approved</span></td>
                                     </tr>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2024-04-10</td>
-                                        <td class="py-3 px-4 text-gray-800">2024-04-12</td>
-                                        <td class="py-3 px-4 text-gray-800">Vacation</td>
-                                        <td class="py-3 px-4"><span class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Declined</span></td>
+                                        <td id="leave-start-3" class="py-3 px-4 text-gray-800">2024-04-10</td>
+                                        <td id="leave-end-3" class="py-3 px-4 text-gray-800">2024-04-12</td>
+                                        <td id="leave-type-3" class="py-3 px-4 text-gray-800">Vacation</td>
+                                        <td class="py-3 px-4"><span id="leave-status-3" class="bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">Declined</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -319,8 +318,7 @@
 
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
-                            <h4 class="text-xl font-semibold text-gray-600">Promotions</h4>
-                            
+                            <h4 id="promotions-heading" class="text-xl font-semibold text-gray-600">Promotions</h4>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left table-auto">
@@ -333,9 +331,9 @@
                                 </thead>
                                 <tbody>
                                     <tr class="border-b border-gray-100">
-                                        <td class="py-3 px-4 text-gray-800">2023-01-20</td>
-                                        <td class="py-3 px-4 text-gray-800">Junior Developer</td>
-                                        <td class="py-3 px-4 text-gray-800">Software Engineer</td>
+                                        <td id="promotion-date-1" class="py-3 px-4 text-gray-800">2023-01-20</td>
+                                        <td id="previous-title-1" class="py-3 px-4 text-gray-800">Junior Developer</td>
+                                        <td id="new-title-1" class="py-3 px-4 text-gray-800">Software Engineer</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -352,27 +350,27 @@
         <div class="container mx-auto px-6 md:px-12 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Our Company</h4>
-                    <p class="text-sm">We are a leading provider of innovative employee management solutions, dedicated to empowering businesses to thrive.</p>
+                    <h4 id="company-heading" class="text-xl font-semibold text-white mb-4">Our Company</h4>
+                    <p id="company-description" class="text-sm">We are a leading provider of innovative employee management solutions, dedicated to empowering businesses to thrive.</p>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Quick Links</h4>
+                    <h4 id="links-heading" class="text-xl font-semibold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors duration-200">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-200">Services</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-200">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+                        <li><a id="about-us-link" href="#" class="hover:text-white transition-colors duration-200">About Us</a></li>
+                        <li><a id="services-link" href="#" class="hover:text-white transition-colors duration-200">Services</a></li>
+                        <li><a id="contact-link" href="#" class="hover:text-white transition-colors duration-200">Contact</a></li>
+                        <li><a id="privacy-link" href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xl font-semibold text-white mb-4">Contact Info</h4>
-                    <p class="text-sm">123 Corporate Blvd, Suite 456<br>Business City, BC 78901<br>info@company.com<br>+1 (800) 555-0199</p>
+                    <h4 id="contact-info-heading" class="text-xl font-semibold text-white mb-4">Contact Info</h4>
+                    <p id="address-footer" class="text-sm">123 Corporate Blvd, Suite 456<br>Business City, BC 78901<br>info@company.com<br>+1 (800) 555-0199</p>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-6 text-center">
-                <p class="text-sm text-gray-500">&copy; 2024 Your Company. All rights reserved.</p>
-                <p class="text-sm mt-2">
-                    Developed by <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-200">Syntax Designs</a>
+                <p id="copyright-text" class="text-sm text-gray-500">&copy; 2024 Your Company. All rights reserved.</p>
+                <p id="developer-credit" class="text-sm mt-2">
+                    Developed by <a id="developer-link" href="#" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors duration-200">Syntax Designs</a>
                 </p>
             </div>
         </div>

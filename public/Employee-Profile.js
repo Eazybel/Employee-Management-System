@@ -15,26 +15,71 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
 // Main Buttons
 const saveBtn = document.getElementById('saveBtn');
-
-// Profile & Personal Information
-const profilePhotoInput = document.getElementById('profilePhotoInput');
-const profileName = document.getElementById('profileName');
-const jobTitle = document.getElementById('jobTitle');
-const personalInfoSection = document.getElementById('personalInfoSection');
-const emergencyContactSection = document.getElementById('emergencyContactSection');
-const employmentDetailsSection = document.getElementById('employmentDetailsSection');
-const documentsSection = document.getElementById('documentsSection');
-
-// Employee History Tables
-const absencesTableBody = document.getElementById('absencesTableBody');
-const lateArrivalsTableBody = document.getElementById('lateArrivalsTableBody');
-const overtimeTableBody = document.getElementById('overtimeTableBody');
-const leaveRequestsTableBody = document.getElementById('leaveRequestsTableBody');
-const promotionsTableBody = document.getElementById('promotionsTableBody');
+const editBtn=document.querySelectorAll(".edit-btn")
+      // Personal and Employment Details
+const employeeTitle = document.getElementById('employee-title');
+const profilePhoto = document.getElementById('profile-photo');
+const employeenameheading = document.getElementById('employee-name-heading');
+const fullNameValue = document.getElementById('full-name-value');
+const genderValue = document.getElementById('gender-value');
+const phoneValue = document.getElementById('phone-value');
+const birthdateValue = document.getElementById('birthdate-value');
+const maritalStatusValue = document.getElementById('marital-status-value');
+const emailValue = document.getElementById('email-value');
+const addressValue = document.getElementById('address-value');
+const contactNameValue = document.getElementById('contact-name-value');
+const contactPhoneValue = document.getElementById('contact-phone-value');
+const jobTitleValue = document.getElementById('job-title-value');
+const employeeIdValue = document.getElementById('employee-id-value');
+const employeeTypeValue = document.getElementById('employee-type-value');
+const hireDateValue = document.getElementById('hire-date-value');
+const bankAccountValue = document.getElementById('bank-account-value');
+const viewCv = document.getElementById('view-cv-link');
   if (user) {
     const uid = user.uid;
-saveBtn.onclick=()=>{
+    fetch("/profileFetch",{
+      method:"POST",
+        headers:{
+"Content-type":"application/json"
+  },
+      body:JSON.stringify({
+        companyID:localStorage.getItem("UID"),
+        profilerID:localStorage.getItem("profilerID")
+      })
+    }).then(res=>{
+      return res.json()
+    }).then(data=>{
+      profilePhoto.setAttribute("src",data.personalInfo.profilePhoto)
+      viewCv.setAttribute("href",data.employmentDetails.document)
+      employeenameheading.innerText=data.personalInfo.fullName
+      employeeTitle.innerText=data.employmentDetails.jobTitle
+      fullNameValue.innerText=data.personalInfo.fullName
+      genderValue.innerText=data.personalInfo.gender
+      maritalStatusValue.innerText=data.personalInfo.maritalStatus
+      phoneValue.innerText=data.personalInfo.phone
+      birthdateValue.innerText=data.personalInfo.birthdate.slice(0,10)
+      emailValue.innerText=data.personalInfo.email
+      addressValue.innerText=data.personalInfo.address
+      contactNameValue.innerText=data.personalInfo.emergencyContact.name
+      contactPhoneValue.innerText=data.personalInfo.emergencyContact.phone
+      bankAccountValue.innerText=data.employmentDetails.bankAccount
+      hireDateValue.innerText=data.employmentDetails.dateOfHire.slice(0,10)
+      employeeIdValue.innerText=data.employmentDetails.employeeID
+      employeeTypeValue.innerText=data.employmentDetails.employeeType
+      jobTitleValue.innerText=data.employmentDetails.jobTitle
+}).then(()=>{
+      editBtn.forEach(btn=>{
   
+        btn.onclick=()=>{
+          const editable=btn.parentElement.querySelectorAll("p")[1]
+          editable.contentEditable="true"
+          editable.focus()
+        }
+      })
+      
+    })
+saveBtn.onclick=()=>{
+ 
 }
   } else {
      window.location="./logIn.html"

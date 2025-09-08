@@ -1,7 +1,8 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const hide=require("./controllers/hiddenFrontend")
-const {myEmployees,employeeProfile}=require("./controllers/employeesFetch")
+const myEmployees=require("./controllers/employeesFetch")
+const profileFetch=require("./controllers/profileFetch")
 const companyPost=require("./controllers/Company-Post")
 const employeeRegister=require("./controllers/employeeRegister")
 const companyFetch=require("./controllers/companyFetch")
@@ -25,7 +26,7 @@ app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"public/index.html"))
 })
 app.post("/myEmployees",myEmployees)
-app.get("/employeeProfile",employeeProfile)
+app.post("/profileFetch",profileFetch)
 app.get("/companyFetch/:uid",companyFetch)
 app.get("/hide",hide)
 app.post("/employeeRegister",upload.fields([
