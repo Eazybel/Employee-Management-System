@@ -4,7 +4,16 @@ const reportLateArrivalBtn=document.getElementById("reportLateArrivalBtn")
 const lateArrivalModal=document.getElementById("lateArrivalModal")
 const closeBtn=document.getElementById("closeBtn")
 const submitBtn=document.getElementById("submitBtn")
+const names=document.getElementById("names")
   const lateArrivalForm=document.getElementById("lateArrivalForm")
+  //all employee Data Fetch
+fetch("/nameData",{
+    method:"POST",
+    headers:{"Content-type":"application/json"},
+    body:JSON.stringify({companyUID:localStorage.getItem("UID")})
+}
+)
+  // searching filter codebase
 nameFinder.addEventListener("keyup",(e)=>{
     let target=e.target.value.toLowerCase()
     employeeName.forEach(name => {
@@ -17,6 +26,7 @@ nameFinder.addEventListener("keyup",(e)=>{
         }
     });
 })
+// reporting button area
 reportLateArrivalBtn.onclick=()=>{
 lateArrivalModal.classList.remove("hidden")
 }
