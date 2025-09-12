@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="p-6 md:p-10">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto space-y-8">
+
+        <!-- Header -->
+        <header class="flex flex-col sm:flex-row justify-between items-center bg-white p-6 rounded-2xl shadow-lg">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4 sm:mb-0">Promotion Management</h1>
+            <button id="grantPromotionBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Grant Promotion
+            </button>
+        </header>
+
+        <!-- Filters Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Filters</h2>
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <input type="text" placeholder="Filter by Name" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <input type="text" placeholder="Filter by Position" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+        </section>
+
+        <!-- Promotion Reports Section -->
+        <section class="bg-white p-6 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Promotion Reports</h2>
+            <div class="space-y-4">
+                <!-- Example Card 1 -->
+                <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p class="text-lg font-medium text-gray-800">Pam Beesly - <span class="font-normal text-sm text-gray-500">From: Receptionist</span></p>
+                        <p class="text-sm text-gray-600">To: Salesperson, Effective: 2024-08-15</p>
+                    </div>
+                </div>
+                <!-- Example Card 2 -->
+                <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p class="text-lg font-medium text-gray-800">Michael Scott - <span class="font-normal text-sm text-gray-500">From: Regional Manager</span></p>
+                        <p class="text-sm text-gray-600">To: CEO, Effective: 2024-07-22</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- The Modal -->
+    <div id="promotionModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm overflow-y-auto">
+        <!-- Modal content -->
+        <div class="bg-white p-8 rounded-xl w-full max-w-md shadow-2xl relative">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Grant a New Promotion</h3>
+            <form id="promotionForm" class="space-y-4">
+                <div>
+                    <label for="employeeName" class="block text-gray-700 font-medium mb-1">Employee Name</label>
+                    <input type="text" id="employeeName" name="employeeName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Jane Doe" required>
+                </div>
+                <div>
+                    <label for="currentPosition" class="block text-gray-700 font-medium mb-1">Current Position</label>
+                    <input type="text" id="currentPosition" name="currentPosition" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Junior Developer" required>
+                </div>
+                <div>
+                    <label for="newPosition" class="block text-gray-700 font-medium mb-1">New Position</label>
+                    <input type="text" id="newPosition" name="newPosition" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Senior Developer" required>
+                </div>
+                <div>
+                    <label for="effectiveDate" class="block text-gray-700 font-medium mb-1">Effective Date</label>
+                    <input type="date" id="effectiveDate" name="effectiveDate" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <div class="flex justify-end space-x-4 pt-4">
+                    <button type="button" id="cancelBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                        Submit Promotion
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const grantBtn = document.getElementById('grantPromotionBtn');
+        const modal = document.getElementById('promotionModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        grantBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
