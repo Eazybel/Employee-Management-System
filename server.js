@@ -29,7 +29,7 @@ app.get("/",(req,res)=>{
 app.post("/myEmployees",myEmployees)
 app.post("/profileFetch",profileFetch)
 app.get("/companyFetch/:uid",companyFetch)
-app.post("/lateController",lateController)
+app.post("/lateController",upload.none(),lateController)
 app.get("/hide",hide)
 app.post("/nameData",nameData)
 app.post("/employeeRegister",upload.fields([
