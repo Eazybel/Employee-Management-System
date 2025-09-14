@@ -4,7 +4,7 @@ const reportLateArrivalBtn=document.getElementById("reportLateArrivalBtn")
 const lateArrivalModal=document.getElementById("lateArrivalModal")
 const closeBtn=document.getElementById("closeBtn")
 const submitBtn=document.getElementById("submitBtn")
-const employeeNameModal=document.getElementById("employeeName")
+const lateArrivalReports=document.getElementById("lateArrivalReports")
 const names=document.getElementById("names")
   const lateArrivalForm=document.getElementById("lateArrivalForm")
   //all employee Data Fetch
@@ -17,7 +17,7 @@ fetch("/nameData",{
     return res.json()
 }).then(data=>{
     data.forEach(fullNames=>{
-        names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}"></option>`)
+        names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
     })
 })
   // searching filter codebase
@@ -43,20 +43,27 @@ closeBtn.onclick=()=>{
 }
 submitBtn.onclick=(e)=>{
     e.preventDefault()
-const allEmployees=document.querySelectorAll("option")
-const matchEmployee=Array.from(allEmployees).find(employee=>{
-  return  employeeNameModal.value===employee.value
-})
-if(matchEmployee){   
+
+if(names.value!==""){   
     let form=new FormData(lateArrivalForm)
     form.append("companyUID",localStorage.getItem("UID"))
      fetch("/lateController",{
       method:"POST",
       body:form
       
+     }).then((res)=>{
+            return res.json()
+     }).then(data=>{
+        // lateArrivalReports.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        //             <div>
+        //                 <p  class="text-lg font-medium text-gray-800 employeeName">${} - <span class="font-normal text-sm text-gray-500">Reason: ${}</span></p>
+        //                 <p class="text-sm text-gray-600">Date: ${}, Time: ${}</p>
+        //             </div>
+        //         </div>`)
+        console.log(data)
      })
 }else{
-    alert("Employee not found please selevt from the available options only")
+   return alert("Employee not found please select from the available options only")
 }
     alert("Saved")
     lateArrivalForm.reset()

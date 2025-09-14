@@ -65,7 +65,9 @@ const EmployeeSchema = new mongoose.Schema({
     },
     document: String,
     
-  }
+    
+  },
+  lateArrival:[{date:{type:String},arrivalDate:{type:String},arrivalTime:{type:String},reason:{type:String}}]
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
