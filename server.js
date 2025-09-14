@@ -6,6 +6,7 @@ const profileFetch=require("./controllers/profileFetch")
 const companyPost=require("./controllers/Company-Post")
 const employeeRegister=require("./controllers/employeeRegister")
 const {lateController,nameData}=require("./controllers/registerController/lateController")
+const {overtimeController,nameDataOvertime}=require("./controllers/registerController/overtimeController")
 const companyFetch=require("./controllers/companyFetch")
 const multer=require("multer")
 const upload=multer()
@@ -30,8 +31,10 @@ app.post("/myEmployees",myEmployees)
 app.post("/profileFetch",profileFetch)
 app.get("/companyFetch/:uid",companyFetch)
 app.post("/lateController",upload.none(),lateController)
+app.post("/overtimeController",upload.none(),overtimeController)
 app.get("/hide",hide)
 app.post("/nameData",nameData)
+app.post("/nameDataOvertime",nameDataOvertime)
 app.post("/employeeRegister",upload.fields([
    { name:"profilePhoto",maxCount:1},
    { name:"document",maxCount:1}
