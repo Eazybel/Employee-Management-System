@@ -8,13 +8,13 @@ const lateController=async(req,res)=>{
     const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
     myEmployee.lateArrival.push({date:req.body.lateArrivalDate,arrivalTime:req.body.lateArrivalTime,reason:req.body.lateArrivalReason})
     await myEmployee.save()
-    res.json(myEmployee)
+    res.json(req.body)
 }
 const nameData=async(req,res)=>{
     const companyData=await Company.findOne({companyUID:req.body.companyUID})
     const companyName=companyData.companyName
     const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
-    const myEmployee=await employeesModel.find().select("personalInfo.fullName")
+    const myEmployee=await employeesModel.find()
     res.json(myEmployee)
 }
 module.exports={lateController,nameData}

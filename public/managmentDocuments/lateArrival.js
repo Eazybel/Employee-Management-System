@@ -1,4 +1,3 @@
-const employeeName=document.querySelectorAll("p.employeeName")
 const nameFinder=document.getElementById("nameFinder")
 const reportLateArrivalBtn=document.getElementById("reportLateArrivalBtn")
 const lateArrivalModal=document.getElementById("lateArrivalModal")
@@ -18,10 +17,24 @@ fetch("/nameData",{
 }).then(data=>{
     data.forEach(fullNames=>{
         names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
+        if (fullNames.lateArrival.length!==0) {
+            fullNames.lateArrival.forEach(lateData=>{
+            
+            lateArrivalReports.insertAdjacentHTML("beforeend",`<div  class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p  class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">Reason: ${lateData.reason}</span></p>
+                        <p class="text-sm text-gray-600">Date: ${lateData.date}, Time: ${lateData.arrivalTime}</p>
+                    </div>
+                </div>`)
+
+         })
+       }
     })
-})
-  // searching filter codebase
-nameFinder.addEventListener("keyup",(e)=>{
+
+ 
+}).then(()=>{
+     const employeeName=document.querySelectorAll("p.employeeName")
+        nameFinder.addEventListener("keyup",(e)=>{
     let target=e.target.value.toLowerCase()
     employeeName.forEach(name => {
         let text=name.innerText.toLowerCase()
@@ -33,6 +46,9 @@ nameFinder.addEventListener("keyup",(e)=>{
         }
     });
 })
+})
+  // searching filter codebase
+
 // reporting button area
 reportLateArrivalBtn.onclick=()=>{
 lateArrivalModal.classList.remove("hidden")
@@ -44,7 +60,7 @@ closeBtn.onclick=()=>{
 submitBtn.onclick=(e)=>{
     e.preventDefault()
 
-if(names.value!==""){   
+if(lateArrivalForm.checkValidity()){   
     let form=new FormData(lateArrivalForm)
     form.append("companyUID",localStorage.getItem("UID"))
      fetch("/lateController",{
@@ -54,18 +70,19 @@ if(names.value!==""){
      }).then((res)=>{
             return res.json()
      }).then(data=>{
-        // lateArrivalReports.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-        //             <div>
-        //                 <p  class="text-lg font-medium text-gray-800 employeeName">${} - <span class="font-normal text-sm text-gray-500">Reason: ${}</span></p>
-        //                 <p class="text-sm text-gray-600">Date: ${}, Time: ${}</p>
-        //             </div>
-        //         </div>`)
-        console.log(data)
+        lateArrivalReports.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p  class="text-lg font-medium text-gray-800 employeeName">${data.employeeName} - <span class="font-normal text-sm text-gray-500">Reason: ${data.lateArrivalReason}</span></p>
+                        <p class="text-sm text-gray-600">Date: ${data.lateArrivalDate}, Time: ${data.lateArrivalTime}</p>
+                    </div>
+                </div>`)
+      
      })
-}else{
-   return alert("Employee not found please select from the available options only")
-}
-    alert("Saved")
+     alert("Saved")
     lateArrivalForm.reset()
+}else{
+lateArrivalForm.reportValidity()
+}
+    
 
 }
