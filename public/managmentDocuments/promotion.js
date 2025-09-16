@@ -1,10 +1,11 @@
 const grantPromotionBtn=document.getElementById("grantPromotionBtn")
+const submitBtn=document.getElementById("submitBtn")
 const promptionReports=document.getElementById("promptionReports")
 const cancelBtn=document.getElementById("cancelBtn")
-const employeeName=document.querySelectorAll("p.employeeName")
+const promotionForm=document.getElementById("promotionForm")
 const promotionModal=document.getElementById("promotionModal")
 const names=document.getElementById("employeeName")
-
+const filterBtn=document.getElementById("filterBtn")
   //all employee Data Fetch
 fetch("/nameDataPromotion",{
     method:"POST",
@@ -16,42 +17,22 @@ fetch("/nameDataPromotion",{
 }).then(data=>{
     data.forEach(fullNames=>{
         names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-    //     if (fullNames.lateArrival.length!==0) {
-    //         fullNames.lateArrival.forEach(lateData=>{
+        if (fullNames.promotion.length!==0) {
+            fullNames.promotion.forEach(promotion=>{
             
-    //         lateArrivalReports.insertAdjacentHTML("beforeend",`<div  class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-    //                 <div>
-    //                     <p  class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">Reason: ${lateData.reason}</span></p>
-    //                     <p class="text-sm text-gray-600">Date: ${lateData.date}, Time: ${lateData.arrivalTime}</p>
-    //                 </div>
-    //             </div>`)
+            promptionReports.insertAdjacentHTML("beforeend",` <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">From: ${promotion.currentPosition}</span></p>
+                        <p class="text-sm text-gray-600">To: ${promotion.newPosition}, Effective: ${promotion.date}</p>
+                    </div>
+                </div>`)
 
-    //      })
-    //    }
+         })
+       }
     })
-})
-// .then(()=>{
-//      const employeeName=document.querySelectorAll("p.employeeName")
-//         nameFinder.addEventListener("keyup",(e)=>{
-//     let target=e.target.value.toLowerCase()
-//     employeeName.forEach(name => {
-//         let text=name.innerText.toLowerCase()
-//         if (text.includes(target)) {
-//             name.parentElement.parentElement.style.display=""
-//         }else{
-//             name.parentElement.parentElement.style.display="none"
-            
-//         }
-//     });
-// })
-// })
-grantPromotionBtn.onclick=()=>{
-    promotionModal.classList.remove("hidden")
-}
-cancelBtn.onclick=()=>{
-    promotionModal.classList.add("hidden")
-}
-const filterBtn=document.getElementById("filterBtn")
+}).then(()=>{
+const employeeName=document.querySelectorAll("p.employeeName")
+
 filterBtn.addEventListener("keyup",(e)=>{
     let target=e.target.value.toLowerCase()
     employeeName.forEach(names=>{
@@ -63,3 +44,34 @@ filterBtn.addEventListener("keyup",(e)=>{
         }
     })
 })
+})
+grantPromotionBtn.onclick=()=>{
+    promotionModal.classList.remove("hidden")
+}
+cancelBtn.onclick=()=>{
+    promotionModal.classList.add("hidden")
+}
+submitBtn.onclick=(e)=>{
+    e.preventDefault()
+const form=new FormData(promotionForm)
+form.append("companyUID",localStorage.getItem("UID"))
+if(promotionForm.checkValidity()){
+    fetch("/promotionController",{
+    method:"POST",
+    body:form
+}).then(res=>{
+    return res.json()
+}).then(data=>{
+    promptionReports.insertAdjacentHTML("beforeend",` <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <p class="text-lg font-medium text-gray-800 employeeName">${data.employeeName} - <span class="font-normal text-sm text-gray-500">From: ${data.currentPosition}</span></p>
+                        <p class="text-sm text-gray-600">To: ${data.newPosition}, Effective: ${data.effectiveDate}</p>
+                    </div>
+                </div>`)
+})
+    alert("Saved")
+    promotionForm.reset()
+}else{
+    promotionForm.reportValidity()
+}
+}
