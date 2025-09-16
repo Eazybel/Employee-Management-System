@@ -123,25 +123,6 @@
         </div>
     </div>
 
-    <script>
-        const reportBtn = document.getElementById('reportAbsenceBtn');
-        const modal = document.getElementById('absenceModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-
-        reportBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
-
-        cancelBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        });
-    </script>
-
+<script type="module" src="absence.js"></script>
 </body>
 </html>
