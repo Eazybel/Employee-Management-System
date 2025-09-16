@@ -21,48 +21,20 @@
         </header>
 
         <!-- Filters Section -->
-        <section class="bg-white p-6 rounded-2xl shadow-lg">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Filters</h2>
-            <div class="flex flex-col md:flex-row gap-4 mb-6">
-                <input type="text" placeholder="Filter by Name" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <input type="text" placeholder="Filter by Duration (e.g., 3 days)" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            </div>
-        </section>
+         <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Filters</h2>
+    <div class="flex flex-col md:flex-row gap-4 mb-6">
+        <input id="nameFinder" type="text" placeholder="Filter by Name" class="w-64 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+    </div>
+</section>
 
         <!-- Ongoing Absences Section -->
         <section class="bg-white p-6 rounded-2xl shadow-lg">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Ongoing Absences</h2>
-            <div class="space-y-4">
+            <div id="ongoing" class="space-y-4">
                 <!-- Dummy Person 1 -->
-                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <p class="text-lg font-medium text-gray-800">Jane Doe</p>
-                        <p class="text-sm text-gray-600">Date: 2024-08-28</p>
-                    </div>
-                    <div class="flex gap-2 mt-4 sm:mt-0">
-                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                            Continue
-                        </button>
-                        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                            Add Log
-                        </button>
-                    </div>
-                </div>
-                <!-- Dummy Person 2 -->
-                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <p class="text-lg font-medium text-gray-800">John Smith</p>
-                        <p class="text-sm text-gray-600">Date: 2024-08-29</p>
-                    </div>
-                    <div class="flex gap-2 mt-4 sm:mt-0">
-                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                            Continue
-                        </button>
-                        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                            Add Log
-                        </button>
-                    </div>
-                </div>
+              
             </div>
         </section>
 
@@ -71,17 +43,10 @@
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Absence Reports</h2>
             <div class="space-y-4">
                 <!-- Example Card 1 -->
-                <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                  <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div>
                         <p class="text-lg font-medium text-gray-800">Dwight Schrute - <span class="font-normal text-sm text-gray-500">Illness</span></p>
                         <p class="text-sm text-gray-600">Date: 2024-08-20, Duration: 3 days</p>
-                    </div>
-                </div>
-                <!-- Example Card 2 -->
-                <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <p class="text-lg font-medium text-gray-800">Jim Halpert - <span class="font-normal text-sm text-gray-500">Vacation</span></p>
-                        <p class="text-sm text-gray-600">Date: 2024-08-05, Duration: 7 days</p>
                     </div>
                 </div>
             </div>
@@ -91,38 +56,39 @@
 
     <!-- The Modal -->
     <div id="absenceModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/40 backdrop-blur-sm overflow-y-auto">
-        <!-- Modal content -->
-        <div class="bg-white p-8 rounded-xl w-full max-w-md shadow-2xl relative">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Report a New Absence</h3>
-            <form id="absenceForm" class="space-y-4">
-                <div>
-                    <label for="employeeName" class="block text-gray-700 font-medium mb-1">Employee Name</label>
-                    <input type="text" id="employeeName" name="employeeName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Jane Doe" required>
-                </div>
-                <div>
-                    <label for="absenceDate" class="block text-gray-700 font-medium mb-1">Absence Date</label>
-                    <input type="date" id="absenceDate" name="absenceDate" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                </div>
-                <div>
-                    <label for="absenceDuration" class="block text-gray-700 font-medium mb-1">Duration (in days)</label>
-                    <input type="number" id="absenceDuration" name="absenceDuration" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., 3" required>
-                </div>
-                <div>
-                    <label for="absenceReason" class="block text-gray-700 font-medium mb-1">Reason for Absence</label>
-                    <textarea id="absenceReason" name="absenceReason" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Illness, vacation, etc." required></textarea>
-                </div>
-                <div class="flex justify-end space-x-4 pt-4">
-                    <button type="button" id="cancelBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
-                        Cancel
-                    </button>
-                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
-                        Submit Report
-                    </button>
-                </div>
-            </form>
-        </div>
+    <div class="bg-white p-8 rounded-xl w-full max-w-md shadow-2xl relative">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Report a New Absence</h3>
+        <form id="absenceForm" >
+            <div>
+                <label for="employeeName" class="block text-gray-700 font-medium mb-1">Employee Name</label>
+                <select id="employeeName" name="employeeName" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    <option value="" disabled selected>Select an employee</option>
+                    
+                </select>
+            </div>
+            <div>
+                <label for="absenceDate" class="block text-gray-700 font-medium mb-1">Absence Date</label>
+                <input type="date" id="absenceDate" name="absenceDate" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+            </div>
+            <div>
+                <label for="absenceDuration" class="block text-gray-700 font-medium mb-1">Duration (in days)</label>
+                <input type="number" id="absenceDuration" name="absenceDuration" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., 3" required>
+            </div>
+            <div>
+                <label for="absenceReason" class="block text-gray-700 font-medium mb-1">Reason for Absence</label>
+                <textarea id="absenceReason" name="absenceReason" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., Illness, vacation, etc." required></textarea>
+            </div>
+            <div class="flex justify-end space-x-4 pt-4">
+                <button type="button" id="cancelBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                    Cancel
+                </button>
+                <button id="submitBtn" type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+                    Submit Report
+                </button>
+            </div>
+        </form>
     </div>
-
+</div>
 <script type="module" src="absence.js"></script>
 </body>
 </html>

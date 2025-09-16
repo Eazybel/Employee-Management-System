@@ -46,7 +46,7 @@ grantOvertimeBtn.onclick=()=>{
     overtimeModal.classList.remove("hidden")
 }
 cancelBtn.onclick=()=>{
-    overtimeModal.classList.add("hidden")
+  window.location.reload()
 }
 
 submitBtn.onclick=(e)=>{

@@ -49,7 +49,7 @@ grantPromotionBtn.onclick=()=>{
     promotionModal.classList.remove("hidden")
 }
 cancelBtn.onclick=()=>{
-    promotionModal.classList.add("hidden")
+   window.location.reload()
 }
 submitBtn.onclick=(e)=>{
     e.preventDefault()

@@ -69,7 +69,8 @@ const EmployeeSchema = new mongoose.Schema({
   },
   lateArrival:[{date:{type:String},arrivalDate:{type:String},arrivalTime:{type:String},reason:{type:String}}],
   overtime:[{date:{type:String},overtimeDate:{type:String},hour:{type:String},reason:{type:String}}],
-  promotion:[{date:{type:String},currentPosition:{type:String},newPosition:{type:String}}]
+  promotion:[{date:{type:String},currentPosition:{type:String},newPosition:{type:String}}],
+   absence:[{date:{type:String},duration:{type:String},reason:{type:String}}]
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });

@@ -54,7 +54,7 @@ reportLateArrivalBtn.onclick=()=>{
 lateArrivalModal.classList.remove("hidden")
 }
 closeBtn.onclick=()=>{
-    lateArrivalModal.classList.add("hidden")
+  window.location.reload()
 
 }
 submitBtn.onclick=(e)=>{
