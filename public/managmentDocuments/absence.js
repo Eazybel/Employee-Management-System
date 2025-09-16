@@ -19,13 +19,13 @@ fetch("/nameDataAbsence",{
             ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
     <div class="flex-grow">
         <p class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">${absences.reason}</span></p>
-        <p class="text-sm text-gray-600 duration">Date: ${absences.date}, Duration: ${absences.duration} days</p>
+        <p class="text-sm text-gray-600 ">Date: ${absences.date}, Duration: <span class="duration">${absences.duration} </span>days</p>
     </div>
     <div class="flex gap-2 mt-4 sm:mt-0">
         <button id="continuer" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
             Continue
         </button>
-        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+        <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
             Add Log
         </button>
     </div>
@@ -38,23 +38,20 @@ fetch("/nameDataAbsence",{
 const continuer=document.querySelectorAll("#continuer")
 continuer.forEach(btn=>{
     btn.onclick=()=>{
-    // let employeeName=btn.parentElement.parentElement.querySelector("p.employeeName").innerText.split("-")
+    let employeeName=btn.parentElement.parentElement.querySelector("p.employeeName").innerText.split("-")
     
-    // employeeName=employeeName[0].trimEnd()
-    // fetch("/continueAbsence",{
-    //     method:"POST",
-    //     headers:{"Content-type":"application/json"},
-    //     body:JSON.stringify({companyUID:localStorage.getItem("UID"),employeeName:employeeName})
-    // }).then(res=>{
-    //     return res.json()
-    // }).then(data=>{
-    //     console.log(data)
-    // })
-  
-    let durationUpdate=btn.parentElement.parentElement.querySelector("p.duration").innerText.split(",")
-    durationUpdate=durationUpdate[1].replace(" Duration: ","")
-    durationUpdate=Number(durationUpdate.replace(" days",""))+1
-    console.log(durationUpdate)
+    employeeName=employeeName[0].trimEnd()
+    fetch("/continueAbsence",{
+        method:"POST",
+        headers:{"Content-type":"application/json"},
+        body:JSON.stringify({companyUID:localStorage.getItem("UID"),employeeName:employeeName})
+    }).then(()=>{
+          let durationUpdate=btn.parentElement.parentElement.querySelector("span.duration")
+          durationUpdate.innerText=Number(durationUpdate.innerText)+1+" "
+       
+    })
+const log=document.querySelectorAll("#logger")
+    // continue from here by feaguring out how the logging works its easy 
 }
 })
 })
