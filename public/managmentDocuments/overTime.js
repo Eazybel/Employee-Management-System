@@ -54,7 +54,7 @@ submitBtn.onclick=(e)=>{
 if(overtimeForm.checkValidity()){
     let form=new FormData(overtimeForm)
        form.append("companyUID",localStorage.getItem("UID"))
-        fetch("/lateController",{
+        fetch("/overtimeController",{
          method:"POST",
          body:form
          

@@ -56,7 +56,7 @@ submitBtn.onclick=(e)=>{
 const form=new FormData(promotionForm)
 form.append("companyUID",localStorage.getItem("UID"))
 if(promotionForm.checkValidity()){
-    fetch("/lateController",{
+    fetch("/promotionController",{
     method:"POST",
     body:form
 }).then(res=>{
