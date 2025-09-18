@@ -21,6 +21,7 @@ const employeeTitle = document.getElementById('employee-title');
 const profilePhoto = document.getElementById('profile-photo');
 const employeenameheading = document.getElementById('employee-name-heading');
 const fullNameValue = document.getElementById('full-name-value');
+const department = document.getElementById('department-value');
 const genderValue = document.getElementById('gender-value');
 const phoneValue = document.getElementById('phone-value');
 const birthdateValue = document.getElementById('birthdate-value');
@@ -53,6 +54,7 @@ const viewCv = document.getElementById('view-cv-link');
       viewCv.setAttribute("href",data.employmentDetails.document)
       employeenameheading.innerText=data.personalInfo.fullName
       employeeTitle.innerText=data.employmentDetails.jobTitle
+      department.innerText=data.employmentDetails.department
       fullNameValue.innerText=data.personalInfo.fullName
       genderValue.innerText=data.personalInfo.gender
       maritalStatusValue.innerText=data.personalInfo.maritalStatus

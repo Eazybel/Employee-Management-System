@@ -6,7 +6,7 @@ const names=document.getElementById("names")
 const overtimeReports=document.getElementById("overtimeReports")
 const overtimeForm=document.getElementById("overtimeForm")
 const cancelBtn=document.getElementById("cancelBtn")
-fetch("/nameDataOvertime",{
+fetch("/nameData",{
     method:"POST",
     headers:{"Content-type":"application/json"},
     body:JSON.stringify({companyUID:localStorage.getItem("UID")})
@@ -54,7 +54,7 @@ submitBtn.onclick=(e)=>{
 if(overtimeForm.checkValidity()){
     let form=new FormData(overtimeForm)
        form.append("companyUID",localStorage.getItem("UID"))
-        fetch("/overtimeController",{
+        fetch("/lateController",{
          method:"POST",
          body:form
          

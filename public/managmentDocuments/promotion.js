@@ -7,7 +7,7 @@ const promotionModal=document.getElementById("promotionModal")
 const names=document.getElementById("employeeName")
 const filterBtn=document.getElementById("filterBtn")
   //all employee Data Fetch
-fetch("/nameDataPromotion",{
+fetch("/nameData",{
     method:"POST",
     headers:{"Content-type":"application/json"},
     body:JSON.stringify({companyUID:localStorage.getItem("UID")})
@@ -56,7 +56,7 @@ submitBtn.onclick=(e)=>{
 const form=new FormData(promotionForm)
 form.append("companyUID",localStorage.getItem("UID"))
 if(promotionForm.checkValidity()){
-    fetch("/promotionController",{
+    fetch("/lateController",{
     method:"POST",
     body:form
 }).then(res=>{
