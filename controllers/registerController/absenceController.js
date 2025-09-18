@@ -27,4 +27,13 @@ const continueAbsence=async(req,res)=>{
   await myEmployee.save()
     res.json(myEmployee)
 }
-module.exports={absenceController,nameDataAbsence,continueAbsence}
+const logAbsence=async(req,res)=>{
+    const companyData=await Company.findOne({companyUID:req.body.companyUID})
+    const companyName=companyData.companyName
+    const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
+   const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
+   myEmployee.absence[myEmployee.absence.length-1].ongoingStatus=false
+    await myEmployee.save()
+    res.json(myEmployee)
+}
+module.exports={absenceController,nameDataAbsence,continueAbsence,logAbsence}

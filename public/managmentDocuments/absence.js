@@ -14,7 +14,9 @@ fetch("/nameDataAbsence",{
 }).then(data=>{
     data.forEach(fullNames=>{
         names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-        if (fullNames.absence.length!==0) {
+       let absence=fullNames.absence
+       absence.forEach((absences,i)=>{
+             if (absence.length!==0&&absences.ongoingStatus===true) {
             fullNames.absence.forEach(absences=>{
             ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
     <div class="flex-grow">
@@ -33,6 +35,7 @@ fetch("/nameDataAbsence",{
 
          })
        }
+       })
     })
 }).then(()=>{
 const continuer=document.querySelectorAll("#continuer")
@@ -50,10 +53,24 @@ continuer.forEach(btn=>{
           durationUpdate.innerText=Number(durationUpdate.innerText)+1+" "
        
     })
-const log=document.querySelectorAll("#logger")
-    // continue from here by feaguring out how the logging works its easy 
+
 }
 })
+const log=document.querySelectorAll("#logger")
+ log.forEach(btn=>{
+    btn.onclick=()=>{
+        let employeeName=btn.parentElement.parentElement.querySelector("p.employeeName").innerText.split("-")
+        employeeName=employeeName[0].trimEnd()
+        fetch("/logAbsence",{
+               method:"POST",
+                headers:{"Content-type":"application/json"},
+                body:JSON.stringify({companyUID:localStorage.getItem("UID"),employeeName:employeeName,ongoingStatus:false})
+        }).then(()=>{
+            
+        })
+
+    }
+ })
 })
 reportAbsenceBtn.onclick=()=>{
     absenceModal.classList.remove("hidden")
