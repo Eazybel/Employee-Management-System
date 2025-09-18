@@ -6,7 +6,7 @@ const absenceController=async(req,res)=>{
     const companyName=companyData.companyName
     const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
     const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
-    myEmployee.absence.push({date:req.body.absenceDate,duration:req.body.absenceDuration,reason:req.body.absenceReason})
+    myEmployee.absence.push({date:req.body.absenceDate,duration:req.body.absenceDuration,reason:req.body.absenceReason,ongoingStatus:true})
     await myEmployee.save()
     res.json(req.body)
 }
