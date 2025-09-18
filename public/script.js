@@ -85,7 +85,7 @@ fetch("/myEmployees",{
     employeeList.insertAdjacentHTML("beforeend",
       `  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
             <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
-                No employees registered, please add employees
+                No employees registered
             </h1>
             <p class="text-sm text-gray-600">
                 Get started by adding your first employee to the system.
