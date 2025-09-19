@@ -5,7 +5,7 @@
     const names=document.getElementById("employeeName")
     const ongoing=document.getElementById("ongoing")
     const leaveRequestForm=document.getElementById("leaveRequestForm")
-    const expiryReports=document.getElementById("expiryReports")
+    const leaveReports=document.getElementById("expiryReports")
     GrantleaveRequest.onclick=()=>{
     leaveRequestModal.classList.remove("hidden")
     }
@@ -22,35 +22,63 @@
     }).then(data=>{
         data.forEach(fullNames=>{
             names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-    //        let expiry=fullNames.expiry
-    //       if(expiry.length!==0){
-    //        for (let i = 0; i < expiry.length; i++) {
-    //         if (expiry[i].expiry===false) {
-    //          ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-    //     <div>
-    //         <p class="text-lg font-medium text-gray-800">Michael Scott - <span class="font-normal text-sm text-gray-500">Vacation</span></p>
-    //         <p class="text-sm text-gray-600">Start: 2024-09-01, End: 2024-09-05</p>
-    //     </div>
-    //     <div class="flex-shrink-0 mt-2 sm:mt-0 sm:ml-4 flex items-center space-x-2">
-    //         <span class="hidden inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-    //             Expired <span class="ml-1 font-bold">4 days ago</span>
-    //         </span>
-    //         <span class=" inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-    //             Ongoing
-    //         </span>
-    //         <div class="flex gap-2 mt-4 sm:mt-0">
-    //                 <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-    //                         Add Log
-    //                     </button>
-    //             <button id="fullProfile" class="bg-purple-800 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-    //                 Full Profile
-    //             </button>
-    //         </div>
-    //     </div>
-    // </div>`)
-    //         }else if (expiry[i].expiry===true){
+           let leaveRequest=fullNames.leaveRequest
+          if(leaveRequest.length!==0){
+              for (let i = 0; i < leaveRequest.length; i++) {
+                  if (leaveRequest[i].expiry===false) {
+                        let today=new Date()
+                        let expiry=new Date(leaveRequest[i].endDate)
+                        if(today>expiry){
+                        ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                        <div>
+                            <p class="text-lg font-medium text-gray-800">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">${leaveRequest[i].reason}</span></p>
+                            <p class="text-sm text-gray-600">Start: ${leaveRequest[i].startDate}, End: ${leaveRequest[i].endDate}</p>
+                        </div>
+                        <div class="flex-shrink-0 mt-2 sm:mt-0 sm:ml-4 flex items-center space-x-2">
+                            <span class=" inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
+                                Expired
+                            </span>
+                            <span class="hidden inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                                Ongoing
+                            </span>
+                            <div class="flex gap-2 mt-4 sm:mt-0">
+                                    <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+                                            Add Log
+                                        </button>
+                                <button id="fullProfile" class="bg-purple-800 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+                                    Full Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>`)
+                        }else{
+               ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <div>
+                    <p class="text-lg font-medium text-gray-800">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">${leaveRequest[i].reason}</span></p>
+                    <p class="text-sm text-gray-600">Start: ${leaveRequest[i].startDate}, End: ${leaveRequest[i].endDate}</p>
+                </div>
+                <div class="flex-shrink-0 mt-2 sm:mt-0 sm:ml-4 flex items-center space-x-2">
+                    <span class="hidden inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
+                        Expired <span class="ml-1 font-bold">4 days ago</span>
+                    </span>
+                    <span class=" inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        Ongoing
+                    </span>
+                    <div class="flex gap-2 mt-4 sm:mt-0">
+                            <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+                                    Add Log
+                                </button>
+                        <button id="fullProfile" class="bg-purple-800 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+                            Full Profile
+                        </button>
+                    </div>
+                </div>
+            </div>`)                
+           }
+            
+            }else if (leaveRequest[i].expiry===true){
                 
-    //             expiryReports.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+    //             leaveReports.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
     //     <div>
     //         <p class="text-lg font-medium text-gray-800">Michael Scott - <span class="font-normal text-sm text-gray-500">Vacation</span></p>
     //         <p class="text-sm text-gray-600">Start: 2024-09-01, End: 2024-09-05</p>
@@ -66,9 +94,9 @@
     //         </div>
     //     </div>
     // </div>`)
-    //         }
-    //        }
-    //       }
+            }
+           }
+          }
         })
 
     

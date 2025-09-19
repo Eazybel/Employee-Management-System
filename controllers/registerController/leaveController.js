@@ -6,7 +6,7 @@ const leaveController=async(req,res)=>{
         const companyName=companyData.companyName
         const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
         const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
-        myEmployee.leaveRequest.push({startDate:req.body.leaveStartDate,endDate:req.body.leaveEndDate,reason:req.body.leaveReason,expiry:true})
+        myEmployee.leaveRequest.push({startDate:req.body.leaveStartDate,endDate:req.body.leaveEndDate,reason:req.body.leaveReason,expiry:false})
         await myEmployee.save()
         res.json(req.body)
 }
