@@ -72,6 +72,7 @@ const EmployeeSchema = new mongoose.Schema({
     
   },
   lateArrival:[{date:{type:String},arrivalDate:{type:String},arrivalTime:{type:String},reason:{type:String}}],
+  leaveRequest:[{startDate:{type:String},endDate:{type:String},reason:{type:String},expiry:{type:Boolean}}],
   overtime:[{date:{type:String},overtimeDate:{type:String},hour:{type:String},reason:{type:String}}],
   promotion:[{date:{type:String},currentPosition:{type:String},newPosition:{type:String}}],
    absence:[{date:{type:String},duration:{type:String},reason:{type:String},ongoingStatus:{type:Boolean}}]

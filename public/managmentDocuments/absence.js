@@ -31,6 +31,9 @@ fetch("/nameData",{
                     <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
                         Add Log
                     </button>
+                    <button id="fullProfile" class="bg-purple-800 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
+                Full Profile
+             </button>
                 </div>
             </div>`)
         }else if (absence[i].ongoingStatus===false){
