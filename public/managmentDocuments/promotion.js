@@ -62,15 +62,9 @@ if(promotionForm.checkValidity()){
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    promptionReports.insertAdjacentHTML("beforeend",` <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <p class="text-lg font-medium text-gray-800 employeeName">${data.employeeName} - <span class="font-normal text-sm text-gray-500">From: ${data.currentPosition}</span></p>
-                        <p class="text-sm text-gray-600">To: ${data.newPosition}, Effective: ${data.effectiveDate}</p>
-                    </div>
-                </div>`)
+alert("Saved")
+promotionForm.reset()
 })
-    alert("Saved")
-    promotionForm.reset()
 }else{
     promotionForm.reportValidity()
 }

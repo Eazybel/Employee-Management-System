@@ -61,12 +61,6 @@ if(overtimeForm.checkValidity()){
         }).then((res)=>{
                return res.json()
         }).then(data=>{
-           overtimeReports.insertAdjacentHTML("beforeend",` <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <p class="text-lg font-medium text-gray-800 employeeName">${data.employeeName} - <p class="font-normal text-sm text-gray-500">${data.overtimeHours} Hours</p></p>
-                        <p class="text-sm text-gray-600">Reason: ${data.overtimeReason}, Date: ${data.overtimeDate}</p>
-                    </div>
-                </div>`)
                 alert("Saved")
                overtimeForm.reset()
         })

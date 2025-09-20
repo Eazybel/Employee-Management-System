@@ -160,34 +160,15 @@ form.append("companyUID",localStorage.getItem("UID"))
      }).then((res)=>{
             return res.json()
      }).then(data=>{
-        console.log(data)
-        ongoing.insertAdjacentHTML("beforeend",`<div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <div>
-                    <p class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">${leaveRequest[i].reason}</span></p>
-                    <p class="text-sm text-gray-600">Start: ${leaveRequest[i].startDate}, End: ${leaveRequest[i].endDate}</p>
-                </div>
-                <div class="flex-shrink-0 mt-2 sm:mt-0 sm:ml-4 flex items-center space-x-2">
-                    <span class="hidden inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-                        Expired <span class="ml-1 font-bold">4 days ago</span>
-                    </span>
-                    <span class=" inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        Ongoing
-                    </span>
-                    <div class="flex gap-2 mt-4 sm:mt-0">
-                            <button id="logger" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                                    Add Log
-                                </button>
-                        <button id="fullProfile" class="bg-purple-800 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full shadow-md transition duration-300 ease-in-out">
-                            Full Profile
-                        </button>
-                    </div>
-                </div>
-            </div>`)
+         alert("Saved")
+        leaveRequestForm.reset()
      })
-     alert("Saved")
-    leaveRequestForm.reset()
 }else{
     leaveRequestForm.reportValidity()
 }
+
+}
+cancelBtn.onclick=()=>{
+    window.location.reload()
 
 }
