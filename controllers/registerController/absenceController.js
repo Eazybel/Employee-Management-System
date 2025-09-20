@@ -10,13 +10,6 @@ const absenceController=async(req,res)=>{
     await myEmployee.save()
     res.json(req.body)
 }
-const nameDataAbsence=async(req,res)=>{
-    const companyData=await Company.findOne({companyUID:req.body.companyUID})
-    const companyName=companyData.companyName
-    const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
-    const myEmployee=await employeesModel.find()
-    res.json(myEmployee)
-}
 const continueAbsence=async(req,res)=>{
     const companyData=await Company.findOne({companyUID:req.body.companyUID})
     const companyName=companyData.companyName
@@ -36,4 +29,4 @@ const logAbsence=async(req,res)=>{
     await myEmployee.save()
     res.json(myEmployee)
 }
-module.exports={absenceController,nameDataAbsence,continueAbsence,logAbsence}
+module.exports={absenceController,continueAbsence,logAbsence}

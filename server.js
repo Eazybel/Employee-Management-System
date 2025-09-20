@@ -9,7 +9,7 @@ const {absenceController,continueAbsence,logAbsence}=require("./controllers/regi
 const {lateController,nameData}=require("./controllers/registerController/lateController")
 const overtimeController=require("./controllers/registerController/overtimeController")
 const promotionController=require("./controllers/registerController/promotionController")
-const leaveController=require("./controllers/registerController/leaveController")
+const {leaveController,logLeaveRequest}=require("./controllers/registerController/leaveController")
 const companyFetch=require("./controllers/companyFetch")
 const multer=require("multer")
 const upload=multer()
@@ -41,6 +41,7 @@ app.post("/leaveController",upload.none(),leaveController)
 app.get("/hide",hide)
 app.post("/nameData",nameData)
 app.post("/logAbsence",logAbsence)
+app.post("/logLeaveRequest",logLeaveRequest)
 app.post("/continueAbsence",continueAbsence)
 app.post("/employeeRegister",upload.fields([
    { name:"profilePhoto",maxCount:1},
