@@ -157,11 +157,9 @@ form.append("companyUID",localStorage.getItem("UID"))
  fetch("/leaveController",{
       method:"POST",
       body:form
-     }).then((res)=>{
-            return res.json()
-     }).then(data=>{
+     }).then(()=>{
          alert("Saved")
-        leaveRequestForm.reset()
+        leaveRequestForm.reset()  
      })
 }else{
     leaveRequestForm.reportValidity()
