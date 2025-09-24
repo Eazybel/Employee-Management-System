@@ -1,8 +1,12 @@
-const salaryModal=document.getElementById("salary-raise-modal")
-const cancelBtn=document.getElementById("cancel-button")
-const saveBtn=document.getElementById("saveBtn")
-const grantSalary=document.getElementById("grantSalary")
-const names=document.getElementById("employee-name")
+const salaryRaiseModal=document.getElementById("salary-raise-modal")
+const newSalaryModal=document.getElementById("salary-insert-modal")
+const cancelBtnRaise=document.getElementById("cancel-button-raise")
+const cancelBtnInsert=document.getElementById("cancel-button-insert")
+const saveBtnRaise=document.getElementById("saveBtnRaise")
+const grantSalaryRaise=document.getElementById("grantSalary")
+const grantSalaryInsert=document.getElementById("addNewSalary")
+const namesRaise=document.getElementById("employee-name-raise")
+const namesInsert=document.getElementById("employee-name-insert")
   //all employee Data Fetch
 fetch("/nameData",{
     method:"POST",
@@ -12,8 +16,10 @@ fetch("/nameData",{
 ).then(res=>{
     return res.json()
 }).then(data=>{
+    console.log(data)
     data.forEach(fullNames=>{
-        names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
+        namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
+        namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
     //     if (fullNames.lateArrival.length!==0) {
     //         fullNames.lateArrival.forEach(lateData=>{
             
@@ -44,9 +50,15 @@ fetch("/nameData",{
 //     });
 // })
 })
-grantSalary.onclick=()=>{
-    salaryModal.classList.remove("hidden")
+grantSalaryRaise.onclick=()=>{
+    salaryRaiseModal.classList.remove("hidden")
 }
-cancelBtn.onclick=()=>{
-    salaryModal.classList.add("hidden")
+cancelBtnRaise.onclick=()=>{
+    salaryRaiseModal.classList.add("hidden")
+}
+grantSalaryInsert.onclick=()=>{
+    newSalaryModal.classList.remove("hidden")
+}
+cancelBtnInsert.onclick=()=>{
+    newSalaryModal.classList.add("hidden")
 }
