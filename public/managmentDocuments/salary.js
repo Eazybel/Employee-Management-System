@@ -19,6 +19,7 @@ fetch("/nameData",{
 }).then(data=>{
     console.log(data)
     data.forEach(fullNames=>{
+        let salaryLength=fullNames.salary.length
         namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
         namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
         if (fullNames.salary.length!==0) {   
@@ -26,8 +27,8 @@ fetch("/nameData",{
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${fullNames.personalInfo.fullName}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.jobTitle}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.department}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salary.length-1].new}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salary.length-1].date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].new}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].date}</td>
                     </tr>`)
        }
     })
