@@ -8,8 +8,8 @@ const salaryReports=document.getElementById("salaryReports")
 const saveBtnInsert=document.getElementById("saveBtnInsert")
 const grantSalaryRaise=document.getElementById("grantSalary")
 const grantSalaryInsert=document.getElementById("addNewSalary")
-const namesRaise=document.getElementById("employee-name-raise")
-const namesInsert=document.getElementById("employee-name-insert")
+const namesRaise=document.getElementById("employeeNameRaise")
+const namesInsert=document.getElementById("employeeNameInsert")
 const nameFinder=document.getElementById("nameFinder")
   //all employee Data Fetch
 fetch("/nameData",{
@@ -23,16 +23,17 @@ fetch("/nameData",{
     console.log(data)
     data.forEach(fullNames=>{
         let salaryLength=fullNames.salary.length
-        namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-        namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-        if (fullNames.salary.length!==0) {   
+        if (fullNames.salary.length!==0) { 
+             namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)  
             salaryReports.insertAdjacentHTML("beforeend",`<tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.jobTitle}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.department}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].new}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].lastRaisedate}</td>
                     </tr>`)
+       }else if(fullNames.salary.length===0){
+        namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
        }
     })
 
