@@ -3,6 +3,7 @@ const newSalaryModal=document.getElementById("salary-insert-modal")
 const cancelBtnRaise=document.getElementById("cancel-button-raise")
 const cancelBtnInsert=document.getElementById("cancel-button-insert")
 const saveBtnRaise=document.getElementById("saveBtnRaise")
+const salaryReports=document.getElementById("salaryReports")
 const grantSalaryRaise=document.getElementById("grantSalary")
 const grantSalaryInsert=document.getElementById("addNewSalary")
 const namesRaise=document.getElementById("employee-name-raise")
@@ -20,18 +21,15 @@ fetch("/nameData",{
     data.forEach(fullNames=>{
         namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
         namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-    //     if (fullNames.lateArrival.length!==0) {
-    //         fullNames.lateArrival.forEach(lateData=>{
-            
-    //         lateArrivalReports.insertAdjacentHTML("beforeend",`<div  class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center">
-    //                 <div>
-    //                     <p  class="text-lg font-medium text-gray-800 employeeName">${fullNames.personalInfo.fullName} - <span class="font-normal text-sm text-gray-500">Reason: ${lateData.reason}</span></p>
-    //                     <p class="text-sm text-gray-600">Date: ${lateData.date}, Time: ${lateData.arrivalTime}</p>
-    //                 </div>
-    //             </div>`)
-
-    //      })
-    //    }
+        if (fullNames.salary.length!==0) {   
+            salaryReports.insertAdjacentHTML("beforeend",`<tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${fullNames.personalInfo.fullName}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.jobTitle}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.department}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salary.length-1].new}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salary.length-1].date}</td>
+                    </tr>`)
+       }
     })
 
  
