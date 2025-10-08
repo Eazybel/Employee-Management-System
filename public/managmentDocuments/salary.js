@@ -1,5 +1,6 @@
 const salaryRaiseModal=document.getElementById("salary-raise-modal")
 const newSalaryForm=document.getElementById("new-salary-form")
+const salaryRaiseForm=document.getElementById("salaryRaiseForm")
 const newSalaryModal=document.getElementById("salary-insert-modal")
 const cancelBtnRaise=document.getElementById("cancel-button-raise")
 const cancelBtnInsert=document.getElementById("cancel-button-insert")
@@ -11,6 +12,8 @@ const grantSalaryInsert=document.getElementById("addNewSalary")
 const namesRaise=document.getElementById("employeeNameRaise")
 const namesInsert=document.getElementById("employeeNameInsert")
 const nameFinder=document.getElementById("nameFinder")
+const employeeNameRaise=document.getElementById("employeeNameRaise")
+const currentSalary=document.getElementById("currentSalary")
   //all employee Data Fetch
 fetch("/nameData",{
     method:"POST",
@@ -19,12 +22,13 @@ fetch("/nameData",{
 }
 ).then(res=>{
     return res.json()
-}).then(data=>{
+}).then(data=>{ 
     console.log(data)
     data.forEach(fullNames=>{
         let salaryLength=fullNames.salary.length
         if (fullNames.salary.length!==0) { 
              namesRaise.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)  
+            // currentSalary.value+=`${fullNames.salary[salaryLength-1].new}}`
             salaryReports.insertAdjacentHTML("beforeend",`<tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.employmentDetails.jobTitle}</td>
@@ -32,6 +36,13 @@ fetch("/nameData",{
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].new}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.salary[salaryLength-1].lastRaisedate}</td>
                     </tr>`)
+employeeNameRaise.addEventListener("change",(e)=>{
+    let targetValue=e.target.value
+    if(targetValue===fullNames.personalInfo.fullName){
+    currentSalary.value=`$`+`${fullNames.salary[salaryLength-1].new}`
+
+    }
+})
        }else if(fullNames.salary.length===0){
         namesInsert.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
        }
@@ -58,12 +69,14 @@ grantSalaryRaise.onclick=()=>{
 }
 cancelBtnRaise.onclick=()=>{
     salaryRaiseModal.classList.add("hidden")
+    window.location.reload()
 }
 grantSalaryInsert.onclick=()=>{
     newSalaryModal.classList.remove("hidden")
 }
 cancelBtnInsert.onclick=()=>{
     newSalaryModal.classList.add("hidden")
+    window.location.reload()
 }
 saveBtnInsert.onclick=(e)=>{
  e.preventDefault()
@@ -79,6 +92,25 @@ form.append("companyUID",localStorage.getItem("UID"))
      })
 }else{
     newSalaryForm.reportValidity()
+}
+
+}
+saveBtnRaise.onclick=(e)=>{
+ e.preventDefault()
+if(salaryRaiseForm.checkValidity()){
+const form=new FormData(salaryRaiseForm)
+form.append("companyUID",localStorage.getItem("UID"))
+currentSalary.value=currentSalary.value.replace("$","")
+form.append("previous",currentSalary.value)
+ fetch("/salaryRaise",{
+      method:"POST",
+      body:form
+     }).then((res)=>{
+         alert("Saved")
+        salaryRaiseForm.reset()  
+     })
+}else{
+    salaryRaiseForm.reportValidity()
 }
 
 }
