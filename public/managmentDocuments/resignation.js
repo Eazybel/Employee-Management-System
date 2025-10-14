@@ -4,6 +4,7 @@ const closeModal=document.getElementById("close-modal-x")
 const closeModalBtn=document.getElementById("close-modal-btn")
 const ongoingList=document.getElementById("resignation-list")
 const deniedList=document.getElementById("deniedList")
+const submitBtn=document.getElementById("submitBtn")
 resigModalOpener.onclick=()=>{
     resigModal.classList.remove("hidden")
 }
@@ -13,6 +14,7 @@ closeModal.onclick=()=>{
 closeModalBtn.onclick=()=>{
    window.location.reload()
 }
+
 fetch("/nameData",{
     method:"POST",
     headers:{"Content-type":"application/json"},
@@ -70,3 +72,14 @@ fetch("/nameData",{
 // }  
 // )
 })
+submitBtn.onclick=()=>{
+    const form=new FormData()
+  fetch("resignationController",{
+    method:"POST",
+    body:form
+  }).then(res=>{
+    return res.json
+  }).then(data=>{
+    console.log(data)
+  })
+}
