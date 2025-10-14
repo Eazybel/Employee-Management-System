@@ -21,10 +21,11 @@ fetch("/nameData",{
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    console.log(data)
     data.forEach(fullNames=>{
-        names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-       if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===true){
+        if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
+            names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
+        }
+       if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===true){
              ongoingList.insertAdjacentHTML("beforeend",`
                 <tr class=' transition duration-150'>
                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
@@ -44,18 +45,34 @@ fetch("/nameData",{
                                </td>
                            </tr>
                `)
-        }else if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
-                    deniedList.insertAdjacentHTML("beforeend",`
-                        <tr class='hover:bg-gray-50 transition duration-150'>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">N/A</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">Attempted same-day resignation (Policy Violation)</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 border border-red-300"><i class="fas fa-times-circle mr-1"></i> Denied</span>
-                                    </td>
-                                </tr>
-                        `)
-       }
+        }else if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
+            if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===true){
+
+                deniedList.insertAdjacentHTML("beforeend",`
+                    <tr class='hover:bg-gray-50 transition duration-150'>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">N/A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">Attempted same-day resignation (Policy Violation)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 border border-green-300">Accepted</span>
+                                </td>
+                            </tr>
+                    `)
+            }else if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
+                console.log(fullNames)
+                deniedList.insertAdjacentHTML("beforeend",`
+                    <tr class='hover:bg-gray-50 transition duration-150'>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">N/A</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">Attempted same-day resignation (Policy Violation)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 border border-red-300">Denied</span>
+                                </td>
+                            </tr>
+                    `)
+                
+   }
+            }
       
  
     })
@@ -85,7 +102,8 @@ submitBtn.onclick=(e)=>{
   }).then(res=>{
     return res.json
   }).then(data=>{
-    console.log(data)
+    alert("Saved")
+    resignationForm.reset()
   })
    }else{
     resignationForm.reportValidity()
