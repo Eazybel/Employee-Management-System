@@ -6,6 +6,7 @@ const ongoingList=document.getElementById("resignation-list")
 const deniedList=document.getElementById("deniedList")
 const submitBtn=document.getElementById("submitBtn")
 const resignationForm=document.getElementById("resignation-form")
+
 resigModalOpener.onclick=()=>{
     resigModal.classList.remove("hidden")
 }
@@ -36,10 +37,10 @@ fetch("/nameData",{
                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 border border-yellow-300">Pending Review</span>
                                </td>
                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
-                                   <button class="bg-green-600 text-white hover:bg-green-700 py-2 px-4 rounded-xl text-sm font-semibold transition duration-150 ease-in-out shadow-md hover:shadow-lg">
+                                   <button class="bg-green-600 text-white hover:bg-green-700 py-2 px-4 rounded-xl text-sm font-semibold transition duration-150 ease-in-out shadow-md hover:shadow-lg acceptBtn">
                                        <i class="fas fa-check mr-1"></i> Accept
                                    </button>
-                                   <button class="bg-red-600 text-white hover:bg-red-700 py-2 px-4 rounded-xl text-sm font-semibold transition duration-150 ease-in-out shadow-md hover:shadow-lg">
+                                   <button class="bg-red-600 text-white hover:bg-red-700 py-2 px-4 rounded-xl text-sm font-semibold transition duration-150 ease-in-out shadow-md hover:shadow-lg denyBtn">
                                        <i class="fas fa-times mr-1"></i> Deny
                                    </button>
                                </td>
@@ -59,7 +60,6 @@ fetch("/nameData",{
                             </tr>
                     `)
             }else if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
-                console.log(fullNames)
                 deniedList.insertAdjacentHTML("beforeend",`
                     <tr class='hover:bg-gray-50 transition duration-150'>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
@@ -77,6 +77,7 @@ fetch("/nameData",{
  
     })
 }).then(()=>{
+const logBtns=document.querySelectorAll("button")
  const employeeName=document.querySelectorAll("td.employeeName")
 filterBtn.addEventListener("keyup",(e)=>{
     let target=e.target.value.toLowerCase()
@@ -90,6 +91,18 @@ filterBtn.addEventListener("keyup",(e)=>{
     })
 }  
 )
+logBtns.forEach(btn=>{
+    if(btn.classList.contains("acceptBtn")){
+        btn.onclick=()=>{
+          btn.parentElement.parentElement.style.display="none"
+        }
+    }
+    if(btn.classList.contains("denyBtn")){
+        btn.onclick=()=>{
+        btn.parentElement.parentElement.style.display="none"
+        }
+    }
+})
 })
 submitBtn.onclick=(e)=>{
     e.preventDefault()
@@ -109,3 +122,4 @@ submitBtn.onclick=(e)=>{
     resignationForm.reportValidity()
    }
 }
+
