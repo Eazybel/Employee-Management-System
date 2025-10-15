@@ -3,7 +3,7 @@ const resigModal=document.getElementById("resignation-modal")
 const closeModal=document.getElementById("close-modal-x")
 const closeModalBtn=document.getElementById("close-modal-btn")
 const ongoingList=document.getElementById("resignation-list")
-const deniedList=document.getElementById("deniedList")
+const logList=document.getElementById("logList")
 const submitBtn=document.getElementById("submitBtn")
 const resignationForm=document.getElementById("resignation-form")
 
@@ -30,9 +30,9 @@ fetch("/nameData",{
              ongoingList.insertAdjacentHTML("beforeend",`
                 <tr class=' transition duration-150'>
                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
-                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${fullNames.resignation[fullNames.resignation.length-1].noticeDate}</td>
-                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">${fullNames.resignation[fullNames.resignation.length-1].lastDate}</td>
-                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">${fullNames.resignation[fullNames.resignation.length-1].reason}</td>
+                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 noticeDate">${fullNames.resignation[fullNames.resignation.length-1].noticeDate}</td>
+                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold lastDate">${fullNames.resignation[fullNames.resignation.length-1].lastDate}</td>
+                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs reason">${fullNames.resignation[fullNames.resignation.length-1].reason}</td>
                                <td class="px-6 py-4 whitespace-nowrap text-sm">
                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 border border-yellow-300">Pending Review</span>
                                </td>
@@ -48,8 +48,7 @@ fetch("/nameData",{
                `)
         }else if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
             if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===true){
-
-                deniedList.insertAdjacentHTML("beforeend",`
+                logList.insertAdjacentHTML("beforeend",`
                     <tr class='hover:bg-gray-50 transition duration-150'>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">N/A</td>
@@ -60,7 +59,7 @@ fetch("/nameData",{
                             </tr>
                     `)
             }else if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
-                deniedList.insertAdjacentHTML("beforeend",`
+                logList.insertAdjacentHTML("beforeend",`
                     <tr class='hover:bg-gray-50 transition duration-150'>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">N/A</td>
@@ -95,11 +94,32 @@ logBtns.forEach(btn=>{
     if(btn.classList.contains("acceptBtn")){
         btn.onclick=()=>{
           btn.parentElement.parentElement.style.display="none"
+          logList.insertAdjacentHTML("beforeend",`
+                    <tr class='hover:bg-gray-50 transition duration-150'>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${btn.parentElement.parentElement.querySelector("td.employeeName").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${btn.parentElement.parentElement.querySelector("td.lastDate").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">${btn.parentElement.parentElement.querySelector("td.reason").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 border border-green-300">Accepted</span>
+                                </td>
+                            </tr>
+                    `)
         }
     }
     if(btn.classList.contains("denyBtn")){
         btn.onclick=()=>{
         btn.parentElement.parentElement.style.display="none"
+         logList.insertAdjacentHTML("beforeend",`
+                    <tr class='hover:bg-gray-50 transition duration-150'>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${btn.parentElement.parentElement.querySelector("td.employeeName").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${btn.parentElement.parentElement.querySelector("td.lastDate").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell truncate max-w-xs">${btn.parentElement.parentElement.querySelector("td.reason").innerText}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 border border-red-300">Denied</span>
+                                </td>
+                            </tr>
+                    `)
+        
         }
     }
 })
