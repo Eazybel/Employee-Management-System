@@ -19,6 +19,6 @@ const statusController=async(req,res)=>{
     // myEmployee.resignation[resignation.length-1].acceptanceStatus=false
     // await myEmployee.save()
     
-    res.send(myEmployee.resignation[resignation.length-1].ongoingStatus)
+    res.send(myEmployee.resignation[myEmployee.resignation.length-1].ongoingStatus)
 }
 module.exports={resignationController,statusController}

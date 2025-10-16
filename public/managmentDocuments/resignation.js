@@ -109,9 +109,9 @@ logBtns.forEach(btn=>{
                     fetch("/statusController",{
                         method:"POST",
                          headers:{"Content-type":"application/json"},
-                        body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:true,})
+                        body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:true,employeeName:btn.parentElement.parentElement.querySelector("td.employeeName").innerText})
                     }).then(res=>{
-                        return res.json()
+                        return res.text()
                     }).then(data=>{
                         console.log(data)
                     })     
@@ -132,8 +132,8 @@ logBtns.forEach(btn=>{
                     `)
                     fetch("/statusController",{
                         method:"POST",
-                        headers:{"Content-type":"application/json"},
-                         body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:false,})
+                         headers:{"Content-type":"application/json"},
+                        body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:false,employeeName:btn.parentElement.parentElement.querySelector("td.employeeName").innerText})
                     }).then(res=>{
                         return res.text()
                     }).then(data=>{
