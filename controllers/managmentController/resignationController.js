@@ -10,4 +10,15 @@ const resignationController=async(req,res)=>{
     await myEmployee.save()
     res.json(req.body)
 }
-module.exports=resignationController
+const statusController=async(req,res)=>{
+ const companyData=await Company.findOne({companyUID:req.body.companyUID})
+    const companyName=companyData.companyName
+    const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
+    const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
+    // myEmployee.resignation[resignation.length-1].ongoingStatus=false
+    // myEmployee.resignation[resignation.length-1].acceptanceStatus=false
+    // await myEmployee.save()
+    
+    res.send(myEmployee.resignation[resignation.length-1].ongoingStatus)
+}
+module.exports={resignationController,statusController}

@@ -82,10 +82,12 @@ filterBtn.addEventListener("keyup",(e)=>{
     let target=e.target.value.toLowerCase()
     employeeName.forEach(employee=>{
         let name=employee.innerText.toLowerCase()
-        if (name.includes(target)) {
+        if(   employee.parentElement.style.display!=="none"){
+            if (name.includes(target)) {
             employee.parentElement.style.display=""
         }else{
             employee.parentElement.style.display="none"
+        }
         }
     })
 }  
@@ -104,6 +106,15 @@ logBtns.forEach(btn=>{
                                 </td>
                             </tr>
                     `)
+                    fetch("/statusController",{
+                        method:"POST",
+                         headers:{"Content-type":"application/json"},
+                        body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:true,})
+                    }).then(res=>{
+                        return res.json()
+                    }).then(data=>{
+                        console.log(data)
+                    })     
         }
     }
     if(btn.classList.contains("denyBtn")){
@@ -119,7 +130,15 @@ logBtns.forEach(btn=>{
                                 </td>
                             </tr>
                     `)
-        
+                    fetch("/statusController",{
+                        method:"POST",
+                        headers:{"Content-type":"application/json"},
+                         body:JSON.stringify({companyUID:localStorage.getItem("UID"),status:false,})
+                    }).then(res=>{
+                        return res.text()
+                    }).then(data=>{
+                        console.log(data)
+                    })
         }
     }
 })
