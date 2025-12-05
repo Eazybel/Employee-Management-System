@@ -1,5 +1,26 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { signOut,getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  // sidebar toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const closeSidebar = document.getElementById('closeSidebar');
+
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function close() {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      menuBtn?.addEventListener('click', openSidebar);
+      closeSidebar?.addEventListener('click', close);
+      overlay?.addEventListener('click', close);
 const closeBtn = document.getElementById('closeBtn');
 const submitBtn = document.getElementById('btn');
 const registerContainer=document.getElementById("registerContainer")
