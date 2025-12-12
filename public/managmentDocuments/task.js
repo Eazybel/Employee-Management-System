@@ -19,26 +19,27 @@ fetch("/nameData",{
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    data.forEach(fullNames=>{
-        if(fullNames.task.length!=0&&fullNames.task.some(t=>t.active)){
-            console.log(fullNames)
-          activeTasks.insertAdjacentHTML("beforeend",` <div id="task-card-4" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+   for (let i = 0; i < data.length; i++) {
+     if(data[i].task.length!=0&&data[i].task.some(t=>t.active)){
+console.log(data[i])
+          for (let j = 0; j < data[i].task.length; j++) {
+            activeTasks.insertAdjacentHTML("beforeend",` <div id="task-card-4" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
                     <div class="flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <!-- Priority Tag UNIFIED to Indigo -->
-                            <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full">${fullNames.task.priorityLevel} Priority</span>
+                            <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full">${data[i].task[j].priorityLevel} Priority</span>
                             <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">Server Migration Phase 2</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">Awaiting security approval before deployment. Task is currently on hold.</p>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">${data[i].task[j].taskName}</h3>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${data[i].task[j].description}</p>
                         <div class="flex justify-between items-center text-sm mb-4">
                             <div>
                                 <p class="text-gray-500">Assigned to:</p>
-                                <p class="font-medium text-indigo-600">Jordan Smith</p>
+                                <p class="font-medium text-indigo-600">${data[i].task[j].assignedPerson}</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-gray-500">Due Date:</p>
-                                <p class="font-medium text-gray-700">2025-10-30</p>
+                                <p class="font-medium text-gray-700">${data[i].task[j].dueDate}</p>
                             </div>
                         </div>
                     </div>
@@ -58,9 +59,13 @@ fetch("/nameData",{
                         </button>
                     </div>
                 </div>`)
+            
+          }
         }
-        names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
-    })})
+        names.insertAdjacentHTML("beforeend",`<option value="${data[i].personalInfo.fullName}">${data[i].personalInfo.fullName}</option>`)
+   
+    
+   } })
 assign.onclick=(e)=>{
 e.preventDefault()
 const form=new FormData(taskForm)
