@@ -5,11 +5,13 @@ const names=document.getElementById("employee")
 const assign=document.getElementById("submit-btn")
 const taskForm=document.getElementById("task-form")
 const activeTasks=document.getElementById("activeTasks")
+const overDues=document.getElementById("overDues")
 
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
 cancelBtn.onclick=()=>{
+    window.location.reload()
     taskModal.classList.add("hidden")
 }
 fetch("/nameData",{
@@ -23,7 +25,45 @@ fetch("/nameData",{
      if(data[i].task.length!=0&&data[i].task.some(t=>t.active)){
 console.log(data[i])
           for (let j = 0; j < data[i].task.length; j++) {
-            activeTasks.insertAdjacentHTML("beforeend",` <div id="task-card-4" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+               const dueDated=new Date(`${data[i].task[j].dueDate}`)
+                const today=new Date()
+                if(dueDated<today){
+                    overDues.insertAdjacentHTML("beforeend",` <!-- Overdue Task Card 1 (Red style) -->
+                <div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-sm font-medium text-white bg-red-500 px-3 py-1 rounded-full">${data[i].task[j].priorityLevel} Priority</span>
+                            <!-- Distinct OVERDUE tag in red -->
+                            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">${data[i].task[j].taskName}</h3>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${data[i].task[j].description}</p>
+                        <div class="flex justify-between items-center text-sm mb-4">
+                            <div>
+                                <p class="text-gray-500">Assigned to:</p>
+                                <p class="font-medium text-indigo-600">${data[i].task[j].assignedPerson}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-500">Original Due Date:</p>
+                                <p class="font-bold text-red-500">${data[i].task[j].dueDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Action Buttons: Standard set -->
+                    <div class="flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
+                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+                            Complete
+                        </button>
+                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                            Edit
+                        </button>
+                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 transition duration-150 shadow-md">
+                            Review
+                        </button>
+                    </div>
+                </div>`)
+                }else {
+                     activeTasks.insertAdjacentHTML("beforeend",` <div id="task-card-4" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
                     <div class="flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <!-- Priority Tag UNIFIED to Indigo -->
@@ -59,9 +99,12 @@ console.log(data[i])
                         </button>
                     </div>
                 </div>`)
-            
+                }
+           
+          
           }
         }
+      
         names.insertAdjacentHTML("beforeend",`<option value="${data[i].personalInfo.fullName}">${data[i].personalInfo.fullName}</option>`)
    
     
@@ -78,6 +121,7 @@ fetch("/taskController",
     return res.json()
 }).then(data=>{
     console.log(data) 
+    window.alert("Saved")
 })
 
 }
