@@ -21,11 +21,16 @@ fetch("/nameData",{
     data.forEach(fullNames=>{
         names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
     })})
-assign.onclick=()=>{
-fetch("/controllers/managmentController/taskController.js",
-   { method:"GET"}
+assign.onclick=(e)=>{
+e.preventDefault()
+const form=new FormData(taskForm)
+form.append("companyUID",localStorage.getItem("UID"))
+fetch("/taskController",
+   { method:"POST",
+    body:form
+   }
 ).then(res=>{
-    return res.json()
+    return res.text()
 }).then(data=>{
     console.log(data)
 })
