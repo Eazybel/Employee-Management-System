@@ -2,6 +2,8 @@ const taskModal=document.getElementById("task-modal")
 const taskModalBtn=document.getElementById("open-modal-btn")
 const cancelBtn=document.getElementById("cancel-btn")
 const names=document.getElementById("employee")
+const assign=document.getElementById("submit-btn")
+const taskForm=document.getElementById("task-form")
 
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
@@ -19,3 +21,13 @@ fetch("/nameData",{
     data.forEach(fullNames=>{
         names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
     })})
+assign.onclick=()=>{
+fetch("/controllers/managmentController/taskController.js",
+   { method:"GET"}
+).then(res=>{
+    return res.json()
+}).then(data=>{
+    console.log(data)
+})
+
+}
