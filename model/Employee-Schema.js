@@ -77,7 +77,8 @@ const EmployeeSchema = new mongoose.Schema({
   promotion:[{date:{type:String},currentPosition:{type:String},newPosition:{type:String}}],
   salary:[{Effectivedate:{type:String},lastRaisedate:{type:String},previous:{type:String},new:{type:String}}],
   absence:[{date:{type:String},duration:{type:String},reason:{type:String},ongoingStatus:{type:Boolean}}],
-  resignation:[{noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}]
+  resignation:[{noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}],
+  task:[{noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}]
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
