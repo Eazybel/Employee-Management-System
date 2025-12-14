@@ -13,7 +13,6 @@ taskModalBtn.onclick=()=>{
 }
 cancelBtn.onclick=()=>{
     window.location.reload()
-    taskModal.classList.add("hidden")
 }
 fetch("/nameData",{
     method:"POST",
@@ -104,22 +103,22 @@ fetch("/nameData",{
         }
         names.insertAdjacentHTML("beforeend",`<option value="${data[i].personalInfo.fullName}">${data[i].personalInfo.fullName}</option>`)
    } 
-const actionBtn=document.querySelectorAll("button")
+const actionBtn=document.querySelector("main").querySelectorAll("button")
 actionBtn.forEach(btns => {
    btns.onclick=()=>{
    if(btns.classList.contains("active")&&btns.classList.contains("complete")){
     reportContainer.insertAdjacentHTML("beforeend",` <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
                     <div class="flex justify-between items-start mb-2">
-                        <h4 class="text-base font-semibold text-gray-800">Server Migration Phase 1 Completion</h4>
+                        <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector("h3").innerText}</h4>
                         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS</span>
                     </div>
-                    <p class="text-sm text-gray-700 mb-2">All services successfully migrated to the new cluster without downtime.</p>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelectorAll("p")[0].innerText}</p>
                     <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: Jordan Smith</span>
-                        <span>Date: 2025-09-15</span>
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelectorAll("p")[2].innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelectorAll("p")[4].innerText}</span>
                     </div>
                 </div>`)
-                console.log(btns.parentElement.parentElement.querySelector("taskName").innerText)
+                btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("active")&&btns.classList.contains("edit")){
     console.log("edit active")
