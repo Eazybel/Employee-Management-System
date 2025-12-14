@@ -5,6 +5,7 @@ const names=document.getElementById("employee")
 const assign=document.getElementById("submit-btn")
 const taskForm=document.getElementById("task-form")
 const activeTasks=document.getElementById("activeTasks")
+const reportContainer=document.getElementById("report-container")
 const overDues=document.getElementById("overDues")
 
 taskModalBtn.onclick=()=>{
@@ -49,14 +50,14 @@ fetch("/nameData",{
                         </div>
                     </div>
                     <!-- Action Buttons: Standard set -->
-                    <div class=" complete flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+                    <div class=" flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
+                        <button class="overdue complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
                             Complete
                         </button>
-                        <button class="edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                        <button class="overdue edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
                             Edit
                         </button>
-                        <button class="fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
+                        <button class="overdue fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
                             Failed
                         </button>
                     </div>
@@ -66,34 +67,34 @@ fetch("/nameData",{
                     <div class="flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <!-- Priority Tag UNIFIED to Indigo -->
-                            <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full">${data[i].task[j].priorityLevel} Priority</span>
+                            <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full priority">${data[i].task[j].priorityLevel} Priority</span>
                             <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">${data[i].task[j].taskName}</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${data[i].task[j].description}</p>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${data[i].task[j].taskName}</h3>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${data[i].task[j].description}</p>
                         <div class="flex justify-between items-center text-sm mb-4">
                             <div>
                                 <p class="text-gray-500">Assigned to:</p>
-                                <p class="font-medium text-indigo-600">${data[i].task[j].assignedPerson}</p>
+                                <p class="font-medium text-indigo-600 assignedPerson">${data[i].task[j].assignedPerson}</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-gray-500">Due Date:</p>
-                                <p class="font-medium text-gray-700">${data[i].task[j].dueDate}</p>
+                                <p class="font-medium text-gray-700 dueDate">${data[i].task[j].dueDate}</p>
                             </div>
                         </div>
                     </div>
                     <!-- Action Buttons: Added Edit Button -->
                     <div class="flex space-x-2 pt-4 border-t border-gray-100" id="task-actions-4">
                         <button
-                            class="complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+                            class=" active complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
                             Complete
                         </button>
                         <button
-                            class=" editflex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                            class=" active edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
                             Edit
                         </button>
                         <button 
-                            class="fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
+                            class=" active fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
                             Failed
                         </button>
                     </div>
@@ -105,7 +106,37 @@ fetch("/nameData",{
    } 
 const actionBtn=document.querySelectorAll("button")
 actionBtn.forEach(btns => {
-    console.log(btns)
+   btns.onclick=()=>{
+   if(btns.classList.contains("active")&&btns.classList.contains("complete")){
+    reportContainer.insertAdjacentHTML("beforeend",` <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-base font-semibold text-gray-800">Server Migration Phase 1 Completion</h4>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">All services successfully migrated to the new cluster without downtime.</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: Jordan Smith</span>
+                        <span>Date: 2025-09-15</span>
+                    </div>
+                </div>`)
+                console.log(btns.parentElement.parentElement.querySelector("taskName").innerText)
+   }
+   if(btns.classList.contains("active")&&btns.classList.contains("edit")){
+    console.log("edit active")
+   }
+   if(btns.classList.contains("active")&&btns.classList.contains("fail")){
+    console.log("fail active")
+   }
+   if(btns.classList.contains("overdue")&&btns.classList.contains("complete")){
+    console.log("complete overdue")
+   }
+   if(btns.classList.contains("overdue")&&btns.classList.contains("edit")){
+    console.log("edit overdue")
+   }
+   if(btns.classList.contains("overdue")&&btns.classList.contains("fail")){
+    console.log("fail overdue")
+   }
+   }
 });
 })
 assign.onclick=(e)=>{
