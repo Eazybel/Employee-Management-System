@@ -23,7 +23,6 @@ fetch("/nameData",{
 }).then(data=>{
    for (let i = 0; i < data.length; i++) {
      if(data[i].task.length!=0&&data[i].task.some(t=>t.active)){
-console.log(data[i])
           for (let j = 0; j < data[i].task.length; j++) {
                const dueDated=new Date(`${data[i].task[j].dueDate}`)
                 const today=new Date()
@@ -50,15 +49,15 @@ console.log(data[i])
                         </div>
                     </div>
                     <!-- Action Buttons: Standard set -->
-                    <div class="flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
+                    <div class=" complete flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
                         <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
                             Complete
                         </button>
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                        <button class="edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
                             Edit
                         </button>
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-gray-200 text-gray-800 hover:bg-gray-300 transition duration-150 shadow-md">
-                            Review
+                        <button class="fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
+                            Failed
                         </button>
                     </div>
                 </div>`)
@@ -85,30 +84,30 @@ console.log(data[i])
                     </div>
                     <!-- Action Buttons: Added Edit Button -->
                     <div class="flex space-x-2 pt-4 border-t border-gray-100" id="task-actions-4">
-                        <button id="complete-task-4"
-                            class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+                        <button
+                            class="complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
                             Complete
                         </button>
-                        <button id="edit-task-4"
-                            class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                        <button
+                            class=" editflex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
                             Edit
                         </button>
-                        <button id="flag-review-4"
-                            class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
+                        <button 
+                            class="fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
                             Failed
                         </button>
                     </div>
                 </div>`)
                 }
-           
-          
           }
         }
-      
         names.insertAdjacentHTML("beforeend",`<option value="${data[i].personalInfo.fullName}">${data[i].personalInfo.fullName}</option>`)
-   
-    
-   } })
+   } 
+const actionBtn=document.querySelectorAll("button")
+actionBtn.forEach(btns => {
+    console.log(btns)
+});
+})
 assign.onclick=(e)=>{
 e.preventDefault()
 const form=new FormData(taskForm)
@@ -123,5 +122,4 @@ fetch("/taskController",
     console.log(data) 
     window.alert("Saved")
 })
-
 }
