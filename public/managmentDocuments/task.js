@@ -124,7 +124,18 @@ actionBtn.forEach(btns => {
     console.log("edit active")
    }
    if(btns.classList.contains("active")&&btns.classList.contains("fail")){
-    console.log("fail active")
+     reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector("h3").innerText}</h4>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelectorAll("p")[0].innerText}</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelectorAll("p")[2].innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelectorAll("p")[4].innerText}</span>
+                    </div>
+                </div>`)
+                btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("complete")){
     reportContainer.insertAdjacentHTML("beforeend",`  <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
@@ -134,7 +145,7 @@ actionBtn.forEach(btns => {
                     </div>
                     <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelectorAll("p")[0].innerText}</p>
                     <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned:${btns.parentElement.parentElement.querySelectorAll("p")[2].innerText}</span>
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelectorAll("p")[2].innerText}</span>
                         <span>Date: ${btns.parentElement.parentElement.querySelectorAll("p")[4].innerText}(Completed Late)</span>
                     </div>
                 </div>`)
@@ -144,7 +155,18 @@ actionBtn.forEach(btns => {
     console.log("edit overdue")
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("fail")){
-    console.log("fail overdue")
+      reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector("h3").innerText}</h4>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelectorAll("p")[0].innerText}</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelectorAll("p")[2].innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelectorAll("p")[4].innerText} (Overdue)</span>
+                    </div>
+                </div>`)
+                btns.parentElement.parentElement.style.display="none"
    }
    }
 });
