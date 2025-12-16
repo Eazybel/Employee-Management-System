@@ -7,8 +7,6 @@ const taskForm=document.getElementById("task-form")
 const activeTasks=document.getElementById("activeTasks")
 const reportContainer=document.getElementById("report-container")
 const overDues=document.getElementById("overDues")
-const editIcons=document.querySelectorAll("i")
-
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
@@ -33,7 +31,7 @@ fetch("/nameData",{
                         <div class="flex justify-between items-start mb-3">
                             <div class="flex items-center group">
                                 <span class="text-sm font-medium text-white bg-red-500 px-3 py-1 rounded-full priority">${data[i].task[j].priorityLevel} Priority</span>
-                                <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer" title="Edit Priority">
+                                <button class=" hidden ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer" title="Edit Priority">
                                     <i class="fa-solid fa-pen-to-square text-xs"></i>
                                 </button>
                             </div>
@@ -42,14 +40,14 @@ fetch("/nameData",{
 
                         <div class="flex items-center group mb-2">
                             <h3 class="text-lg font-bold text-gray-800 taskName">${data[i].task[j].taskName}</h3>
-                            <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                            <button class=" hidden ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
                                 <i class="fa-solid fa-pen-to-square text-sm"></i>
                             </button>
                         </div>
 
                         <div class="flex items-start group mb-4">
                             <p class="text-sm text-gray-600 line-clamp-2 description">${data[i].task[j].description}</p>
-                            <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                            <button class=" hidden ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
                                 <i class="fa-solid fa-pen-to-square text-xs"></i>
                             </button>
                         </div>
@@ -59,7 +57,7 @@ fetch("/nameData",{
                                 <p class="text-gray-500">Assigned to:</p>
                                 <div class="flex items-center">
                                     <p class="font-medium text-indigo-600 assignedPerson">${data[i].task[j].assignedPerson}</p>
-                                    <button class="ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                    <button class=" hidden ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
                                         <i class="fa-solid fa-pen-to-square text-[10px]"></i>
                                     </button>
                                 </div>
@@ -69,7 +67,7 @@ fetch("/nameData",{
                                 <p class="text-gray-500">Original Due Date:</p>
                                 <div class="flex items-center justify-end">
                                     <p class="font-bold text-red-500 dueDate">${data[i].task[j].dueDate}</p>
-                                    <button class="ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                    <button class=" hidden ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
                                         <i class="fa-solid fa-pen-to-square text-[10px]"></i>
                                     </button>
                                 </div>
@@ -95,7 +93,7 @@ fetch("/nameData",{
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex items-center group">
                             <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full priority">${data[i].task[j].priorityLevel} Priority</span>
-                            <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer" title="Edit Priority">
+                            <button class=" hidden ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer" title="Edit Priority">
                                 <i class="fa-solid fa-pen-to-square text-xs"></i>
                             </button>
                         </div>
@@ -104,14 +102,14 @@ fetch("/nameData",{
 
                     <div class="flex items-center group mb-2">
                         <h3 class="text-lg font-bold text-gray-800 taskName">${data[i].task[j].taskName}</h3>
-                        <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                        <button class=" hidden ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
                             <i class="fa-solid fa-pen-to-square text-sm"></i>
                         </button>
                     </div>
 
                     <div class="flex items-start group mb-4">
                         <p class="text-sm text-gray-600 line-clamp-2 description">${data[i].task[j].description}</p>
-                        <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                        <button class=" hidden ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
                             <i class="fa-solid fa-pen-to-square text-xs"></i>
                         </button>
                     </div>
@@ -121,7 +119,7 @@ fetch("/nameData",{
                             <p class="text-gray-500">Assigned to:</p>
                             <div class="flex items-center">
                                 <p class="font-medium text-indigo-600 assignedPerson">${data[i].task[j].assignedPerson}</p>
-                                <button class="ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                                <button class=" hidden ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
                                     <i class="fa-solid fa-pen-to-square text-[10px]"></i>
                                 </button>
                             </div>
@@ -131,7 +129,7 @@ fetch("/nameData",{
                             <p class="text-gray-500">Due Date:</p>
                             <div class="flex items-center justify-end">
                                 <p class="font-medium text-gray-700 dueDate">${data[i].task[j].dueDate}</p>
-                                <button class="ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                                <button class=" hidden ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
                                     <i class="fa-solid fa-pen-to-square text-[10px]"></i>
                                 </button>
                             </div>
@@ -174,7 +172,12 @@ actionBtn.forEach(btns => {
                 btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("active")&&btns.classList.contains("edit")){
-    console.log("edit active")
+    const iconBtns=btns.parentElement.parentElement.querySelectorAll("button:has(i)")
+    btns.innerText="Save"
+    iconBtns.forEach(btns=>{
+        btns.classList.remove("hidden")
+
+    })
    }
    if(btns.classList.contains("active")&&btns.classList.contains("fail")){
      reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
@@ -205,7 +208,7 @@ actionBtn.forEach(btns => {
                 btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("edit")){
-    console.log(btns.parentElement.parentElement.contentEditable="true")
+    console.log("overdue edit")
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("fail")){
       reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
@@ -223,7 +226,9 @@ actionBtn.forEach(btns => {
    }
    }
 });
-})
+
+}
+)
 assign.onclick=(e)=>{
 e.preventDefault()
 const form=new FormData(taskForm)
