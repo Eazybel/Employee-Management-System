@@ -7,6 +7,17 @@ const taskForm=document.getElementById("task-form")
 const activeTasks=document.getElementById("activeTasks")
 const reportContainer=document.getElementById("report-container")
 const overDues=document.getElementById("overDues")
+const editorFun=(btns)=>{
+ const iconBtns=btns.parentElement.parentElement.querySelectorAll("button:has(i)")
+    btns.innerText="Save"
+    btns.previousElementSibling.classList.add("hidden")
+    btns.nextElementSibling.classList.add("hidden")
+    btns.style.backgroundColor="green"
+    iconBtns.forEach(btns=>{
+        btns.classList.remove("hidden")
+
+    })
+}
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
@@ -172,12 +183,7 @@ actionBtn.forEach(btns => {
                 btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("active")&&btns.classList.contains("edit")){
-    const iconBtns=btns.parentElement.parentElement.querySelectorAll("button:has(i)")
-    btns.innerText="Save"
-    iconBtns.forEach(btns=>{
-        btns.classList.remove("hidden")
-
-    })
+    editorFun(btns)
    }
    if(btns.classList.contains("active")&&btns.classList.contains("fail")){
      reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
@@ -208,7 +214,7 @@ actionBtn.forEach(btns => {
                 btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("edit")){
-    console.log("overdue edit")
+    editorFun(btns)
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("fail")){
       reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
