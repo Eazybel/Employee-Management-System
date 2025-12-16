@@ -7,6 +7,7 @@ const taskForm=document.getElementById("task-form")
 const activeTasks=document.getElementById("activeTasks")
 const reportContainer=document.getElementById("report-container")
 const overDues=document.getElementById("overDues")
+const editIcons=document.querySelectorAll("i")
 
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
@@ -27,77 +28,129 @@ fetch("/nameData",{
                const dueDated=new Date(`${data[i].task[j].dueDate}`)
                 const today=new Date()
                 if(dueDated<today){
-                    overDues.insertAdjacentHTML("beforeend",` <!-- Overdue Task Card 1 (Red style) -->
-                <div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+                    overDues.insertAdjacentHTML("beforeend",`<div id="overdue-card-red" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
                     <div class="flex-1">
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-sm font-medium text-white bg-red-500 px-3 py-1 rounded-full">${data[i].task[j].priorityLevel} Priority</span>
-                            <!-- Distinct OVERDUE tag in red -->
-                            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">${data[i].task[j].taskName}</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${data[i].task[j].description}</p>
-                        <div class="flex justify-between items-center text-sm mb-4">
-                            <div>
-                                <p class="text-gray-500">Assigned to:</p>
-                                <p class="font-medium text-indigo-600">${data[i].task[j].assignedPerson}</p>
+                            <div class="flex items-center group">
+                                <span class="text-sm font-medium text-white bg-red-500 px-3 py-1 rounded-full priority">${data[i].task[j].priorityLevel} Priority</span>
+                                <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer" title="Edit Priority">
+                                    <i class="fa-solid fa-pen-to-square text-xs"></i>
+                                </button>
                             </div>
-                            <div class="text-right">
+                            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full font-bold">OVERDUE</span>
+                        </div>
+
+                        <div class="flex items-center group mb-2">
+                            <h3 class="text-lg font-bold text-gray-800 taskName">${data[i].task[j].taskName}</h3>
+                            <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                <i class="fa-solid fa-pen-to-square text-sm"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-start group mb-4">
+                            <p class="text-sm text-gray-600 line-clamp-2 description">${data[i].task[j].description}</p>
+                            <button class="ml-2 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                <i class="fa-solid fa-pen-to-square text-xs"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex justify-between items-center text-sm mb-4">
+                            <div class="group">
+                                <p class="text-gray-500">Assigned to:</p>
+                                <div class="flex items-center">
+                                    <p class="font-medium text-indigo-600 assignedPerson">${data[i].task[j].assignedPerson}</p>
+                                    <button class="ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                        <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="text-right group">
                                 <p class="text-gray-500">Original Due Date:</p>
-                                <p class="font-bold text-red-500">${data[i].task[j].dueDate}</p>
+                                <div class="flex items-center justify-end">
+                                    <p class="font-bold text-red-500 dueDate">${data[i].task[j].dueDate}</p>
+                                    <button class="ml-1.5 text-gray-300 hover:text-red-500 transition-colors cursor-pointer">
+                                        <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Action Buttons: Standard set -->
-                    <div class=" flex space-x-2 pt-4 border-t border-gray-100" id="overdue-actions-1">
-                        <button class="overdue complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+
+                    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+                        <button class="overdue complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition shadow-md">
                             Complete
                         </button>
-                        <button class="overdue edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+                        <button class="overdue edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition shadow-md">
                             Edit
                         </button>
-                        <button class="overdue fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
+                        <button class="overdue fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition shadow-md">
                             Failed
                         </button>
                     </div>
                 </div>`)
                 }else {
-                     activeTasks.insertAdjacentHTML("beforeend",` <div id="task-card-4" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start mb-3">
-                            <!-- Priority Tag UNIFIED to Indigo -->
+                     activeTasks.insertAdjacentHTML("beforeend",`<div id="task-card-active" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center group">
                             <span class="text-sm font-medium text-white bg-indigo-500 px-3 py-1 rounded-full priority">${data[i].task[j].priorityLevel} Priority</span>
-                            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
+                            <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer" title="Edit Priority">
+                                <i class="fa-solid fa-pen-to-square text-xs"></i>
+                            </button>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${data[i].task[j].taskName}</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${data[i].task[j].description}</p>
-                        <div class="flex justify-between items-center text-sm mb-4">
-                            <div>
-                                <p class="text-gray-500">Assigned to:</p>
+                        <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full font-bold">In Progress</span>
+                    </div>
+
+                    <div class="flex items-center group mb-2">
+                        <h3 class="text-lg font-bold text-gray-800 taskName">${data[i].task[j].taskName}</h3>
+                        <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square text-sm"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-start group mb-4">
+                        <p class="text-sm text-gray-600 line-clamp-2 description">${data[i].task[j].description}</p>
+                        <button class="ml-2 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex justify-between items-center text-sm mb-4">
+                        <div class="group">
+                            <p class="text-gray-500">Assigned to:</p>
+                            <div class="flex items-center">
                                 <p class="font-medium text-indigo-600 assignedPerson">${data[i].task[j].assignedPerson}</p>
+                                <button class="ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                                </button>
                             </div>
-                            <div class="text-right">
-                                <p class="text-gray-500">Due Date:</p>
+                        </div>
+
+                        <div class="text-right group">
+                            <p class="text-gray-500">Due Date:</p>
+                            <div class="flex items-center justify-end">
                                 <p class="font-medium text-gray-700 dueDate">${data[i].task[j].dueDate}</p>
+                                <button class="ml-1.5 text-gray-300 hover:text-indigo-500 transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Action Buttons: Added Edit Button -->
-                    <div class="flex space-x-2 pt-4 border-t border-gray-100" id="task-actions-4">
-                        <button
-                            class=" active complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
-                            Complete
-                        </button>
-                        <button
-                            class=" active edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
-                            Edit
-                        </button>
-                        <button 
-                            class=" active fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition duration-150 shadow-md">
-                            Failed
-                        </button>
-                    </div>
-                </div>`)
+                </div>
+
+                <div class="flex space-x-2 pt-4 border-t border-gray-100">
+                    <button class="active complete flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition shadow-md">
+                        Complete
+                    </button>
+                    <button class="active edit flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition shadow-md">
+                        Edit
+                    </button>
+                    <button class="active fail flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-200 text-red-800 hover:bg-red-300 transition shadow-md">
+                        Failed
+                    </button>
+                </div>
+            </div>`)
                 }
           }
         }
@@ -152,7 +205,7 @@ actionBtn.forEach(btns => {
                 btns.parentElement.parentElement.style.display="none"
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("edit")){
-    console.log("edit overdue")
+    console.log(btns.parentElement.parentElement.contentEditable="true")
    }
    if(btns.classList.contains("overdue")&&btns.classList.contains("fail")){
       reportContainer.insertAdjacentHTML("beforeend",`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
