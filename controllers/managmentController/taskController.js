@@ -11,6 +11,6 @@ const taskController=async(req,res)=>{
         res.json(req.body)
 }
 const taskAction=(req,res)=>{
-        res.send("sucess")
+        res.json(req.body)
 }
 module.exports={taskController,taskAction}

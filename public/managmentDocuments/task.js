@@ -152,20 +152,19 @@ const actionBtn=document.querySelector("main").querySelectorAll("button")
 actionBtn.forEach(btns => {
    btns.onclick=()=>{
      if(btns.innerText==="Save"&&btns.classList.contains("active")&&btns.classList.contains("edit")){
-        const editableElements=btns.parentElement.parentElement.querySelectorAll("p,h3,span")
-        editableElements.forEach(elements=>{
-           console.log(elements[0])
-        
-        })
-    // fetch("/taskAction",
-    //     {method:"POST",
-    //     body:"hello"
-    //     }
-    // ).then(res=>{
-    //     return res.text()
-    // }).then(data=>{
-    //     console.log(data)
-    // })
+        const spanElement=btns.parentElement.parentElement.querySelectorAll("span,p,h3")
+        const nodeChange=[...spanElement]
+       const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText}
+    fetch("/taskAction",
+        {method:"POST",
+        headers:{"Content-type":"application/json"},
+        body:JSON.stringify(editedContent)
+        }
+    ).then(res=>{
+        return res.json()
+    }).then(data=>{
+        console.log(data)
+    })
    }
    if(btns.classList.contains("active")&&btns.classList.contains("complete")){
     reportContainer.insertAdjacentHTML("beforeend",` <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
