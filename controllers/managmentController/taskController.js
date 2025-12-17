@@ -10,4 +10,7 @@ const taskController=async(req,res)=>{
         await myEmployee.save()
         res.json(req.body)
 }
-module.exports=taskController
+const taskAction=(req,res)=>{
+        res.send("sucess")
+}
+module.exports={taskController,taskAction}
