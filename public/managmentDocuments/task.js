@@ -18,6 +18,17 @@ const editorFun=(btns)=>{
 
     })
 }
+const editorFunRecover=(btns)=>{
+ const iconBtns=btns.parentElement.parentElement.querySelectorAll("button:has(i)")
+    btns.innerText="Edit"
+    btns.previousElementSibling.classList.remove("hidden")
+    btns.nextElementSibling.classList.remove("hidden")
+    btns.style.backgroundColor="blue"
+    iconBtns.forEach(btns=>{
+        btns.classList.add("hidden")
+
+    })
+}
 taskModalBtn.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
@@ -152,6 +163,7 @@ const actionBtn=document.querySelector("main").querySelectorAll("button")
 actionBtn.forEach(btns => {
    btns.onclick=()=>{
      if(btns.innerText==="Save"&&btns.classList.contains("active")&&btns.classList.contains("edit")){
+      
         const spanElement=btns.parentElement.parentElement.querySelectorAll("span,p,h3")
         const nodeChange=[...spanElement]
        const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText}
@@ -164,7 +176,9 @@ actionBtn.forEach(btns => {
         return res.json()
     }).then(data=>{
         console.log(data)
+        editorFunRecover(btns)
     })
+       
    }
    if(btns.classList.contains("active")&&btns.classList.contains("complete")){
     reportContainer.insertAdjacentHTML("beforeend",` <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
