@@ -10,7 +10,15 @@ const taskController=async(req,res)=>{
         await myEmployee.save()
         res.json(req.body)
 }
-const taskAction=(req,res)=>{
+const taskAction=async(req,res)=>{
+        const companyData=await Company.findOne({companyUID:req.body.companyUID})
+        const companyName=companyData.companyName
+        const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
+        const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.p2})
+        // console.log(myEmployee)
+        console.log(myEmployee.task[myEmployee.task.length-1])
+        // myEmployee.task.push({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
+        // await myEmployee.save()
         res.json(req.body)
 }
 module.exports={taskController,taskAction}

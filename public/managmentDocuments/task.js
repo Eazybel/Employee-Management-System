@@ -166,7 +166,7 @@ actionBtn.forEach(btns => {
       
         const spanElement=btns.parentElement.parentElement.querySelectorAll("span,p,h3")
         const nodeChange=[...spanElement]
-       const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText}
+       const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText,companyUID:localStorage.getItem("UID")}
     fetch("/taskAction",
         {method:"POST",
         headers:{"Content-type":"application/json"},
@@ -175,7 +175,7 @@ actionBtn.forEach(btns => {
     ).then(res=>{
         return res.json()
     }).then(data=>{
-        console.log(data)
+    console.log(data)
         editorFunRecover(btns)
     })
        
