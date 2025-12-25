@@ -251,6 +251,18 @@ assign.onclick=(e)=>{
 e.preventDefault()
 const form=new FormData(taskForm)
 form.append("companyUID",localStorage.getItem("UID"))
+let taskID=""
+fetch("/taskLength",
+    {
+        methods:"POST",
+        body:form
+    }
+).then(res=>{
+    return res.text()
+}).then(data=>{
+    console.log(data)
+})
+// form.append("taskID",)
 fetch("/taskController",
    { method:"POST",
     body:form
