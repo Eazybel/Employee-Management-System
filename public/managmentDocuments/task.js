@@ -247,12 +247,12 @@ actionBtn.forEach(btns => {
 
 }
 )
-assign.onclick=(e)=>{
+assign.onclick=async(e)=>{
 e.preventDefault()
 const form=new FormData(taskForm)
 form.append("companyUID",localStorage.getItem("UID"))
-let taskID=""
-fetch("/taskLength",
+let taskID="123"
+await fetch("/taskLength",
     {
         method:"POST",
         body:form
@@ -262,9 +262,8 @@ fetch("/taskLength",
 }).then(data=>{
     taskID=data
 })
-form.append("taskID",taskID)
-console.log(taskID)
-fetch("/taskController",
+form.append("taskID",Number(taskID)+1)
+await fetch("/taskController",
    { method:"POST",
     body:form
    }
