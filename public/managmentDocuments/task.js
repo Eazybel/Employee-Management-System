@@ -260,17 +260,18 @@ fetch("/taskLength",
 ).then(res=>{
     return res.text()
 }).then(data=>{
-    console.log(data)
+    taskID=data
 })
-// form.append("taskID",)
-// fetch("/taskController",
-//    { method:"POST",
-//     body:form
-//    }
-// ).then(res=>{
-//     return res.json()
-// }).then(data=>{
-//     console.log(data) 
-//     window.alert("Saved")
-// })
+form.append("taskID",taskID)
+console.log(taskID)
+fetch("/taskController",
+   { method:"POST",
+    body:form
+   }
+).then(res=>{
+    return res.json()
+}).then(data=>{
+    console.log(data) 
+    window.alert("Saved")
+})
 }
