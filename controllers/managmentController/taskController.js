@@ -15,6 +15,11 @@ const taskAction=async(req,res)=>{
         const companyName=companyData.companyName
         const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
         const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.p2})
+        myEmployee.task.forEach(task=>{
+                if(task.assignedPerson=="Benjamin Carter"){
+                        console.log(task)
+                }
+        })
         myEmployee.task.push({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
         await myEmployee.save()
         res.json(req.body)

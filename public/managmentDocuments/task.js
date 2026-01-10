@@ -47,7 +47,7 @@ fetch("/nameData",{
           for (let j = 0; j < data[i].task.length; j++) {
                const dueDated=new Date(`${data[i].task[j].dueDate}`)
                 const today=new Date()
-                if(dueDated<today){
+                if(dueDated<today){ 
                     overDues.insertAdjacentHTML("beforeend",`<div id="overdue-card-red" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
                     <div class="flex-1">
                         <div class="flex justify-between items-start mb-3">
@@ -154,6 +154,7 @@ fetch("/nameData",{
                     </button>
                 </div>
             </div>`)
+           
                 }
           }
         }
@@ -161,13 +162,24 @@ fetch("/nameData",{
    } 
 const actionBtn=document.querySelector("main").querySelectorAll("button")
 actionBtn.forEach(btns => {
-   btns.onclick=()=>{
+   btns.onclick=async()=>{
      if(btns.innerText==="Save"&&btns.classList.contains("active")&&btns.classList.contains("edit")){
-      
         const spanElement=btns.parentElement.parentElement.querySelectorAll("span,p,h3")
         const nodeChange=[...spanElement]
        const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText,companyUID:localStorage.getItem("UID")}
-    fetch("/taskAction",
+       const taskLengthObj={"companyUID":localStorage.getItem("UID"),"employee":nodeChange[5].innerText}
+       await fetch("/taskLength",
+        {
+                method:"POST",
+                headers:{"Content-type":"application/json"},
+                body:JSON.stringify(taskLengthObj)
+        }
+       ).then(res=>{
+        return res.text()
+       }).then(data=>{
+        console.log(data)
+       })
+   await fetch("/taskAction",
         {method:"POST",
         headers:{"Content-type":"application/json"},
         body:JSON.stringify(editedContent)
@@ -175,7 +187,6 @@ actionBtn.forEach(btns => {
     ).then(res=>{
         return res.json()
     }).then(data=>{
-    console.log(data)
         editorFunRecover(btns)
     })
        
