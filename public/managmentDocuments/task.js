@@ -13,8 +13,13 @@ const editorFun=(btns)=>{
     btns.previousElementSibling.classList.add("hidden")
     btns.nextElementSibling.classList.add("hidden")
     btns.style.backgroundColor="green"
-    iconBtns.forEach(btns=>{
-        btns.classList.remove("hidden")
+    iconBtns.forEach(iconBtns=>{
+        iconBtns.classList.remove("hidden")
+        iconBtns.onclick=()=>{
+            iconBtns.parentElement.contentEditable="true"
+            iconBtns.parentElement.focus()
+            iconBtns.classList.add("hidden")
+        }
 
     })
 }
@@ -92,7 +97,7 @@ fetch("/nameData",{
                         </button>
                     </div>
                 </div>`)
-                }else {
+                }else if(dueDated>today){
                      activeTasks.insertAdjacentHTML("beforeend",`<div id="task-card-active" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
                 <div class="flex-1">
                     <div class="flex justify-between items-start mb-3">
