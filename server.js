@@ -21,7 +21,7 @@ require("dotenv").config()
 const string=process.env.STRING
 const app=express()
 app.use("/uploads",express.static("uploads"))
-app.use(express.static(path.join(__dirname,"public"),{index:false}))
+app.use(express.static(path.join(__dirname,"public")))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect(string)
