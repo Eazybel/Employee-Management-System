@@ -20,7 +20,7 @@ const taskAction=async(req,res)=>{
                         console.log(task)
                 }
         })
-        myEmployee.task.push({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
+        myEmployee.task.updateOne({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
         await myEmployee.save()
         res.json(req.body)
 }
@@ -32,3 +32,19 @@ const taskLength=async(req,res)=>{
         res.send(myEmployee.task.length)
 }
 module.exports={taskController,taskAction,taskLength}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
