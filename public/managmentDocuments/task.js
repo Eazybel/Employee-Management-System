@@ -177,19 +177,7 @@ actionBtn.forEach(btns => {
      if(btns.innerText==="Save"&&btns.classList.contains("active")&&btns.classList.contains("edit")){
         const spanElement=btns.parentElement.parentElement.querySelectorAll("span,p,h3")
         const nodeChange=[...spanElement]
-       const editedContent={span:nodeChange[0].innerText,h3:nodeChange[2].innerText,p1:nodeChange[3].innerText,p2:nodeChange[5].innerText,p3:nodeChange[7].innerText,companyUID:localStorage.getItem("UID")}
-       const taskLengthObj={"companyUID":localStorage.getItem("UID"),"employee":nodeChange[5].innerText}
-       await fetch("/taskLength",
-        {
-                method:"POST",
-                headers:{"Content-type":"application/json"},
-                body:JSON.stringify(taskLengthObj)
-        }
-       ).then(res=>{
-        return res.text()
-       }).then(data=>{
-        console.log(data)
-       })
+       const editedContent={span:nodeChange[1].innerText,h3:nodeChange[3].innerText,p1:nodeChange[4].innerText,p2:nodeChange[6].innerText,p3:nodeChange[8].innerText,companyUID:localStorage.getItem("UID"),taskID:nodeChange[0].innerText}
    await fetch("/taskAction",
         {method:"POST",
         headers:{"Content-type":"application/json"},

@@ -16,12 +16,12 @@ const taskAction=async(req,res)=>{
         const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
         const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.p2})
         myEmployee.task.forEach(task=>{
-                if(task.assignedPerson=="Benjamin Carter"){
-                        console.log(task)
+                if("#"+task.taskID==req.body.taskID){
+                      console.log(task)
                 }
         })
-        myEmployee.task.updateOne({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
-        await myEmployee.save()
+        // myEmployee.task.updateOne({assignedPerson:req.body.employee,taskName:req.body.taskName,dueDate:req.body.dueDate,priorityLevel:req.body.priority,description:req.body.description,active:true,overdue:false})
+        // await myEmployee.save()
         res.json(req.body)
 }
 const taskLength=async(req,res)=>{
