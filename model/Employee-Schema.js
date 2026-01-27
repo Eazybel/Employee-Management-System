@@ -78,7 +78,7 @@ const EmployeeSchema = new mongoose.Schema({
   salary:[{Effectivedate:{type:String},lastRaisedate:{type:String},previous:{type:String},new:{type:String}}],
   absence:[{date:{type:String},duration:{type:String},reason:{type:String},ongoingStatus:{type:Boolean}}],
   resignation:[{noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}],
-  task:[{assignedPerson:{type:String},taskName:{type:String},dueDate:{type:String},priorityLevel:{type:String},description:{type:String},active:{type:Boolean},overdue:{type:Boolean}}]
+  task:[{assignedPerson:{type:String},taskName:{type:String},dueDate:{type:String},priorityLevel:{type:String},description:{type:String},active:{type:Boolean},overdue:{type:Boolean},taskID:{type:String}}]
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
