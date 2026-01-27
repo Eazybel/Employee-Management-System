@@ -47,7 +47,6 @@ fetch("/nameData",{
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    console.log(data)
    for (let i = 0; i < data.length; i++) {
      if(data[i].task.length!=0&&data[i].task.some(t=>t.active)){
           for (let j = 0; j < data[i].task.length; j++) {
@@ -193,6 +192,7 @@ actionBtn.forEach(btns => {
     ).then(res=>{
         return res.json()
     }).then(data=>{
+        console.log(data)
         editorFunRecover(btns)
     })
        
