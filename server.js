@@ -61,3 +61,4 @@ app.post("/",upload.single("image"),companyPost)
 app.listen(5000,()=>{
     console.log("Server Listening to Port 5000")
 })
+//jjjjjj
