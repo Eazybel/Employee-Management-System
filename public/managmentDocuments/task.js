@@ -41,3 +41,10 @@ fetch("/nameData", {
       });
     });
   });
+  taskAssignBtn.onclick=(e)=>{
+    e.preventDefault()
+  const formData=document.getElementById("task-form")
+  const form=new FormData(formData)
+  const formObject = Object.fromEntries(form);
+  console.log(formObject)
+  }
