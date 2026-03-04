@@ -19,6 +19,7 @@ fetch("/nameData", {
     return res.json();
   })
   .then((data) => {
+    // updatind the dropdown to show names
     data.forEach((fullNames) => {
       names.insertAdjacentHTML(
         "beforeend",
@@ -28,6 +29,7 @@ fetch("/nameData", {
     });
   })
   .then(() => {
+    // name filtering field
     const employeeName = document.querySelectorAll("p.employeeName");
     filterBtn.addEventListener("keyup", (e) => {
       let target = e.target.value.toLowerCase();
@@ -42,9 +44,16 @@ fetch("/nameData", {
     });
   });
   taskAssignBtn.onclick=(e)=>{
+    //form data collect
     e.preventDefault()
   const formData=document.getElementById("task-form")
   const form=new FormData(formData)
+  form.append("companyUID",localStorage.getItem("UID"));
   const formObject = Object.fromEntries(form);
-  console.log(formObject)
+// form data send to the server
+  fetch("/taskController", {
+    method: "POST",
+    headers:{"Content-type":"application/json"},
+    body: JSON.stringify(formObject),
+  });
   }
