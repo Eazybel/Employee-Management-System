@@ -50,10 +50,18 @@ fetch("/nameData", {
   const form=new FormData(formData)
   form.append("companyUID",localStorage.getItem("UID"));
   const formObject = Object.fromEntries(form);
+  
 // form data send to the server
   fetch("/taskController", {
     method: "POST",
     headers:{"Content-type":"application/json"},
     body: JSON.stringify(formObject),
-  });
+  }).then((res)=>{
+    return res.text()
+  }).then(data=>{
+    console.log(data)
+    alert("Task Saved Sicessfully")
+  }).then(err=>{
+    console.log(err)
+  })
   }
