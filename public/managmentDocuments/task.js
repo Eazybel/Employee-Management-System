@@ -53,11 +53,11 @@ fetch("/nameData", {
    const formObject = Object.fromEntries(form);
    fetch("/taskLength", {
      method: "POST",
-     header: "Content-type:application/json",
-     body: JSON.stringify({ employee: formObject.employee, companyUID :localStorage.getItem("UID")}),
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ employee:formObject.employee,companyUID:localStorage.getItem("UID")}),
    })
      .then((res) => {
-       return res.json();
+       return res.text();
      })
      .then((data) => {
        console.log(data);
