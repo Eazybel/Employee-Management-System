@@ -23,6 +23,7 @@ const app=express()
 app.use("/uploads",express.static("uploads"))
 app.use(express.static(path.join(__dirname,"public")))
 app.use(express.json())
+app.use(express.text())
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect(string)
 .then(()=>{

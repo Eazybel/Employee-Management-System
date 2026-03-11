@@ -10,9 +10,12 @@ const taskController=async(req,res)=>{
     await myEmployee.save()
     res.send(myEmployee)
 }
-const taskLength=((req,res)=>{
-    res.send(req.body)
-})
+const taskLength=async(req,res)=>{
+     const companyData=await Company.findOne({companyUID:req.body.companyUID})
+    const companyName=companyData.companyName
+    const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
+    const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employee})
+    res.send(myEmployee)
+}
 module.exports = {taskController,taskLength};
 
-//Continue from updaating the task schema model
