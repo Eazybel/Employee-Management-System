@@ -43,25 +43,40 @@ fetch("/nameData", {
       });
     });
   });
-  taskAssignBtn.onclick=(e)=>{
-    //form data collect
-    e.preventDefault()
-  const formData=document.getElementById("task-form")
-  const form=new FormData(formData)
-  form.append("companyUID",localStorage.getItem("UID"));
-  const formObject = Object.fromEntries(form);
-  
-// form data send to the server
-  fetch("/taskController", {
-    method: "POST",
-    headers:{"Content-type":"application/json"},
-    body: JSON.stringify(formObject),
-  }).then((res)=>{
-    return res.text()
-  }).then(data=>{
-    console.log(data)
-    alert("Task Saved Sicessfully")
-  }).then(err=>{
-    console.log(err)
-  })
+  taskAssignBtn.onclick=async(e)=>{
+    const formData = document.getElementById("task-form");
+    const form = new FormData(formData);
+ if (formData.checkValidity()){
+   //form data collect
+   e.preventDefault();
+   form.append("companyUID", localStorage.getItem("UID"));
+   const formObject = Object.fromEntries(form);
+   fetch("/taskLength",
+    {
+      method:"POST",
+      body:"sucessfull"
+    }
+   )
+     .then((res) => {
+       return res.text;
+     })
+     .then((data) => {
+       console.log(data);
+     });
+   // form data send to the server
+   // await fetch("/taskController", {
+   //   method: "POST",
+   //   headers:{"Content-type":"application/json"},
+   //   body: JSON.stringify(formObject),
+   // }).then((res)=>{
+   //   return res.text()
+   // }).then(data=>{
+   //   console.log(data)
+   //   alert("Task Saved Sicessfully")
+   // }).then(err=>{
+   //   console.log(err)
+   // })
+ }else{
+  formData.reportValidity()
+ }
   }

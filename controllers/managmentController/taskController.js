@@ -10,6 +10,9 @@ const taskController=async(req,res)=>{
     await myEmployee.save()
     res.send(myEmployee)
 }
-module.exports = taskController;
+const taskLength=((req,res)=>{
+    res.send(req.body)
+})
+module.exports = {taskController,taskLength};
 
 //Continue from updaating the task schema model
