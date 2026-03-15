@@ -46,12 +46,13 @@ fetch("/nameData", {
   taskAssignBtn.onclick=async(e)=>{
     const formData = document.getElementById("task-form");
     const form = new FormData(formData);
+    var taskIDdata = "";
  if (formData.checkValidity()){
    //form data collect
    e.preventDefault();
    form.append("companyUID", localStorage.getItem("UID"));
    const formObject = Object.fromEntries(form);
-   fetch("/taskLength", {
+   await fetch("/taskLength", {
      method: "POST",
      headers: { "Content-Type": "application/json" },
      body: JSON.stringify({ employee:formObject.employee,companyUID:localStorage.getItem("UID")}),
@@ -60,22 +61,23 @@ fetch("/nameData", {
        return res.text();
      })
      .then((data) => {
-       console.log(data);
+      taskIDdata = Number(data);
      });
   // form data send to the server
    await fetch("/taskController", {
      method: "POST",
      headers:{"Content-type":"application/json"},
-     body: JSON.stringify(formObject),
+     body: JSON.stringify({formObject,"taskID":taskIDdata+1}),
    }).then((res)=>{
      return res.text()
    }).then(data=>{
-     console.log(data)
      alert("Task Saved Sicessfully")
-   }).then(err=>{
+     
+   }).catch(err=>{
      console.log(err)
    })
  }else{
   formData.reportValidity()
  }
-  }
+}
+// Task id implemented next start from confuguring the UI of the active tasks
