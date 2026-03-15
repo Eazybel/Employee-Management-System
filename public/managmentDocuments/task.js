@@ -62,19 +62,19 @@ fetch("/nameData", {
      .then((data) => {
        console.log(data);
      });
-   // form data send to the server
-   // await fetch("/taskController", {
-   //   method: "POST",
-   //   headers:{"Content-type":"application/json"},
-   //   body: JSON.stringify(formObject),
-   // }).then((res)=>{
-   //   return res.text()
-   // }).then(data=>{
-   //   console.log(data)
-   //   alert("Task Saved Sicessfully")
-   // }).then(err=>{
-   //   console.log(err)
-   // })
+  // form data send to the server
+   await fetch("/taskController", {
+     method: "POST",
+     headers:{"Content-type":"application/json"},
+     body: JSON.stringify(formObject),
+   }).then((res)=>{
+     return res.text()
+   }).then(data=>{
+     console.log(data)
+     alert("Task Saved Sicessfully")
+   }).then(err=>{
+     console.log(err)
+   })
  }else{
   formData.reportValidity()
  }
