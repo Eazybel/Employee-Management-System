@@ -31,62 +31,71 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
        data[i].task.forEach((tasks,i)=>{
          taskCardActive.insertAdjacentHTML(
            "beforeend",
-           ` <!-- Task Card 1 -->
-                <div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">${tasks.taskID}</span>
-                            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
-                        <div class="flex justify-between items-center text-sm mb-4">
-                            <div>
-                                <p class="text-gray-500 text-xs">Assigned to:</p>
-                                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-gray-500 text-xs">Due Date:</p>
-                                <p class="font-medium text-gray-700">${tasks.dueDate}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex space-x-2 pt-4 border-t border-gray-100">
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">Complete</button>
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
-                    </div>
-                </div>`,
+           `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">${tasks.taskID}</span>
+            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
+        <div class="flex justify-between items-center text-sm mb-4">
+            <div>
+                <p class="text-gray-500 text-xs">Assigned to:</p>
+                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-xs">Due Date:</p>
+                <p class="font-medium text-gray-700">${tasks.dueDate}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+            Log Success
+        </button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md">
+            Log Fail
+        </button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
+            Edit
+        </button>
+    </div>
+</div>`,
          );
        })
       }else if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)<new Date())){
          data[i].task.forEach((tasks, i) => {
            taskCardOverdue.insertAdjacentHTML(
              "beforeend",
-             `<!-- Overdue Task Card 1 -->
-                <div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start mb-3">
-                            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">${tasks.taskID}</span>
-                            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
-                        <div class="flex justify-between items-center text-sm mb-4">
-                            <div>
-                                <p class="text-gray-500 text-xs">Assigned to:</p>
-                                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-gray-500 text-xs">Due Date:</p>
-                                <p class="font-bold text-red-500">${tasks.dueDate}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex space-x-2 pt-4 border-t border-gray-100">
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">Complete</button>
-                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
-                    </div>
-                </div>`,
+             `<div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">${tasks.taskID}</span>
+            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
+        <div class="flex justify-between items-center text-sm mb-4">
+            <div>
+                <p class="text-gray-500 text-xs">Assigned to:</p>
+                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-xs">Due Date:</p>
+                <p class="font-bold text-red-500">${tasks.dueDate}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+            Log Success
+        </button>
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md">
+            Log Fail
+        </button>
+    </div>
+</div>`,
            );
          });
       }
