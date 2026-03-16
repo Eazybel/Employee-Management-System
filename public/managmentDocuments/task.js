@@ -26,6 +26,7 @@ fetch("/nameData", {
         "beforeend",
         `<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`,
       );
+
 if(data[i].task.length!=0&&data[i].task.some(t=>t.active)){  /*look into this line of code the some function*/
        data[i].task.forEach((tasks,i)=>{
          taskCardActive.insertAdjacentHTML(
