@@ -2,6 +2,7 @@ const closeModalBtn=document.getElementById("close-modal-btn")
 const openModal = document.getElementById("open-modal-btn")
 const taskModal = document.getElementById("task-modal")
 const names = document.getElementById("employee");
+const taskCardActive=document.getElementById("taskCardActive")
 openModal.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
@@ -20,12 +21,41 @@ fetch("/nameData", {
   })
   .then((data) => {
     // updatind the dropdown to show names
-    data.forEach((fullNames) => {
+    data.forEach((fullNames,i) => {
       names.insertAdjacentHTML(
         "beforeend",
         `<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`,
       );
-    
+      if(data[i].task.length!=0){
+        taskCardActive.insertAdjacentHTML(
+          "beforeend",
+          ` <!-- Task Card 1 -->
+                <div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+                    <div class="flex-1">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">ID: TSK-8821</span>
+                            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">Q3 Financial Report Analysis</h3>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">Complete the comprehensive analysis of Q3 earnings data and compile key insights for the executive review.</p>
+                        <div class="flex justify-between items-center text-sm mb-4">
+                            <div>
+                                <p class="text-gray-500 text-xs">Assigned to:</p>
+                                <p class="font-medium text-indigo-600 employeeName">Alex Johnson</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-500 text-xs">Due Date:</p>
+                                <p class="font-medium text-gray-700">2025-10-25</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">Complete</button>
+                        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
+                    </div>
+                </div>`,
+        );
+      }
     });
   })
   .then(() => {
