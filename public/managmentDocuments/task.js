@@ -52,7 +52,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         </div>
     </div>
     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLog">
             Log Success
         </button>
         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md">
@@ -116,6 +116,12 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         }
       });
     });
+  const activeLogBtn=document.querySelectorAll(".activeLog")
+  activeLogBtn.forEach(btns=>{
+    btns.onclick=()=>{
+      // continue from here by working on log btn
+    }
+  })
   });
   taskAssignBtn.onclick=async(e)=>{
     const formData = document.getElementById("task-form");
