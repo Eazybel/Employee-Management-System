@@ -28,9 +28,10 @@ fetch("/nameData", {
         `<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`,
       );
 if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date())){  /*look into this line of code the "some" function*/
-       data[i].task.forEach((tasks,i)=>{
-         taskCardActive.insertAdjacentHTML(
-           "beforeend",
+
+  data[i].task.forEach((tasks,i)=>{
+  taskCardActive.insertAdjacentHTML(
+       "beforeend",
            `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
     <div class="flex-1">
         <div class="flex justify-between items-start mb-3">
@@ -120,7 +121,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
     const formData = document.getElementById("task-form");
     const form = new FormData(formData);
     var taskIDdata = "";
- if (formData.checkValidity()){
+ if (formData.checkValidity()){ 
    //form data collect
    e.preventDefault();
    form.append("companyUID", localStorage.getItem("UID"));
