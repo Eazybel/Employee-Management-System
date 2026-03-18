@@ -38,12 +38,12 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
             <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">${tasks.taskID}</span>
             <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${tasks.taskName}</h3>
         <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
                 <p class="text-gray-500 text-xs">Assigned to:</p>
-                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
             </div>
             <div class="text-right">
                 <p class="text-gray-500 text-xs">Due Date:</p>
@@ -75,12 +75,12 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
             <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">${tasks.taskID}</span>
             <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2">${tasks.taskName}</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${tasks.taskName}</h3>
         <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
                 <p class="text-gray-500 text-xs">Assigned to:</p>
-                <p class="font-medium text-indigo-600 employeeName">${tasks.assignedPerson}</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
             </div>
             <div class="text-right">
                 <p class="text-gray-500 text-xs">Due Date:</p>
@@ -119,11 +119,12 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
   const activeLogBtn=document.querySelectorAll(".activeLogSucess, .activeLogFail")
   activeLogBtn.forEach(btns=>{
     btns.onclick=()=>{
+     const assignedPersonText=btns.parentElement.parentElement.querySelector(".assignedPerson").innerText
     if(btns.classList.contains("activeLogSucess")){
        fetch("/taskAction", {
          method: "POST",
          headers: { "Content-type": "application/json" },
-         body: JSON.stringify({ Sucess: "true" }),
+         body: JSON.stringify({ "Status": "Sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText}),
        })
          .then((res) => {
            return res.json();
@@ -133,9 +134,9 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
          });
     }else if(btns.classList.contains("activeLogFail")){
          fetch("/taskAction", {
-           method: "POST",
-           headers: { "Content-type": "application/json" },
-           body: JSON.stringify({ Sucess: "false" }),
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ "Status": "Fail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
