@@ -31,8 +31,8 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
 
   data[i].task.forEach((tasks,i)=>{
   taskCardActive.insertAdjacentHTML(
-       "beforeend",
-           `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    "beforeend",
+    `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
     <div class="flex-1">
         <div class="flex justify-between items-start mb-3">
             <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase">${tasks.taskID}</span>
@@ -52,10 +52,10 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         </div>
     </div>
     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLog">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">
             Log Success
         </button>
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">
             Log Fail
         </button>
         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
@@ -63,7 +63,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         </button>
     </div>
 </div>`,
-         );
+  );
        })
       }else if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)<new Date())){
          data[i].task.forEach((tasks, i) => {
@@ -116,10 +116,34 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         }
       });
     });
-  const activeLogBtn=document.querySelectorAll(".activeLog")
+  const activeLogBtn=document.querySelectorAll(".activeLogSucess, .activeLogFail")
   activeLogBtn.forEach(btns=>{
     btns.onclick=()=>{
-      // continue from here by working on log btn
+    if(btns.classList.contains("activeLogSucess")){
+       fetch("/taskAction", {
+         method: "POST",
+         headers: { "Content-type": "application/json" },
+         body: JSON.stringify({ Sucess: "true" }),
+       })
+         .then((res) => {
+           return res.json();
+         })
+         .then((data) => {
+           console.log(data);
+         });
+    }else if(btns.classList.contains("activeLogFail")){
+         fetch("/taskAction", {
+           method: "POST",
+           headers: { "Content-type": "application/json" },
+           body: JSON.stringify({ Sucess: "false" }),
+         })
+           .then((res) => {
+             return res.json();
+           })
+           .then((data) => {
+             console.log(data);
+           });
+    }
     }
   })
   });
