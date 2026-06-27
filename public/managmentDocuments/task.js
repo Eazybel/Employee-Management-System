@@ -4,6 +4,7 @@ const taskModal = document.getElementById("task-modal")
 const names = document.getElementById("employee");
 const taskCardActive=document.getElementById("taskCardActive")
 const taskCardOverdue=document.getElementById("taskCardOverdue")
+const reportContainer=document.getElementById("report-container")
 openModal.onclick=()=>{
     taskModal.classList.remove("hidden")
 }
@@ -130,6 +131,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
            return res.json();
          })
          .then((data) => {
+      // active log sucess section
            console.log(data);
          });
     }else if(btns.classList.contains("activeLogFail")){
@@ -142,6 +144,22 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
              return res.json();
            })
            .then((data) => {
+    //active log fail section
+reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-1">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">ID: LOG-0911</span>
+                            <h4 class="text-base font-semibold text-gray-800">New Marketing Campaign Launch</h4>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">Campaign experienced a critical tracking error upon launch. Rollback initiated.</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: Alex Johnson</span>
+                        <span>Date: 2025-10-01</span>
+                    </div>
+                </div>`)
              console.log(data);
            });
     }
