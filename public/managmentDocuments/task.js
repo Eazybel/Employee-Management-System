@@ -39,7 +39,17 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
             <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase taskID">${tasks.taskID}</span>
             <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${tasks.taskName}</h3>
+        
+        <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${tasks.taskName}</h3>
+        
+        <!-- Priority Section -->
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
+                ${tasks.priorityLevel}
+            </span>
+        </div>
+
         <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
@@ -53,15 +63,9 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         </div>
     </div>
     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">
-            Log Success
-        </button>
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">
-            Log Fail
-        </button>
-        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">
-            Edit
-        </button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">Log Success</button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">Log Fail</button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
     </div>
 </div>`,
   );
@@ -76,7 +80,16 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
             <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase taskID">${tasks.taskID}</span>
             <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
         </div>
-        <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${tasks.taskName}</h3>
+        
+        <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${tasks.taskName}</h3>
+        
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
+                ${tasks.priorityLevel}
+            </span>
+        </div>
+
         <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
@@ -133,20 +146,28 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
          .then((data) => {
       // active log sucess section
            reportContainer.insertAdjacentHTML("beforeend",
-`  <div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
-                    <div class="flex justify-between items-start mb-1">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase ">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
-                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
-                        </div>
-                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
-                    <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
-                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}</span>
-                    </div>
-                </div>`
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${btns.parentElement.parentElement.querySelector(".priorityLevel").innerText}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}</span>
+    </div>
+</div>`
 )
 
          });
@@ -163,55 +184,106 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
     //active log fail section
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
-                    <div class="flex justify-between items-start mb-1">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
-                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
-                        </div>
-                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
-                    <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
-                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}</span>
-                    </div>
-                </div>`)
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${btns.parentElement.parentElement.querySelector(".priorityLevel").innerText}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}</span>
+    </div>
+</div>`)
 
            });
     }else if(btns.classList.contains("overDueLogSucess")){
+fetch("/taskAction", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ "Status": "overDueSuccess", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+         })
+           .then((res) => {
+             return res.json();
+           })
+           .then((data) => {
+
+
     reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
-                    <div class="flex justify-between items-start mb-1">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
-                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
-                        </div>
-                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS (DELAYED)</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
-                    <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
-                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}(Completed Late)</span>
-                    </div>
-                </div> `
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS (DELAYED)</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${btns.parentElement.parentElement.querySelector(".priorityLevel").innerText}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText} (Completed Late)</span>
+    </div>
+</div>`
 )
+            })
+
     }else if(btns.classList.contains("overDueLogFail")){
+//overdue log fail section
+
+fetch("/taskAction", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ "Status": "OverDueFail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+         })
+           .then((res) => {
+             return res.json();
+           })
+           .then((data) => {
+
+
    reportContainer.insertAdjacentHTML("beforeend",
-`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
-                    <div class="flex justify-between items-start mb-1">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
-                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
-                        </div>
-                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAIL (DELAYED)</span>
-                    </div>
-                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
-                    <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
-                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}(Completed Late)</span>
-                    </div>
-                </div> `
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAIL (DELAYED)</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${btns.parentElement.parentElement.querySelector(".priorityLevel").innerText}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText} (Completed Late)</span>
+    </div>
+</div> `
 )
+        })
     }
     }
   })
