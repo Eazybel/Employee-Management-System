@@ -73,27 +73,27 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
              `<div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
     <div class="flex-1">
         <div class="flex justify-between items-start mb-3">
-            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">${tasks.taskID}</span>
+            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase taskID">${tasks.taskID}</span>
             <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
         </div>
         <h3 class="text-lg font-bold text-gray-800 mb-2 taskName">${tasks.taskName}</h3>
-        <p class="text-sm text-gray-600 mb-4 line-clamp-2">${tasks.description}</p>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
-                <p class="text-gray-500 text-xs">Assigned to:</p>
+                <p class="text-gray-500 text-xs ">Assigned to:</p>
                 <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
             </div>
             <div class="text-right">
                 <p class="text-gray-500 text-xs">Due Date:</p>
-                <p class="font-bold text-red-500">${tasks.dueDate}</p>
+                <p class="font-bold text-red-500 dueDate">${tasks.dueDate}</p>
             </div>
         </div>
     </div>
     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md">
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md overDueLogSucess">
             Log Success
         </button>
-        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md">
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md overDueLogFail">
             Log Fail
         </button>
     </div>
@@ -117,7 +117,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
         }
       });
     });
-  const activeLogBtn=document.querySelectorAll(".activeLogSucess, .activeLogFail")
+  const activeLogBtn=document.querySelectorAll(".activeLogSucess, .activeLogFail, .overDueLogSucess, .overDueLogFail")
   activeLogBtn.forEach(btns=>{
     btns.onclick=()=>{
      const assignedPersonText=btns.parentElement.parentElement.querySelector(".assignedPerson").innerText
@@ -165,19 +165,53 @@ reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
                     <div class="flex justify-between items-start mb-1">
                         <div class="flex flex-col">
-                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">ID: LOG-0911</span>
-                            <h4 class="text-base font-semibold text-gray-800">New Marketing Campaign Launch</h4>
+                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
                         </div>
                         <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
                     </div>
-                    <p class="text-sm text-gray-700 mb-2">Campaign experienced a critical tracking error upon launch. Rollback initiated.</p>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
                     <div class="flex justify-between text-xs text-gray-500">
-                        <span>Assigned: Alex Johnson</span>
-                        <span>Date: 2025-10-01</span>
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}</span>
                     </div>
                 </div>`)
-             console.log(btns.parentElement);
+
            });
+    }else if(btns.classList.contains("overDueLogSucess")){
+    reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-1">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS (DELAYED)</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}(Completed Late)</span>
+                    </div>
+                </div> `
+)
+    }else if(btns.classList.contains("overDueLogFail")){
+   reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+                    <div class="flex justify-between items-start mb-1">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${btns.parentElement.parentElement.querySelector(".taskID").innerText}</span>
+                            <h4 class="text-base font-semibold text-gray-800">${btns.parentElement.parentElement.querySelector(".taskName").innerText}</h4>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAIL (DELAYED)</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">${btns.parentElement.parentElement.querySelector(".description").innerText}</p>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Assigned: ${btns.parentElement.parentElement.querySelector(".assignedPerson").innerText}</span>
+                        <span>Date: ${btns.parentElement.parentElement.querySelector(".dueDate").innerText}(Completed Late)</span>
+                    </div>
+                </div> `
+)
     }
     }
   })
@@ -219,4 +253,3 @@ reportContainer.insertAdjacentHTML("beforeend",
   formData.reportValidity()
  }
 }
-// Task id implemented next start from confuguring the UI of the active tasks
