@@ -138,7 +138,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
        fetch("/taskAction", {
          method: "POST",
          headers: { "Content-type": "application/json" },
-         body: JSON.stringify({ "Status": "Sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText}),
+         body: JSON.stringify({ "status": "sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText}),
        })
          .then((res) => {
            return res.json();
@@ -175,7 +175,7 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
          fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "Status": "Fail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "fail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -211,7 +211,7 @@ reportContainer.insertAdjacentHTML("beforeend",
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "Status": "overDueSuccess", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "overDueSuccess", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -251,7 +251,7 @@ fetch("/taskAction", {
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "Status": "OverDueFail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "OverDueFail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -296,6 +296,7 @@ fetch("/taskAction", {
    //form data collect
    e.preventDefault();
    form.append("companyUID", localStorage.getItem("UID"));
+
    const formObject = Object.fromEntries(form);
    await fetch("/taskLength", {
      method: "POST",
