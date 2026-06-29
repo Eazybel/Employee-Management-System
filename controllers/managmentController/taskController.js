@@ -22,7 +22,14 @@ const taskAction=async(req,res)=>{
     const companyName=companyData.companyName
     const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
     const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.assignedPerson})
-    res.send(myEmployee);
+  myEmployee.task.forEach(tasks=>{
+        if(tasks.taskID==req.body.taskID){
+        tasks.status=req.body.status
+        
+        }
+        })
+    await myEmployee.save()
+    res.send(myEmployee.task);
 }
 module.exports = {taskController,taskLength,taskAction};
 

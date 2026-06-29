@@ -134,11 +134,13 @@ if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)>new Date()))
   activeLogBtn.forEach(btns=>{
     btns.onclick=()=>{
      const assignedPersonText=btns.parentElement.parentElement.querySelector(".assignedPerson").innerText
+    const taskIDText=btns.parentElement.parentElement.querySelector(".taskID").innerText
+// activelogSucess button action code block
     if(btns.classList.contains("activeLogSucess")){
        fetch("/taskAction", {
          method: "POST",
          headers: { "Content-type": "application/json" },
-         body: JSON.stringify({ "status": "sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText}),
+         body: JSON.stringify({ "status": "sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText,"taskID":taskIDText}),
        })
          .then((res) => {
            return res.json();
@@ -288,6 +290,7 @@ fetch("/taskAction", {
     }
   })
   });
+  // task assigner code block {#116,38}
   taskAssignBtn.onclick=async(e)=>{
     const formData = document.getElementById("task-form");
     const form = new FormData(formData);
