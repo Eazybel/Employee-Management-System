@@ -142,8 +142,7 @@ reportContainer.insertAdjacentHTML("beforeend",
 </div>`
 )
 //status=sucess dueDate= Over due green passed
-}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
-console.log(tasks.status + tasks.dueDate)
+}else if(tasks.status=="overDueSuccess"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -195,7 +194,7 @@ reportContainer.insertAdjacentHTML("beforeend",
 </div>`
 )
 // status=fail due date=overdue
-}else if(tasks.status=="fail"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
+}else if(tasks.status=="OverDueFail"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -282,7 +281,7 @@ btns.parentElement.parentElement.style.display="none"
     </div>
 </div>`
 )
-// issue fixed making the container disaper and duedate fixed
+// issue fixed making the container disaper and duedate fixed pass
          });
     }else if(btns.classList.contains("activeLogFail")){
          fetch("/taskAction", {
@@ -321,13 +320,13 @@ reportContainer.insertAdjacentHTML("beforeend",
 
            });
 
-//fixing the overDueSucess btn
+//issue fixed bu solving spelling issue passed
     }else if(btns.classList.contains("overDueLogSucess")){
 btns.parentElement.parentElement.style.display="none"
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "overDueSuccess","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "overDueSuccess","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -360,12 +359,12 @@ fetch("/taskAction", {
             })
 
     }else if(btns.classList.contains("overDueLogFail")){
-//overdue log fail section
-
+//overdue log fail section 
+btns.parentElement.parentElement.style.display="none"
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "OverDueFail","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "OverDueFail","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -441,3 +440,5 @@ fetch("/taskAction", {
   formData.reportValidity()
  }
 }
+ //  {#6d2,1}
+// all buttones established except the edit button next start from edit button
