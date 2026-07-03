@@ -26,11 +26,11 @@ const taskAction=async(req,res)=>{
         if(tasks.taskID==req.body.taskID){
         tasks.status=req.body.status
         tasks.logDate=req.body.logDate
-        
-        }
+     }
         })
+
     await myEmployee.save()
-    res.send(req.body);
+    res.send(myEmployee);
 }
 module.exports = {taskController,taskLength,taskAction};
 

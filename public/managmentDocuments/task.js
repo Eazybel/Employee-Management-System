@@ -31,6 +31,7 @@ fetch("/nameData", {
 
 if(fullNames.task.length!=0){
 fullNames.task.forEach((tasks)=>{
+// status= active duedate=underDue green checked passed
 if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
  taskCardActive.insertAdjacentHTML(
     "beforeend",
@@ -70,7 +71,9 @@ if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
     </div>
 </div>`,
   ); 
+//status=active dueDate=overdue red checked passed
 }else if(tasks.status=="active"&& new Date(tasks.dueDate)<new Date()){
+
 taskCardOverdue.insertAdjacentHTML(
              "beforeend",
              `<div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
@@ -111,8 +114,9 @@ taskCardOverdue.insertAdjacentHTML(
     </div>
 </div>`,
            );
+// stutus=sucess duedate=underdue green passed
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
 
-}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -137,8 +141,36 @@ reportContainer.insertAdjacentHTML("beforeend",
     </div>
 </div>`
 )
+//status=sucess dueDate= Over due green passed
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
+console.log(tasks.status + tasks.dueDate)
+reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${tasks.taskID}</span>
+            <h4 class="text-base font-semibold text-gray-800">${tasks.taskName}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS (DELAYED)</span>
+    </div>
 
-}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${tasks.priorityLevel}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${tasks.description}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${tasks.assignedPerson}</span>
+        <span>Date: ${tasks.dueDate} (Completed Late)</span>
+    </div>
+</div>`
+)
+// status=fail duedate= underdue red
+
+}else if(tasks.status=="fail"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -162,9 +194,8 @@ reportContainer.insertAdjacentHTML("beforeend",
     </div>
 </div>`
 )
-
-// make algo to check the logdatees {#b2c,26}
-}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
+// status=fail due date=overdue
+}else if(tasks.status=="fail"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -172,7 +203,7 @@ reportContainer.insertAdjacentHTML("beforeend",
             <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${tasks.taskID}</span>
             <h4 class="text-base font-semibold text-gray-800">${tasks.taskName}</h4>
         </div>
-        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAIL (DELAYED)</span>
     </div>
 
     <div class="flex items-center gap-2 mb-2">
@@ -181,10 +212,11 @@ reportContainer.insertAdjacentHTML("beforeend",
             ${tasks.priorityLevel}
         </span>
     </div>
+
     <p class="text-sm text-gray-700 mb-2">${tasks.description}</p>
     <div class="flex justify-between text-xs text-gray-500">
         <span>Assigned: ${tasks.assignedPerson}</span>
-        <span>Date: ${tasks.dueDate}</span>
+        <span>Date: ${tasks.dueDate} (Completed Late)</span>
     </div>
 </div>`
 )
@@ -192,8 +224,6 @@ reportContainer.insertAdjacentHTML("beforeend",
 }
 })
 }
-
-
     });
   })
   .then(() => {
@@ -215,7 +245,7 @@ reportContainer.insertAdjacentHTML("beforeend",
     btns.onclick=()=>{
      const assignedPersonText=btns.parentElement.parentElement.querySelector(".assignedPerson").innerText
     const taskIDText=btns.parentElement.parentElement.querySelector(".taskID").innerText
-// activelogSucess button action code block
+// activelogSucess button action code block pass
     if(btns.classList.contains("activeLogSucess")){
        fetch("/taskAction", {
          method: "POST",
@@ -226,7 +256,8 @@ reportContainer.insertAdjacentHTML("beforeend",
            return res.json();
          })
          .then((data) => {
-      // active log sucess section
+btns.parentElement.parentElement.style.display="none"
+      // active log sucess section pass
            reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -251,19 +282,20 @@ reportContainer.insertAdjacentHTML("beforeend",
     </div>
 </div>`
 )
-
+// issue fixed making the container disaper and duedate fixed
          });
     }else if(btns.classList.contains("activeLogFail")){
          fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "fail","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "fail","logDate": `${new Date()}`,"taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
-             return res.json();
+             return res.text();
            })
            .then((data) => {
-    //active log fail section
+    //active log fail section pass
+btns.parentElement.parentElement.style.display="none"
 reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
@@ -288,7 +320,10 @@ reportContainer.insertAdjacentHTML("beforeend",
 </div>`)
 
            });
+
+//fixing the overDueSucess btn
     }else if(btns.classList.contains("overDueLogSucess")){
+btns.parentElement.parentElement.style.display="none"
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -298,8 +333,6 @@ fetch("/taskAction", {
              return res.json();
            })
            .then((data) => {
-
-
     reportContainer.insertAdjacentHTML("beforeend",
 `<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
     <div class="flex justify-between items-start mb-1">
