@@ -29,104 +29,97 @@ fetch("/nameData", {
         `<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`,
       );
 
-//data.forEach((tasks,i)=>{
-// if(tasks.task.length===0){
-// console.log("data available")
-// }
-// tasks.task.forEach((dataSets,i)=>{
-// if(dataSets.status==="active"&& new Date(dataSets.dueDate) > new Date()&&dataSets.){
+if(fullNames.task.length!=0){
+fullNames.task.forEach((tasks)=>{
+if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
+ taskCardActive.insertAdjacentHTML(
+    "beforeend",
+    `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase taskID">${tasks.taskID}</span>
+            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
+        </div>
+        
+        <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${tasks.taskName}</h3>
+        
+        <!-- Priority Section -->
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
+                ${tasks.priorityLevel}
+            </span>
+        </div>
 
-//  taskCardActive.insertAdjacentHTML(
-//     "beforeend",
-//     `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
-//     <div class="flex-1">
-//         <div class="flex justify-between items-start mb-3">
-//             <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase taskID">${dataSets.taskID}</span>
-//             <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
-//         </div>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
+        <div class="flex justify-between items-center text-sm mb-4">
+            <div>
+                <p class="text-gray-500 text-xs">Assigned to:</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-xs">Due Date:</p>
+                <p class="font-medium text-gray-700 dueDate">${tasks.dueDate}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">Log Success</button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">Log Fail</button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
+    </div>
+</div>`,
+  ); 
+}else if(tasks.status=="active"&& new Date(tasks.dueDate)<new Date()){
+taskCardOverdue.insertAdjacentHTML(
+             "beforeend",
+             `<div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase taskID">${tasks.taskID}</span>
+            <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
+        </div>
         
-//         <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${dataSets.taskName}</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${tasks.taskName}</h3>
         
-//         <!-- Priority Section -->
-//         <div class="flex items-center gap-2 mb-3">
-//             <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
-//             <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
-//                 ${dataSets.priorityLevel}
-//             </span>
-//         </div>
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
+                ${tasks.priorityLevel}
+            </span>
+        </div>
 
-//         <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${dataSets.description}</p>
-//         <div class="flex justify-between items-center text-sm mb-4">
-//             <div>
-//                 <p class="text-gray-500 text-xs">Assigned to:</p>
-//                 <p class="font-medium text-indigo-600 employeeName assignedPerson">${dataSets.assignedPerson}</p>
-//             </div>
-//             <div class="text-right">
-//                 <p class="text-gray-500 text-xs">Due Date:</p>
-//                 <p class="font-medium text-gray-700 dueDate">${dataSets.dueDate}</p>
-//             </div>
-//         </div>
-//     </div>
-//     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-//         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">Log Success</button>
-//         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">Log Fail</button>
-//         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md">Edit</button>
-//     </div>
-// </div>`,
-//   ); 
-// }
-// })
-//})
-// if (
-//   data[i].task.length !== 0 &&
-//   data[i].task.some(t => t.status === "sucess" && new Date(t.dueDate) > new Date())
-// ){  /*look into this line of code the "some" function*/
-// console.log(data[i].task)
-// //   
-//       }else if(data[i].task.length!=0&&data[i].task.some(t=>new Date(t.dueDate)<new Date())){
-//          data[i].task.forEach((tasks, i) => {
-//            taskCardOverdue.insertAdjacentHTML(
-//              "beforeend",
-//              `<div id="overdue-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
-//     <div class="flex-1">
-//         <div class="flex justify-between items-start mb-3">
-//             <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase taskID">${tasks.taskID}</span>
-//             <span class="text-xs text-red-700 bg-red-100 px-3 py-1 rounded-full">OVERDUE</span>
-//         </div>
-        
-//         <h3 class="text-lg font-bold text-gray-800 mb-1 taskName">${tasks.taskName}</h3>
-        
-//         <div class="flex items-center gap-2 mb-3">
-//             <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
-//             <span class="px-2 py-0.5 text-[10px] font-bold rounded border priorityLevel">
-//                 ${tasks.priorityLevel}
-//             </span>
-//         </div>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
+        <div class="flex justify-between items-center text-sm mb-4">
+            <div>
+                <p class="text-gray-500 text-xs ">Assigned to:</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-xs">Due Date:</p>
+                <p class="font-bold text-red-500 dueDate">${tasks.dueDate}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md overDueLogSucess">
+            Log Success
+        </button>
+        <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md overDueLogFail">
+            Log Fail
+        </button>
+    </div>
+</div>`,
+           );
 
-//         <p class="text-sm text-gray-600 mb-4 line-clamp-2 description">${tasks.description}</p>
-//         <div class="flex justify-between items-center text-sm mb-4">
-//             <div>
-//                 <p class="text-gray-500 text-xs ">Assigned to:</p>
-//                 <p class="font-medium text-indigo-600 employeeName assignedPerson">${tasks.assignedPerson}</p>
-//             </div>
-//             <div class="text-right">
-//                 <p class="text-gray-500 text-xs">Due Date:</p>
-//                 <p class="font-bold text-red-500 dueDate">${tasks.dueDate}</p>
-//             </div>
-//         </div>
-//     </div>
-//     <div class="flex space-x-2 pt-4 border-t border-gray-100">
-//         <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md overDueLogSucess">
-//             Log Success
-//         </button>
-//         <button class="flex-1 px-3 py-1.5 text-sm font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md overDueLogFail">
-//             Log Fail
-//         </button>
-//     </div>
-// </div>`,
-//            );
-//          });
-//       }
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date()){
+
+
+}
+})
+}
+
+
     });
   })
   .then(() => {
