@@ -112,8 +112,82 @@ taskCardOverdue.insertAdjacentHTML(
 </div>`,
            );
 
-}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date()){
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)<new Date(tasks.logDate)){
+reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-emerald-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${tasks.taskID}</span>
+            <h4 class="text-base font-semibold text-gray-800">${tasks.taskName}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">SUCCESS</span>
+    </div>
 
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${tasks.priorityLevel}
+        </span>
+    </div>
+
+    <p class="text-sm text-gray-700 mb-2">${tasks.description}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${tasks.assignedPerson}</span>
+        <span>Date: ${tasks.dueDate}</span>
+    </div>
+</div>`
+)
+
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
+reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${tasks.taskID}</span>
+            <h4 class="text-base font-semibold text-gray-800">${tasks.taskName}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${tasks.priorityLevel}
+        </span>
+    </div>
+    <p class="text-sm text-gray-700 mb-2">${tasks.description}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${tasks.assignedPerson}</span>
+        <span>Date: ${tasks.dueDate}</span>
+    </div>
+</div>`
+)
+
+// make algo to check the logdatees {#b2c,26}
+}else if(tasks.status=="sucess"&& new Date(tasks.dueDate)>new Date(tasks.logDate)){
+reportContainer.insertAdjacentHTML("beforeend",
+`<div class="p-4 rounded-xl shadow-sm bg-white border border-gray-100 border-l-4 border-red-500 transition duration-150 hover:shadow-md">
+    <div class="flex justify-between items-start mb-1">
+        <div class="flex flex-col">
+            <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">${tasks.taskID}</span>
+            <h4 class="text-base font-semibold text-gray-800">${tasks.taskName}</h4>
+        </div>
+        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">FAILURE</span>
+    </div>
+
+    <div class="flex items-center gap-2 mb-2">
+        <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+        <span class="px-2 py-0.5 text-[10px] font-bold rounded border">
+            ${tasks.priorityLevel}
+        </span>
+    </div>
+    <p class="text-sm text-gray-700 mb-2">${tasks.description}</p>
+    <div class="flex justify-between text-xs text-gray-500">
+        <span>Assigned: ${tasks.assignedPerson}</span>
+        <span>Date: ${tasks.dueDate}</span>
+    </div>
+</div>`
+)
 
 }
 })
@@ -146,7 +220,7 @@ taskCardOverdue.insertAdjacentHTML(
        fetch("/taskAction", {
          method: "POST",
          headers: { "Content-type": "application/json" },
-         body: JSON.stringify({ "status": "sucess","companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText,"taskID":taskIDText}),
+         body: JSON.stringify({ "status": "sucess","logDate": `${new Date()}`,"companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText,"taskID":taskIDText}),
        })
          .then((res) => {
            return res.json();
@@ -183,7 +257,7 @@ taskCardOverdue.insertAdjacentHTML(
          fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "fail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "fail","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -218,7 +292,7 @@ reportContainer.insertAdjacentHTML("beforeend",
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "overDueSuccess", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "overDueSuccess","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
@@ -258,7 +332,7 @@ fetch("/taskAction", {
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "OverDueFail", "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "OverDueFail","logDate": `${new Date()}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
          })
            .then((res) => {
              return res.json();
