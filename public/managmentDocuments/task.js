@@ -446,8 +446,19 @@ const btnWrap=document.querySelector(".btnWrap")
 btnWrap.innerHTML=`<button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-700 text-white hover:bg-indigo-800 transition duration-150 shadow-md saveEdit">Save</button>`
 const saveBtn=document.querySelector(".saveEdit")
 saveBtn.onclick=()=>{
-console.log("sucess")
-// continue from here by fixing the saveBtn apiCall
+
+fetch("/taskAction",
+{
+method:"POST",
+headers:{"Content-type":"text/plain",
+ body: JSON.stringify({"taskID":`${saveBtn.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":`${saveBtn.parentElement.parentElement.querySelector(".assignedPerson").innerText}`})}
+})
+.then(res=>{
+return res.text()
+})
+.then(data=>{
+console.log(data)
+})
 }
     
 }

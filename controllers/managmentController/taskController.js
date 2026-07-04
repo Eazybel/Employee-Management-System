@@ -18,19 +18,19 @@ const taskLength=async(req,res)=>{
     res.send(myEmployee.task.length);
 }
 const taskAction=async(req,res)=>{
-     const companyData=await Company.findOne({companyUID:req.body.companyUID})
-    const companyName=companyData.companyName
-    const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
-    const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.assignedPerson})
-  myEmployee.task.forEach(tasks=>{
-        if(tasks.taskID==req.body.taskID){
-        tasks.status=req.body.status
-        tasks.logDate=req.body.logDate
-     }
-        })
+    //  const companyData=await Company.findOne({companyUID:req.body.companyUID})
+    // const companyName=companyData.companyName
+    // const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
+    // const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.assignedPerson})
+//   myEmployee.task.forEach(tasks=>{
+//         if(tasks.taskID==req.body.taskID){
+//         tasks.status=req.body.status
+//         tasks.logDate=req.body.logDate
+//      }
+//         })
 
-    await myEmployee.save()
-    res.send(myEmployee);
+//     await myEmployee.save()
+    res.send(req.body);
 }
 module.exports = {taskController,taskLength,taskAction};
 
