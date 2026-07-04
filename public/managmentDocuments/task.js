@@ -35,7 +35,13 @@ fullNames.task.forEach((tasks)=>{
 if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()&&tasks.editStatus=="edited"){
  taskCardActive.insertAdjacentHTML(
     "beforeend",
-    `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    `<div id="task-card-1" class="relative bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    
+    <!-- Edited Label -->
+    <span class="absolute top-2 right-2 text-[9px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 uppercase tracking-wider">
+        Edited
+    </span>
+
     <div class="flex-1">
         <div class="flex justify-between items-start mb-3">
             <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase taskID">${tasks.taskID}</span>
@@ -288,7 +294,7 @@ reportContainer.insertAdjacentHTML("beforeend",
        fetch("/taskAction", {
          method: "POST",
          headers: { "Content-type": "application/json" },
-         body: JSON.stringify({ "status": "sucess","logDate": `${new Date()}`,"companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText,"taskID":taskIDText}),
+         body: JSON.stringify({ "status": "sucess","logDate": `${new Date()}`,"companyUID": localStorage.getItem("UID"),"assignedPerson": assignedPersonText,"taskID":taskIDText,"action":"log"}),
        })
          .then((res) => {
            return res.json();
@@ -326,7 +332,7 @@ btns.parentElement.parentElement.style.display="none"
          fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "fail","logDate": `${new Date()}`,"taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "fail","logDate": `${new Date()}`,"taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText,"action":"log"}),
          })
            .then((res) => {
              return res.text();
@@ -365,7 +371,7 @@ btns.parentElement.parentElement.style.display="none"
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "overDueSuccess","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "overDueSuccess","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText,"action":"log"}),
          })
            .then((res) => {
              return res.json();
@@ -403,7 +409,7 @@ btns.parentElement.parentElement.style.display="none"
 fetch("/taskAction", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ "status": "OverDueFail","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText}),
+          body: JSON.stringify({ "status": "OverDueFail","logDate": `${new Date()}`, "taskID":`${btns.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":assignedPersonText,"action":"log"}),
          })
            .then((res) => {
              return res.json();
@@ -450,8 +456,8 @@ saveBtn.onclick=()=>{
 fetch("/taskAction",
 {
 method:"POST",
-headers:{"Content-type":"text/plain",
- body: JSON.stringify({"taskID":`${saveBtn.parentElement.parentElement.querySelector(".taskID").innerText}`, "companyUID": localStorage.getItem("UID"),"assignedPerson":`${saveBtn.parentElement.parentElement.querySelector(".assignedPerson").innerText}`})}
+headers:{"Content-type":"application/json"},
+ body: JSON.stringify({"taskID":`${saveBtn.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),"assignedPerson":`${saveBtn.parentElement.parentElement.querySelector(".assignedPerson").innerText}`,"action":"edit"})
 })
 .then(res=>{
 return res.text()
