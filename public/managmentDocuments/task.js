@@ -56,7 +56,7 @@ if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
         <div class="flex justify-between items-center text-sm mb-4">
             <div>
                 <p class="text-gray-500 text-xs">Assigned to:</p>
-                <p class="font-medium text-indigo-600 employeeName assignedPerson editable">${tasks.assignedPerson}</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson ">${tasks.assignedPerson}</p>
             </div>
             <div class="text-right">
                 <p class="text-gray-500 text-xs">Due Date:</p>
@@ -64,7 +64,7 @@ if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
             </div>
         </div>
     </div>
-    <div class="flex space-x-2 pt-4 border-t border-gray-100">
+    <div class="flex space-x-2 pt-4 border-t border-gray-100 btnWrap">
         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">Log Success</button>
         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">Log Fail</button>
         <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150 shadow-md edit">Edit</button>
@@ -400,7 +400,11 @@ fetch("/taskAction", {
 }else if(btns.classList.contains("edit")){
 const editableTexts=btns.parentElement.parentElement.querySelectorAll(".editable")
 for (const key in editableTexts) {
-    console.log(editableTexts[key])
+    if(editableTexts[key].innerText){
+        editableTexts[key].setAttribute("contentEditable","true")
+}
+const btnWrap=document.querySelector(".btnWrap")
+btnWrap.innerHTML=`<button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-700 text-white hover:bg-indigo-800 transition duration-150 shadow-md saveEdit">Save</button>`
     // continue from here by logging elements
     
 }
