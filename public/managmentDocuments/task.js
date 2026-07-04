@@ -444,31 +444,44 @@ fetch("/taskAction", {
         })
 }else if(btns.classList.contains("edit")){
 const editableTexts=btns.parentElement.parentElement.querySelectorAll(".editable")
-for (const key in editableTexts) {
-    if(editableTexts[key].innerText){
-        editableTexts[key].setAttribute("contentEditable","true")
-}
-const btnWrap=document.querySelector(".btnWrap")
+if(!document.querySelector(".saveEdit")){
+const btnWrap=btns.parentElement.parentElement.querySelector(".btnWrap")
 btnWrap.innerHTML=`<button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-700 text-white hover:bg-indigo-800 transition duration-150 shadow-md saveEdit">Save</button>`
 const saveBtn=document.querySelector(".saveEdit")
 saveBtn.onclick=()=>{
+const actionBody=JSON.stringify({
+"taskID":`${saveBtn.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),
+"assignedPerson":`${saveBtn.parentElement.parentElement.querySelector(".assignedPerson").innerText}`,
+"action":"edit",
+"taskName":`${saveBtn.parentElement.parentElement.querySelector(".taskName").innerText}`,
+"priority":`${saveBtn.parentElement.parentElement.querySelector(".priorityLevel").innerText}`,
+"description":`${saveBtn.parentElement.parentElement.querySelector(".description").innerText}`,
+"dueDate":`${saveBtn.parentElement.parentElement.querySelector(".dueDate").innerText}`,
+})
 
 fetch("/taskAction",
 {
 method:"POST",
 headers:{"Content-type":"application/json"},
- body: JSON.stringify({"taskID":`${saveBtn.parentElement.parentElement.querySelector(".taskID").innerText}`,"companyUID": localStorage.getItem("UID"),"assignedPerson":`${saveBtn.parentElement.parentElement.querySelector(".assignedPerson").innerText}`,"action":"edit"})
+ body: actionBody,
+// continue from here by emplementing the edit labeles send the full json with them value on it
 })
 .then(res=>{
 return res.text()
 })
 .then(data=>{
-console.log(data)
+alert("Task Edited")
+window.location.reload()
 })
 }
-    
+}else if(document.querySelector(".saveEdit")){
+window.alert("Please Save The Previous Task")
 }
-
+for (const key in editableTexts) {
+    if(editableTexts[key].innerText){
+        editableTexts[key].setAttribute("contentEditable","true")
+}
+}
 }
     }
   })
@@ -512,5 +525,5 @@ console.log(data)
   formData.reportValidity()
  }
 }
- //  {#6d2,1}
-// all buttones established except the edit button next start from edit button
+
+// almost everything is over check it out tomorrow

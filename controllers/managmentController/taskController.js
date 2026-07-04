@@ -36,13 +36,16 @@ myEmployee.task.forEach(tasks=>{
 myEmployee.task.forEach(tasks=>{
         if(tasks.taskID==req.body.taskID){
         tasks.editStatus="edited"
+        tasks.description=req.body.description
+        tasks.dueDate=req.body.dueDate
+        tasks.priorityLevel=req.body.priority
+        tasks.taskName=req.body.taskName
     res.send(tasks);
      }
         })
+ await myEmployee.save()
+res.send("Not Sucessful")
 }
-
-    await myEmployee.save()
-    res.send("employee not found");
 }
 module.exports = {taskController,taskLength,taskAction};
 
