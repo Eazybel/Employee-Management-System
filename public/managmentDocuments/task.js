@@ -526,4 +526,4 @@ for (const key in editableTexts) {
  }
 }
 
-// almost everything is over check it out tomorrow
+// almost everything is over check it out tomorrow make sure it logs the edited badge also
