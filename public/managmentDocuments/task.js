@@ -32,7 +32,46 @@ fetch("/nameData", {
 if(fullNames.task.length!=0){
 fullNames.task.forEach((tasks)=>{
 // status= active duedate=underDue green checked passed
-if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
+if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()&&tasks.editStatus=="edited"){
+ taskCardActive.insertAdjacentHTML(
+    "beforeend",
+    `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
+    <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-[10px] font-bold tracking-widest text-indigo-400 uppercase taskID">${tasks.taskID}</span>
+            <span class="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full">In Progress</span>
+        </div>
+        
+        <h3 class="text-lg font-bold text-gray-800 mb-1 taskName editable">${tasks.taskName}</h3>
+        
+        <!-- Priority Section -->
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-[10px] font-semibold text-gray-400 uppercase">Priority:</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded border editable priorityLevel">
+                ${tasks.priorityLevel}
+            </span>
+        </div>
+
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2 description editable">${tasks.description}</p>
+        <div class="flex justify-between items-center text-sm mb-4">
+            <div>
+                <p class="text-gray-500 text-xs">Assigned to:</p>
+                <p class="font-medium text-indigo-600 employeeName assignedPerson ">${tasks.assignedPerson}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-gray-500 text-xs">Due Date:</p>
+                <p class="font-medium text-gray-700 editable dueDate">${tasks.dueDate}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-2 pt-4 border-t border-gray-100 btnWrap">
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition duration-150 shadow-md activeLogSucess">Log Success</button>
+        <button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition duration-150 shadow-md activeLogFail">Log Fail</button>
+    </div>
+</div>`,
+  ); 
+//status=active dueDate=overdue red checked passed
+}else if(tasks.status=="active"&& new Date(tasks.dueDate)>new Date()){
  taskCardActive.insertAdjacentHTML(
     "beforeend",
     `<div id="task-card-1" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 hover:shadow-xl transition duration-300 flex flex-col h-full">
@@ -405,7 +444,11 @@ for (const key in editableTexts) {
 }
 const btnWrap=document.querySelector(".btnWrap")
 btnWrap.innerHTML=`<button class="flex-1 px-2 py-1.5 text-xs font-semibold rounded-lg bg-indigo-700 text-white hover:bg-indigo-800 transition duration-150 shadow-md saveEdit">Save</button>`
-    // continue from here by logging elements
+const saveBtn=document.querySelector(".saveEdit")
+saveBtn.onclick=()=>{
+console.log("sucess")
+// continue from here by fixing the saveBtn apiCall
+}
     
 }
 
