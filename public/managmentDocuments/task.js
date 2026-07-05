@@ -516,7 +516,7 @@ for (const key in editableTexts) {
    }).then((res)=>{
      return res.text()
    }).then(data=>{
-     alert("Task Saved Sicessfully")
+     alert("Task Saved Sucessfully")
      
    }).catch(err=>{
      console.log(err)
