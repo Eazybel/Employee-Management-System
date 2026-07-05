@@ -9,30 +9,51 @@
 <body class="bg-gray-100 min-h-screen p-4 md:p-8">
 
     <!-- 1. Top Section -->
-    <header class="bg-white p-6 rounded-2xl shadow-sm mb-6 flex flex-wrap justify-between items-center gap-4">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-800">Hello, Ezedin Kamil Yassin</h1>
-            <p class="text-gray-500">Lead Software Developer | ID: #EMP-2026-001</p>
-            <span class="inline-block mt-2 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Status: Active</span>
+   <header class="bg-white p-6 rounded-2xl shadow-sm mb-6">
+    <!-- Top Row: Logo, Identity, and Actions -->
+    <div class="flex flex-wrap items-center justify-between gap-6">
+        
+        <!-- Logo and Company Info -->
+        <div class="flex items-center gap-4">
+            <img id="companyLogo" title="companyLogo" class="w-16 h-16 rounded-2xl flex items-center justify-center ">
+            </img>
+            <div>
+                <h2 id="companyName" class="text-xl font-bold text-gray-800"></h2>
+                <p class="text-sm text-gray-400">Enterprise Management Portal</p>
+            </div>
         </div>
+
+        <!-- Identity and User Info -->
+        <div class="flex-grow flex items-center gap-6">
+            <div class="h-10 w-px bg-gray-200 hidden md:block"></div>
+            <div>
+                 <p class="text-sm text-gray-400">Welcome-Back</p>
+                <h1 id="adminName" class="text-lg font-bold text-gray-800"></h1>
+                <span id="employeeNumber" class="inline-block mt-1 px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-semibold rounded-full uppercase"></span>
+            </div>
+        </div>
+
+        <!-- Action Buttons Section -->
         <div class="text-right">
-    <p class="text-sm text-gray-500">Next Payroll: <span class="font-bold text-gray-800">25 days left</span></p>
-    <div class="mt-3 flex gap-2 justify-end">
-        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
-            + Add Announcement
-        </button>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            + Add Post
-        </button>
-        <button class="bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition">
-            Logout
-        </button>
+            <p class="text-sm text-gray-500 mb-2">Next Payroll: <span class="font-bold text-gray-800">25 days left</span></p>
+            <div class="flex gap-2 justify-end">
+                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
+                    + Announcement
+                </button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                    + Post
+                </button>
+                <button id="logoutBtn" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition text-sm">
+                    Logout
+                </button>
+            </div>
+        </div>
     </div>
-</div>
-    </header>
+</header>
 
     <!-- 2. Search Section -->
    <!-- 2. Search & Announcements Section -->
+<div id="dataContainer">
 <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
     
     <!-- Search Section -->
@@ -201,6 +222,7 @@
 
 </section>
 
+</div>
     <!-- Coming Soon -->
     <section class="bg-indigo-900 text-white p-8 rounded-2xl text-center mb-8">
         <h2 class="text-2xl font-bold mb-2">Coming Soon</h2>
@@ -211,6 +233,6 @@
     <footer class="text-center text-gray-400 text-sm py-4">
         &copy; 2026 Syntax Designs. Built by Ezedin Kamil Yassin.
     </footer>
-
+<script type="module" src="dashboard.js"></script>
 </body>
 </html>

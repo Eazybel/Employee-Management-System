@@ -48,7 +48,6 @@ cloudRaw=data.urlRaw
 // Variables initialization
  const jobTitleFilter = document.getElementById('job-title-filter');
  const nameFilter = document.getElementById('name-filter');
-const addEmployeeBtn = document.getElementById('addEmployeeBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 // Get the filter input elements by their IDs
 let dataLength;
@@ -104,14 +103,27 @@ fetch("/myEmployees",{
    }else{
     employeeList.insertAdjacentHTML("beforeend",
       `  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
-            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
-                No employees registered
-            </h1>
-            <p class="text-sm text-gray-600">
-                Get started by adding your first employee to the system.
-            </p>
-        </div>`
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
+        No employees registered
+    </h1>
+    <p class="text-sm text-gray-600 mb-6">
+        Get started by adding your first employee to the system.
+    </p>
+    
+    <!-- Added Button -->
+    <button class="bg-gray-800 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-gray-900 transition shadow-md addEmployeeBtn">
+        + Add Employee
+    </button>
+</div>`
     )
+const addEmployeeBtn = document.querySelectorAll('.addEmployeeBtn');
+  addEmployeeBtn.forEach(btn=>{
+btn.onclick=()=>{
+registerContainer.classList.remove("hidden")
+    main.classList.add("hidden")
+    header.classList.add("hidden")
+}
+})
    }
   return data
   }).then((data)=>{
@@ -238,12 +250,15 @@ const toTheBackend=fetch("/employeeRegister",{
       })
   }
   //POPUP MODAL OPENING
-  addEmployeeBtn.onclick=()=>{
-  
-    registerContainer.classList.remove("hidden")
+const addEmployeeBtn = document.querySelectorAll('.addEmployeeBtn');
+  addEmployeeBtn.forEach(btn=>{
+btn.onclick=()=>{
+registerContainer.classList.remove("hidden")
     main.classList.add("hidden")
     header.classList.add("hidden")
-  }
+
+}
+})
   closeBtn.onclick=()=>{
     registerContainer.classList.add("hidden")
     main.classList.remove("hidden")

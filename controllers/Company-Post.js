@@ -20,7 +20,8 @@ const company=new Company({
   },
    adminAccount: {
     email:req.body.adminEmail,
-    password:req.body.adminPassword
+    password:req.body.adminPassword,
+    adminName:req.body.adminName
 },
  companyUID:req.body.companyUID,
 })
@@ -31,5 +32,6 @@ company.save()
 }).catch((err)=>{
   console.log(err)
 })
+res.send(req.body)
 }
 module.exports=companyPost

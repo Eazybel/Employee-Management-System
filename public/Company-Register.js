@@ -34,7 +34,7 @@ cloudImage=data.urlImage
   const file = document.getElementById("logo").files[0];
      const forms=new FormData(form)
   e.preventDefault()
-const email = document.getElementById("admin-email").value.trim();
+const email = document.getElementById("admin-email").value.trim();  
 const password = document.getElementById("admin-password").value.trim();
 const passwordConfirm = document.getElementById("confirm-password").value.trim();
 if(!form.checkValidity()){

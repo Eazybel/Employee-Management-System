@@ -76,6 +76,10 @@ const companySchema = new mongoose.Schema({
     password: {
       type: String,
       required: true
+    },
+    adminName: {
+      type: String,
+      required: true
     }
   }
 }, { timestamps: true });

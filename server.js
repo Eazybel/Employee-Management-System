@@ -36,7 +36,7 @@ app.get("/",(req,res)=>{
 })
 app.post("/myEmployees",myEmployees)
 app.post("/profileFetch",profileFetch)
-app.get("/companyFetch/:uid",companyFetch)
+app.post("/companyFetch",companyFetch)
 app.post("/lateController",upload.none(),lateController)
 app.post("/taskController",upload.none(),taskController)
 app.post("/taskAction",upload.none(),taskAction)
