@@ -72,6 +72,13 @@ fetch("/myEmployees",{
     return res.json()
   })
   .then(data=>{
+console.log(data)
+const companyName=document.getElementById("companyName")
+companyName.innerText=data.companyName
+const companyLogo=document.querySelectorAll(".companyLogo")
+companyLogo.forEach((logos)=>{
+logos.setAttribute("src",`${data.myCompany.companyLogo}`)
+})
     dataLength=data.allEmployee.length
    if (data.allEmployee.length>0) {
     for (let i = 0; i < data.allEmployee.length; i++) {

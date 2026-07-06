@@ -28,6 +28,7 @@ const announcementBtn=document.getElementById("announcementBtn")
 const announcementSumbitBtn=document.getElementById("announcementSumbitBtn")
 const announcementCloseBtn=document.getElementById("announcementCloseBtn")
 const announcementForm=document.getElementById("announcementForm")
+const announceLogContainer=document.getElementById("announceLogContainer")
 
 // ADMIN DATA FETCH CODE BLOCK
 fetch("/companyFetch",{
@@ -54,7 +55,8 @@ fetch("/nameData",{
     return res.json()
 }).then(data=>{
 if(data.length==0){
-
+console.log(data)
+//PAYROLL DAY LEFT CONTROLLER
 payRollShower.innerText="No employee recorded to payroll"
 dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
@@ -77,6 +79,7 @@ employeeNumber.innerText=`${data.length} : Active-employees`
 data.forEach(employees => {
   employeesName.insertAdjacentHTML("beforeend",`<option class="fullProfile" value="${employees.employmentDetails.employeeID}">${employees.personalInfo.fullName}</option>`)
 const profileBtn=document.getElementById("fullProfileBtn")
+//FULL PROFILE SHOW BASED ON SEARCH BAR
  profileBtn.onclick=()=>{
 const fullProfileInput=document.getElementById("fullProfileInput").value
 const profilerID=fullProfileInput
@@ -85,10 +88,19 @@ const profilerID=fullProfileInput
 
   }
 });
+// ANNOUNCEMENT LOG CONFIG SECTION
+// consttinue from here by emplementing the announcement log {#1f6,7}
+if (data[0].announcements.some(t=>t.priorirty=="low")) {
+  console.log("low")
+} else if(data[0].announcements.some(t=>t.priorirty=="high")){
+  console.log("high")
+}else if(data[0].announcements.some(t=>t.priorirty=="medium")){
+  console.log("mediom")
+}
 }
 
 })
-//POST FEATURE POPUP BUTTON CONFIG
+//POST VACCANCY POPUP BUTTON CONFIG
 popupOpenBtn.onclick=()=>{
 
 popupPost.showModal()
@@ -97,22 +109,25 @@ popupCloseBtn.onclick=()=>{
 
 popupPost.close()
 }
-// ANNOUNCEMENT SETUP SECTION
+// ANNOUNCEMENT POPUP SETUP SECTION
 announcementBtn.onclick=()=>{
 announcementDialog.showModal()
 }
 announcementCloseBtn.onclick=()=>{
 announcementDialog.close()
+window.location.reload()
 }
+// ANNOUNCEMENT DATA SETUP SECTION
 announcementSumbitBtn.onclick=()=>{
 const title=document.getElementById("title").value
 const description=document.getElementById("description").value
-const priority=document.getElementById("priority").value
+const priorirty=document.getElementById("priorirty").value
 const announceData={
 title:title,
 description:description,
-priority:priority,
-date:new Date()
+priorirty:priorirty,
+date:new Date(),
+UID:localStorage.getItem("UID")
 }
 fetch("/dashboard",{
 method:"POST",

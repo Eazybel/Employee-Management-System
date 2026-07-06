@@ -6,6 +6,6 @@ const myEmployees=async(req,res)=>{
     const myCompany=allCompanys.companyName
     const myEmployeeModel=mongoose.model("myEmployeeModel",EmployeeSchema,myCompany)
     const allEmployees=await myEmployeeModel.find()
-res.json({allEmployee:allEmployees,companyName:myCompany})
+res.json({allEmployee:allEmployees,companyName:myCompany,myCompany:allCompanys})
 }
 module.exports=myEmployees
