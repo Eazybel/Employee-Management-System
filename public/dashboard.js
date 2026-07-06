@@ -20,10 +20,15 @@ const adminInfo=document.getElementById("adminInfo")
 const dataContainer=document.getElementById("dataContainer")
 const payRollShower=document.getElementById("payRollShower")
 const employeesName=document.getElementById("employeesName")
-const popup=document.getElementById("popup")
+const popupPost=document.getElementById("popupPost")
+const announcementDialog=document.getElementById("announcementDialog")
 const popupOpenBtn=document.getElementById("popupOpenBtn")
 const popupCloseBtn=document.getElementById("popupCloseBtn")
-const announcement=document.getElementById("announcement")
+const announcementBtn=document.getElementById("announcementBtn")
+const announcementSumbitBtn=document.getElementById("announcementSumbitBtn")
+const announcementCloseBtn=document.getElementById("announcementCloseBtn")
+const announcementForm=document.getElementById("announcementForm")
+
 // ADMIN DATA FETCH CODE BLOCK
 fetch("/companyFetch",{
 method:"POST",
@@ -86,18 +91,32 @@ const profilerID=fullProfileInput
 //POST FEATURE POPUP BUTTON CONFIG
 popupOpenBtn.onclick=()=>{
 
-popup.showModal()
+popupPost.showModal()
 }
 popupCloseBtn.onclick=()=>{
 
-popup.close()
+popupPost.close()
 }
 // ANNOUNCEMENT SETUP SECTION
-announcement.onclick=()=>{
+announcementBtn.onclick=()=>{
+announcementDialog.showModal()
+}
+announcementCloseBtn.onclick=()=>{
+announcementDialog.close()
+}
+announcementSumbitBtn.onclick=()=>{
+const title=document.getElementById("title").value
+const description=document.getElementById("description").value
+const priority=document.getElementById("priority").value
+const announceData={
+title:title,
+description:description,
+priority:priority
+}
 fetch("/dashboard",{
 method:"POST",
 headers:{"Content-type":"application/json"},
-body:JSON.stringify({"announcementData":"none given"})
+body:JSON.stringify(announceData)
 })
 .then((res)=>{
 return res.json()
@@ -106,7 +125,7 @@ return res.json()
 console.log(data)
 })
 }
-// sign out section
+// SIGNING OUT SECTION
  const logoutBtn=document.getElementById("logoutBtn")
 logoutBtn.onclick=()=>{
   signOut(auth)

@@ -37,7 +37,7 @@
         <div class="text-right">
             <p  class="text-sm text-gray-500 mb-2">Next Payroll: <span id="payRollShower" class="font-bold text-gray-800"></span></p>
             <div class="flex gap-2 justify-end">
-                <button id="announcement" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
+                <button id="announcementBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
                     + Announcement
                 </button>
                 <button id="popupOpenBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">
@@ -237,7 +237,7 @@
         &copy; 2026 Syntax Designs. Built by Ezedin Kamil Yassin.
     </footer>
 <!-- The Dialog Element -->
-<dialog id="popup" class="p-0 rounded-2xl shadow-2xl w-full max-w-lg backdrop:bg-gray-900/50">
+<dialog id="popupPost" class="p-0 rounded-2xl shadow-2xl w-full max-w-lg backdrop:bg-gray-900/50">
     <div class="p-8">
         <h2 class="text-xl font-bold text-gray-800 mb-4">Coming Soon</h2>
         
@@ -253,8 +253,51 @@
         </div>
     </div>
 </dialog>
+<!-- Announcement Dialog -->
+<dialog id="announcementDialog" class="p-0 rounded-2xl shadow-2xl w-full max-w-lg backdrop:bg-gray-900/50">
+    <form id="announcementForm" method="dialog" class="p-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Create New Announcement</h2>
+        
+        <div class="space-y-4">
+            <!-- Title -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <input id="title" type="text" placeholder="Enter announcement title" 
+                       class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 outline-none">
+            </div>
 
-<!-- Script to trigger (Example) -->
+            <!-- Priority -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <select id="priority" class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea id="description" rows="4" placeholder="Write your announcement details here..." 
+                          class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-8 flex gap-3 justify-end">
+            <button id="announcementCloseBtn" type="button"
+                    class="px-5 py-2 rounded-xl text-gray-600 hover:bg-gray-100 transition font-semibold">
+                Close
+            </button>
+            <button id="announcementSumbitBtn" type="submit" 
+                    class="px-5 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition font-semibold shadow-sm">
+                Submit Announcement
+            </button>
+        </div>
+    </form>
+</dialog>
+
 
 <script type="module" src="dashboard.js"></script>
 </body>
