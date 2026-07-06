@@ -35,12 +35,12 @@
 
         <!-- Action Buttons Section -->
         <div class="text-right">
-            <p class="text-sm text-gray-500 mb-2">Next Payroll: <span class="font-bold text-gray-800">25 days left</span></p>
+            <p  class="text-sm text-gray-500 mb-2">Next Payroll: <span id="payRollShower" class="font-bold text-gray-800"></span></p>
             <div class="flex gap-2 justify-end">
-                <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
+                <button id="announcement" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
                     + Announcement
                 </button>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                <button id="popupOpenBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm">
                     + Post
                 </button>
                 <button id="logoutBtn" class="bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition text-sm">
@@ -60,8 +60,11 @@
     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm">
         <h2 class="font-bold text-gray-800 mb-4">Search Portal</h2>
         <div class="flex gap-2">
-            <input type="text" placeholder="Search tasks, logs, or colleagues..." class="flex-grow p-3 rounded-xl border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button class="bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-900 transition font-semibold">Search</button>
+            <input id="fullProfileInput" list="employeesName" type="text" placeholder="Search colleagues..." class="flex-grow p-3 rounded-xl border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="fullProfileBtn" class="bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-900 transition font-semibold">Search</button>
+            <datalist id="employeesName">
+            
+            </datalist>
         </div>
     </div>
 
@@ -224,7 +227,7 @@
 
 </div>
     <!-- Coming Soon -->
-    <section class="bg-indigo-900 text-white p-8 rounded-2xl text-center mb-8">
+    <section id="comingSoon" class="bg-indigo-900 text-white p-8 rounded-2xl text-center mb-8">
         <h2 class="text-2xl font-bold mb-2">Coming Soon</h2>
         <p class="text-indigo-200">New Automation dashboard tools are currently in development.</p>
     </section>
@@ -233,6 +236,26 @@
     <footer class="text-center text-gray-400 text-sm py-4">
         &copy; 2026 Syntax Designs. Built by Ezedin Kamil Yassin.
     </footer>
+<!-- The Dialog Element -->
+<dialog id="popup" class="p-0 rounded-2xl shadow-2xl w-full max-w-lg backdrop:bg-gray-900/50">
+    <div class="p-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Coming Soon</h2>
+        
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            We are currently developing third-party app integrations. Once live, you will be able to post vacancies and company announcements directly to external platforms from this dashboard.
+        </p>
+
+        <div class="flex justify-end">
+            <button id="popupCloseBtn" type="button" onclick="popup.close()" 
+                    class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition font-semibold">
+                Understood
+            </button>
+        </div>
+    </div>
+</dialog>
+
+<!-- Script to trigger (Example) -->
+
 <script type="module" src="dashboard.js"></script>
 </body>
 </html>

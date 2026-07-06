@@ -18,6 +18,12 @@ const companyLogo=document.getElementById("companyLogo")
 const adminName=document.getElementById("adminName")
 const adminInfo=document.getElementById("adminInfo")
 const dataContainer=document.getElementById("dataContainer")
+const payRollShower=document.getElementById("payRollShower")
+const employeesName=document.getElementById("employeesName")
+const popup=document.getElementById("popup")
+const popupOpenBtn=document.getElementById("popupOpenBtn")
+const popupCloseBtn=document.getElementById("popupCloseBtn")
+const announcement=document.getElementById("announcement")
 // ADMIN DATA FETCH CODE BLOCK
 fetch("/companyFetch",{
 method:"POST",
@@ -43,6 +49,8 @@ fetch("/nameData",{
     return res.json()
 }).then(data=>{
 if(data.length==0){
+
+payRollShower.innerText="No employee recorded to payroll"
 dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
         No employees registered
@@ -58,11 +66,46 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
 }else if(data.length!=0){
-// continue from here by emplementing the header section up to now the the text fields are fixed except the payroll date display {#b6a,1}
+const now=new Date()
+payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")
 employeeNumber.innerText=`${data.length} : Active-employees`
+data.forEach(employees => {
+  employeesName.insertAdjacentHTML("beforeend",`<option class="fullProfile" value="${employees.employmentDetails.employeeID}">${employees.personalInfo.fullName}</option>`)
+const profileBtn=document.getElementById("fullProfileBtn")
+ profileBtn.onclick=()=>{
+const fullProfileInput=document.getElementById("fullProfileInput").value
+const profilerID=fullProfileInput
+   localStorage.setItem("profilerID",profilerID)
+   window.location="./Employee-Profile.html"
+
+  }
+});
 }
 
 })
+//POST FEATURE POPUP BUTTON CONFIG
+popupOpenBtn.onclick=()=>{
+
+popup.showModal()
+}
+popupCloseBtn.onclick=()=>{
+
+popup.close()
+}
+// ANNOUNCEMENT SETUP SECTION
+announcement.onclick=()=>{
+fetch("/dashboard",{
+method:"POST",
+headers:{"Content-type":"application/json"},
+body:JSON.stringify({"announcementData":"none given"})
+})
+.then((res)=>{
+return res.json()
+})
+.then((data)=>{
+console.log(data)
+})
+}
 // sign out section
  const logoutBtn=document.getElementById("logoutBtn")
 logoutBtn.onclick=()=>{
