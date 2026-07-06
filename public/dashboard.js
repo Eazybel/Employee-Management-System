@@ -111,7 +111,8 @@ const priority=document.getElementById("priority").value
 const announceData={
 title:title,
 description:description,
-priority:priority
+priority:priority,
+date:new Date()
 }
 fetch("/dashboard",{
 method:"POST",
