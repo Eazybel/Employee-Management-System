@@ -73,11 +73,43 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
 }else if(data.length!=0){
+console.log(data)
+// ANNOUNCEMENT LOG CONFIG SECTION
+for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
+ if (data[0].announcements[i-1].priorirty=="low") {
+  announceLogContainer.insertAdjacentHTML("beforeend",
+`
+       <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
+        ${data[0].announcements[i-1].title} 
+        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
+    </p>              
+`)
+}else if(data[0].announcements[i-1].priorirty=="high"){
+   announceLogContainer.insertAdjacentHTML("beforeend",
+`
+      <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
+       ${data[0].announcements[i-1].title}  
+        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()} </span>
+    </p>              
+`)
+} else if(data[0].announcements[i-1].priorirty=="medium"){
+   announceLogContainer.insertAdjacentHTML("beforeend",
+`
+     <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
+        ${data[0].announcements[i-1].title} 
+        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
+    </p>                  
+`)
+}
+  
+}
 const now=new Date()
 payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")
 employeeNumber.innerText=`${data.length} : Active-employees`
 data.forEach(employees => {
   employeesName.insertAdjacentHTML("beforeend",`<option class="fullProfile" value="${employees.employmentDetails.employeeID}">${employees.personalInfo.fullName}</option>`)
+
+
 const profileBtn=document.getElementById("fullProfileBtn")
 //FULL PROFILE SHOW BASED ON SEARCH BAR
  profileBtn.onclick=()=>{
@@ -88,15 +120,7 @@ const profilerID=fullProfileInput
 
   }
 });
-// ANNOUNCEMENT LOG CONFIG SECTION
-// consttinue from here by emplementing the announcement log {#1f6,7}
-if (data[0].announcements.some(t=>t.priorirty=="low")) {
-  console.log("low")
-} else if(data[0].announcements.some(t=>t.priorirty=="high")){
-  console.log("high")
-}else if(data[0].announcements.some(t=>t.priorirty=="medium")){
-  console.log("mediom")
-}
+
 }
 
 })
