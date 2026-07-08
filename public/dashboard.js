@@ -133,8 +133,6 @@ payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")
 employeeNumber.innerText=`${data.length} : Active-employees`
 data.forEach(employees => {
   employeesName.insertAdjacentHTML("beforeend",`<option class="fullProfile" value="${employees.employmentDetails.employeeID}">${employees.personalInfo.fullName}</option>`)
-
-
 const profileBtn=document.getElementById("fullProfileBtn")
 //FULL PROFILE SHOW BASED ON SEARCH BAR
  profileBtn.onclick=()=>{
