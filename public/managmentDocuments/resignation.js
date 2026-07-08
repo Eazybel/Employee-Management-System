@@ -22,12 +22,12 @@ fetch("/nameData",{
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    console.log(data)
     data.forEach(fullNames=>{
-        if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
+
+        if(fullNames.resignation.length!=0&&fullNames.resignation[fullNames.resignation.length-1].ongoingStatus==false){
             names.insertAdjacentHTML("beforeend",`<option value="${fullNames.personalInfo.fullName}">${fullNames.personalInfo.fullName}</option>`)
         }
-       if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===true){
+       if(fullNames.resignation.length!=0&&fullNames.resignation[fullNames.resignation.length-1].ongoingStatus==true){
              ongoingList.insertAdjacentHTML("beforeend",`
                 <tr class=' transition duration-150'>
                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
@@ -47,7 +47,7 @@ fetch("/nameData",{
                                </td>
                            </tr>
                `)
-        }else if(fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
+        }else if(fullNames.resignation.length!=0&&fullNames.resignation[fullNames.resignation.length-1].ongoingStatus===false){
             if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===true){
                 logList.insertAdjacentHTML("beforeend",`
                     <tr class='hover:bg-gray-50 transition duration-150'>
@@ -59,7 +59,7 @@ fetch("/nameData",{
                                 </td>
                             </tr>
                     `)
-            }else if(fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
+            }else if(fullNames.resignation.length!=0&&fullNames.resignation[fullNames.resignation.length-1].acceptanceStatus===false){
                 logList.insertAdjacentHTML("beforeend",`
                     <tr class='hover:bg-gray-50 transition duration-150'>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 employeeName">${fullNames.personalInfo.fullName}</td>
@@ -76,7 +76,8 @@ fetch("/nameData",{
       
  
     })
-}).then(()=>{
+}
+).then(()=>{
 const logBtns=document.querySelectorAll("button")
  const employeeName=document.querySelectorAll("td.employeeName")
 filterBtn.addEventListener("keyup",(e)=>{

@@ -29,6 +29,7 @@ const announcementSumbitBtn=document.getElementById("announcementSumbitBtn")
 const announcementCloseBtn=document.getElementById("announcementCloseBtn")
 const announcementForm=document.getElementById("announcementForm")
 const announceLogContainer=document.getElementById("announceLogContainer")
+const pendingResignationCard=document.getElementById("pendingResignationCard")
 
 // ADMIN DATA FETCH CODE BLOCK
 fetch("/companyFetch",{
@@ -101,8 +102,32 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
     </p>                  
 `)
 }
-  
 }
+  // PENDING RESIGNATION CODE BLOCK
+
+// }
+const lastLog=[]
+for (let i = 0; i < data.length; i++) {
+if(data[i].resignation.length==0){
+console.log("resignation not found")
+}else if(data[i].resignation.length!=0){
+data[i].resignation.forEach(resign=>{
+if(new Date(resign.noticeDate).getTime()>new Date().getTime()&&resign.ongoingStatus==true){
+lastLog.push(data[i])
+}
+})
+}
+}
+lastLog.slice(0,3).forEach((resigns,i)=>{
+pendingResignationCard.insertAdjacentHTML("beforeend",
+`<p class="text-sm text-gray-700 bg-yellow-50 p-2 rounded flex justify-between items-center">
+                    <span>Resignation: ${resigns.personalInfo.fullName}</span>
+                    <span class="text-xs text-yellow-600/70 font-mono"> ${resigns.resignation[0].noticeDate}</span>
+                </p>
+`
+)
+})
+console.log(lastLog)
 const now=new Date()
 payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")
 employeeNumber.innerText=`${data.length} : Active-employees`
