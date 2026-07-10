@@ -12,6 +12,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
+// VARIABLES ASSIHNMENT
 const employeeNumber=document.getElementById("employeeNumber")
 const companyName=document.getElementById("companyName")
 const companyLogo=document.getElementById("companyLogo")
@@ -103,19 +104,30 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
 `)
 }
 }
-  // PENDING RESIGNATION CODE BLOCK
 
-// }
+
+  // PENDING RESIGNATION CODE BLOCK
 const lastLog=[]
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length==0){
 console.log("resignation not found")
 }else if(data[i].resignation.length!=0){
 data[i].resignation.forEach(resign=>{
+
+// HAVE A LOGIC BUG {#e23,4}
 if(new Date(resign.noticeDate).getTime()>new Date().getTime()&&resign.ongoingStatus==true){
 lastLog.push(data[i])
 }
 })
+}
+//PENDING TASKS CODE BLOCK
+if(data[i].task.length==0){
+console.log("no task found")
+}else if(data[i].task.length!=0){
+if(data[i].task.find(task=>task.dueDate=="2026-10-09")){
+console.log(data[i].task.find(task=>task.dueDate))
+}
+
 }
 }
 lastLog.slice(0,3).forEach((resigns,i)=>{
@@ -127,7 +139,9 @@ pendingResignationCard.insertAdjacentHTML("beforeend",
 `
 )
 })
-console.log(lastLog)
+
+
+
 const now=new Date()
 payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")
 employeeNumber.innerText=`${data.length} : Active-employees`
