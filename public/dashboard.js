@@ -31,6 +31,8 @@ const announcementCloseBtn=document.getElementById("announcementCloseBtn")
 const announcementForm=document.getElementById("announcementForm")
 const announceLogContainer=document.getElementById("announceLogContainer")
 const pendingResignationCard=document.getElementById("pendingResignationCard")
+const pendingTaskCard=document.getElementById("pendingTaskCard")
+let lastLogTask=[]
 
 // ADMIN DATA FETCH CODE BLOCK
 fetch("/companyFetch",{
@@ -107,34 +109,55 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
 
 
   // PENDING RESIGNATION CODE BLOCK
-const lastLog=[]
+const lastLogResignation=[]
+
+
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length==0){
-console.log("resignation not found")
+// console.log("resignation not found")
 }else if(data[i].resignation.length!=0){
 data[i].resignation.forEach(resign=>{
 
 // HAVE A LOGIC BUG {#e23,4}
 if(new Date(resign.noticeDate).getTime()>new Date().getTime()&&resign.ongoingStatus==true){
-lastLog.push(data[i])
+lastLogResignation.push(data[i])
 }
 })
 }
 //PENDING TASKS CODE BLOCK
+
 if(data[i].task.length==0){
-console.log("no task found")
+// console.log("no task found")
 }else if(data[i].task.length!=0){
-if(data[i].task.find(task=>task.dueDate=="2026-10-09")){
-console.log(data[i].task.find(task=>task.dueDate))
-}
+
+data[i].task.forEach(tasks=>{
+// MAJOR BUGS NEEDS FIXING AND LOGIC CORRECTION {#e33,13}
+lastLogTask=lastLogTask.sort((a,b)=>a-b)
+const tasksDate=new Date(tasks.dueDate).getTime()
+if(tasksDate<new Date().getTime()){
+// console.log(`${tasks.dueDate} is expired` )
+}else if(tasksDate>new Date().getTime()&&tasks.status=="active"){
+lastLogTask.push(`
+ <p class="text-sm text-gray-700 bg-blue-50 p-2 rounded flex justify-between items-center">
+                    <span>${tasks.taskName}</span>
+                    <span class="text-xs text-blue-600/70 font-mono">${new Date(tasks.dueDate).toDateString()}</span>
+                </p>
+`)
 
 }
+})
 }
-lastLog.slice(0,3).forEach((resigns,i)=>{
+}
+lastLogTask.slice(0,3).forEach((task,i)=>{
+pendingTaskCard.insertAdjacentHTML("beforeend",task)
+
+})
+
+lastLogResignation.slice(0,3).forEach((resigns,i)=>{
 pendingResignationCard.insertAdjacentHTML("beforeend",
 `<p class="text-sm text-gray-700 bg-yellow-50 p-2 rounded flex justify-between items-center">
                     <span>Resignation: ${resigns.personalInfo.fullName}</span>
-                    <span class="text-xs text-yellow-600/70 font-mono"> ${resigns.resignation[0].noticeDate}</span>
+                    <span class="text-xs text-yellow-600/70 font-mono"> ${new Date(resigns.resignation[0].noticeDate).toDateString()}</span>
                 </p>
 `
 )
