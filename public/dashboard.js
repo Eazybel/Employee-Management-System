@@ -126,32 +126,20 @@ lastLogResignation.push(data[i])
 }
 //PENDING TASKS CODE BLOCK
 
-if(data[i].task.length==0){
-// console.log("no task found")
-}else if(data[i].task.length!=0){
+// FIX THE TASK LAST 3 LOG UPDATE {#c4d,13}
+// if(data[i].task.length==0){
+// // console.log("no task found")
+// }else if(data[i].task.length!=0){
 
-data[i].task.forEach(tasks=>{
-// MAJOR BUGS NEEDS FIXING AND LOGIC CORRECTION {#e33,13}
-lastLogTask=lastLogTask.sort((a,b)=>a-b)
-const tasksDate=new Date(tasks.dueDate).getTime()
-if(tasksDate<new Date().getTime()){
-// console.log(`${tasks.dueDate} is expired` )
-}else if(tasksDate>new Date().getTime()&&tasks.status=="active"){
-lastLogTask.push(`
- <p class="text-sm text-gray-700 bg-blue-50 p-2 rounded flex justify-between items-center">
-                    <span>${tasks.taskName}</span>
-                    <span class="text-xs text-blue-600/70 font-mono">${new Date(tasks.dueDate).toDateString()}</span>
-                </p>
-`)
+// data[i].task.forEach(tasks=>{
+// console.log(tasks)
+// })
+// }
+}
+// lastLogTask.slice(0,3).forEach((task,i)=>{
+// pendingTaskCard.insertAdjacentHTML("beforeend",task)
 
-}
-})
-}
-}
-lastLogTask.slice(0,3).forEach((task,i)=>{
-pendingTaskCard.insertAdjacentHTML("beforeend",task)
-
-})
+// })
 
 lastLogResignation.slice(0,3).forEach((resigns,i)=>{
 pendingResignationCard.insertAdjacentHTML("beforeend",
