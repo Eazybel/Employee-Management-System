@@ -77,7 +77,6 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
 }else if(data.length!=0){
-console.log(data)
 // ANNOUNCEMENT LOG CONFIG SECTION
 for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
  if (data[0].announcements[i-1].priorirty=="low") {
@@ -108,10 +107,9 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
 }
 
 
-  // PENDING RESIGNATION CODE BLOCK
+
+//  PENDING RESIGNATION CODE BLOCK {#be6,14}
 const lastLogResignation=[]
-
-
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length==0){
 // console.log("resignation not found")
@@ -124,22 +122,15 @@ lastLogResignation.push(data[i])
 }
 })
 }
+}
 //PENDING TASKS CODE BLOCK
 
-// FIX THE TASK LAST 3 LOG UPDATE {#c4d,13}
-// if(data[i].task.length==0){
-// // console.log("no task found")
-// }else if(data[i].task.length!=0){
-
-// data[i].task.forEach(tasks=>{
-// console.log(tasks)
-// })
-// }
+for (let i = 0; i < data.length; i++) {
+  if(data[i].task.length!=0){
+console.log(data[i].task)
 }
-// lastLogTask.slice(0,3).forEach((task,i)=>{
-// pendingTaskCard.insertAdjacentHTML("beforeend",task)
-
-// })
+  
+}
 
 lastLogResignation.slice(0,3).forEach((resigns,i)=>{
 pendingResignationCard.insertAdjacentHTML("beforeend",
