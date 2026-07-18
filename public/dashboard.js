@@ -108,7 +108,7 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
 
 
 
-//  PENDING RESIGNATION CODE BLOCK {#be6,14}
+//  PENDING RESIGNATION CODE BLOCK EDITING{#be6,14}
 const lastLogResignation=[]
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length==0){
@@ -125,12 +125,16 @@ lastLogResignation.push(data[i])
 }
 //PENDING TASKS CODE BLOCK
 
+const dataOrder=[]
 for (let i = 0; i < data.length; i++) {
   if(data[i].task.length!=0){
-console.log(data[i].task)
+for (let j = 0; j < data[i].task.length; j++) {
+dataOrder.push(data[i].task[j])
 }
-  
 }
+
+}
+console.log(dataOrder)
 
 lastLogResignation.slice(0,3).forEach((resigns,i)=>{
 pendingResignationCard.insertAdjacentHTML("beforeend",
