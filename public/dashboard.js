@@ -76,43 +76,50 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
     </button>
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
-}else if(data.length!=0&&data[0].announcements.length!=0){
+}else if(data.length!=0){
 // ANNOUNCEMENT LOG CONFIG SECTION
-for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
- if (data[0].announcements[i-1].priorirty=="low") {
-  announceLogContainer.insertAdjacentHTML("beforeend",
-`
-       <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
-        ${data[0].announcements[i-1].title} 
-        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
-    </p>              
-`)
-}else if(data[0].announcements[i-1].priorirty=="high"){
-   announceLogContainer.insertAdjacentHTML("beforeend",
-`
-      <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
-       ${data[0].announcements[i-1].title}  
-        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()} </span>
-    </p>              
-`)
-} else if(data[0].announcements[i-1].priorirty=="medium"){
-   announceLogContainer.insertAdjacentHTML("beforeend",
-`
-     <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
-        ${data[0].announcements[i-1].title} 
-        <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
-    </p>                  
-`)
+// sort this announcement data block {#efa,33}
+for (let i = 0; i < data[0].announcements.length; i++) {
+  console.log(data[0].announcements[i])
+  
 }
-}
+// for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
+
+//  if (data[0].announcements[i-1].priorirty=="low") {
+//   announceLogContainer.insertAdjacentHTML("beforeend",
+// `
+//        <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
+//         ${data[0].announcements[i-1].title} 
+//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
+//     </p>              
+// `)
+// }else if(data[0].announcements[i-1].priorirty=="high"){
+//    announceLogContainer.insertAdjacentHTML("beforeend",
+// `
+//       <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
+//        ${data[0].announcements[i-1].title}  
+//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()} </span>
+//     </p>              
+// `)
+// } else if(data[0].announcements[i-1].priorirty=="medium"){
+//    announceLogContainer.insertAdjacentHTML("beforeend",
+// `
+//      <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
+//         ${data[0].announcements[i-1].title} 
+//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
+//     </p>                  
+// `)
+// }
+// }
 
 
 
 //  PENDING RESIGNATION CODE BLOCK EDITING
+// Resignation code fix {#205,6}
 let dataOrderResignation=[]
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length!=0&&data[i].resignation[0].ongoingStatus==true&&new Date(data[i].resignation[0].noticeDate).getTime()>new Date().getTime()){
-console.log(data[i].resignation)
+// console.log(data[i].resignation)
 }
 }
 //PENDING TASKS CODE BLOCK (fix if not code block to show no task found)
