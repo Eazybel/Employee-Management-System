@@ -76,7 +76,7 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
     </button>
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
-}else if(data.length!=0){
+}else if(data.length!=0&&data[0].announcements.length!=0){
 // ANNOUNCEMENT LOG CONFIG SECTION
 for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
  if (data[0].announcements[i-1].priorirty=="low") {
