@@ -77,7 +77,7 @@ const EmployeeSchema = new mongoose.Schema({
   promotion:[{date:{type:String},currentPosition:{type:String},newPosition:{type:String}}],
   salary:[{Effectivedate:{type:String},lastRaisedate:{type:String},previous:{type:String},new:{type:String}}],
   absence:[{date:{type:String},duration:{type:String},reason:{type:String},ongoingStatus:{type:Boolean}}],
-  resignation:[{noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}],
+  resignation:[{resigner:{type:String},noticeDate:{type:String},lastDate:{type:String},reason:{type:String},ongoingStatus:{type:Boolean},acceptanceStatus:{type:Boolean}}],
   task:[{assignedPerson:{type:String},taskName:{type:String},dueDate:{type:String},priorityLevel:{type:String},description:{type:String},taskID:{type:String},status:{type:String},logDate:{type:String},editStatus:{type:String}}],
   announcements:[{date:{type:String},title:{type:String},description:{type:String},priorirty:{type:String}}],
 }, {
@@ -85,3 +85,5 @@ const EmployeeSchema = new mongoose.Schema({
 });
 const employeesModel=mongoose.model("employeesModel",EmployeeSchema)
 module.exports = {employeesModel,EmployeeSchema};
+
+

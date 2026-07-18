@@ -6,7 +6,7 @@ const resignationController=async(req,res)=>{
     const companyName=companyData.companyName
     const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
     const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
-    myEmployee.resignation.push({noticeDate:req.body.noticeDay,lastDate:req.body.lastDay,reason:req.body.reason,ongoingStatus:true,acceptanceStatus:false})
+    myEmployee.resignation.push({resigner:req.body.employeeName,noticeDate:req.body.noticeDay,lastDate:req.body.lastDay,reason:req.body.reason,ongoingStatus:true,acceptanceStatus:false})
     await myEmployee.save()
     res.json(req.body)
 }

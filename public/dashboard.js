@@ -108,35 +108,42 @@ for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; 
 
 
 
-//  PENDING RESIGNATION CODE BLOCK EDITING{#be6,14}
-const lastLogResignation=[]
+//  PENDING RESIGNATION CODE BLOCK EDITING
+let dataOrderResignation=[]
 for (let i = 0; i < data.length; i++) {
-if(data[i].resignation.length==0){
-// console.log("resignation not found")
-}else if(data[i].resignation.length!=0){
-data[i].resignation.forEach(resign=>{
+if(data[i].resignation.length!=0&&data[i].resignation[0].ongoingStatus==true&&new Date(data[i].resignation[0].noticeDate).getTime()>new Date().getTime()){
+console.log(data[i].resignation)
+}
+}
+//PENDING TASKS CODE BLOCK (fix if not code block to show no task found)
 
-// HAVE A LOGIC BUG {#e23,4}
-if(new Date(resign.noticeDate).getTime()>new Date().getTime()&&resign.ongoingStatus==true){
-lastLogResignation.push(data[i])
-}
-})
-}
-}
-//PENDING TASKS CODE BLOCK
-
-const dataOrder=[]
+let dataOrderTask=[]
 for (let i = 0; i < data.length; i++) {
   if(data[i].task.length!=0){
 for (let j = 0; j < data[i].task.length; j++) {
-dataOrder.push(data[i].task[j])
+  if(new Date(data[i].task[j].dueDate).getTime()>new Date().getTime()){
+
+    dataOrderTask.push(data[i].task[j])
+  }
 }
 }
 
 }
-console.log(dataOrder)
+dataOrderTask=dataOrderTask.sort((a,b)=>{
+return new Date(a.dueDate).getTime()-new Date(b.dueDate).getTime()
+})
+dataOrderTask.slice(0,3).forEach(datas=>{
+pendingTaskCard.insertAdjacentHTML("beforeend",
+  `
+  <p class="text-sm text-gray-700 bg-blue-50 p-2 rounded flex justify-between items-center">
+                    <span>${datas.taskName}(${datas.assignedPerson})</span>
+                    <span class="text-xs text-blue-600/70 font-mono">${new Date(datas.dueDate).toDateString()}</span>
+  </p>
+  `
+)
+})
 
-lastLogResignation.slice(0,3).forEach((resigns,i)=>{
+dataOrderResignation.slice(0,3).forEach((resigns,i)=>{
 pendingResignationCard.insertAdjacentHTML("beforeend",
 `<p class="text-sm text-gray-700 bg-yellow-50 p-2 rounded flex justify-between items-center">
                     <span>Resignation: ${resigns.personalInfo.fullName}</span>
