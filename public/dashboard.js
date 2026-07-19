@@ -77,40 +77,39 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
 }else if(data.length!=0){
+  let dataOrderAnnouncement=[]
 // ANNOUNCEMENT LOG CONFIG SECTION
-// sort this announcement data block {#efa,33}
-for (let i = 0; i < data[0].announcements.length; i++) {
-  console.log(data[0].announcements[i])
-  
+dataOrderAnnouncement=data[0].announcements.sort((a,b)=>{
+    return new Date(b.date).getTime()-new Date(a.date).getTime()
+  })
+// console.log(dataOrderAnnouncement)
+for (let i = 0; i < dataOrderAnnouncement.length; i++) {
+    if (dataOrderAnnouncement[i].priorirty=="low") {
+    announceLogContainer.insertAdjacentHTML("beforeend",
+  `
+         <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
+          ${dataOrderAnnouncement[i].title} 
+          <span class="float-right text-xs text-gray-400 font-mono">${new Date(dataOrderAnnouncement[i].date).toDateString()}</span>
+      </p>              
+  `)
+  }else if(dataOrderAnnouncement[i].priorirty=="high"){
+     announceLogContainer.insertAdjacentHTML("beforeend",
+  `
+        <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
+         ${dataOrderAnnouncement[i].title}  
+          <span class="float-right text-xs text-gray-400 font-mono">${new Date(dataOrderAnnouncement[i].date).toDateString()} </span>
+      </p>              
+  `)
+  } else if(dataOrderAnnouncement[i].priorirty=="medium"){
+     announceLogContainer.insertAdjacentHTML("beforeend",
+  `
+       <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
+          ${dataOrderAnnouncement[i].title} 
+          <span class="float-right text-xs text-gray-400 font-mono">${new Date(dataOrderAnnouncement[i].date).toDateString()}</span>
+      </p>                  
+  `)
+  }
 }
-// for (let i = data[0].announcements.length; i > data[0].announcements.length-3 ; i--) {
-
-//  if (data[0].announcements[i-1].priorirty=="low") {
-//   announceLogContainer.insertAdjacentHTML("beforeend",
-// `
-//        <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
-//         ${data[0].announcements[i-1].title} 
-//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
-//     </p>              
-// `)
-// }else if(data[0].announcements[i-1].priorirty=="high"){
-//    announceLogContainer.insertAdjacentHTML("beforeend",
-// `
-//       <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
-//        ${data[0].announcements[i-1].title}  
-//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()} </span>
-//     </p>              
-// `)
-// } else if(data[0].announcements[i-1].priorirty=="medium"){
-//    announceLogContainer.insertAdjacentHTML("beforeend",
-// `
-//      <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
-//         ${data[0].announcements[i-1].title} 
-//         <span class="float-right text-xs text-gray-400 font-mono">${new Date(data[0].announcements[i-1].date).toDateString()}</span>
-//     </p>                  
-// `)
-// }
-// }
 
 
 
