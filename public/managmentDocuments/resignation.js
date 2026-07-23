@@ -6,6 +6,7 @@ const ongoingList=document.getElementById("resignation-list")
 const logList=document.getElementById("logList")
 const submitBtn=document.getElementById("submitBtn")
 const resignationForm=document.getElementById("resignation-form")
+const filterBtn=document.getElementById("filterBtn")
 
 resigModalOpener.onclick=()=>{
     resigModal.classList.remove("hidden")
@@ -81,7 +82,7 @@ fetch("/nameData",{
 const logBtns=document.querySelectorAll("button")
  const employeeName=document.querySelectorAll("td.employeeName")
 filterBtn.addEventListener("keyup",(e)=>{
-    let target=e.target.value.toLowerCase()
+  let target=e.target.value.toLowerCase()
     employeeName.forEach(employee=>{
         let name=employee.innerText.toLowerCase()
         if(   employee.parentElement.style.display!=="none"){
@@ -92,6 +93,8 @@ filterBtn.addEventListener("keyup",(e)=>{
         }
         }
     })
+
+  
 }  
 )
 logBtns.forEach(btn=>{

@@ -118,12 +118,25 @@ for (let i = 0; i < dataOrderAnnouncement.length; i++) {
 // Resignation code fix {#205,6}
 let dataOrderResignation=[]
 for (let i = 0; i < data.length; i++) {
-if(data[i].resignation.length!=0&&data[i].resignation[0].ongoingStatus==true&&new Date(data[i].resignation[0].noticeDate).getTime()>new Date().getTime()){
-console.log(data[i].resignation)
+if(data[i].resignation.length!=0&&data[i].resignation[data[i].resignation.length-1].ongoingStatus==true&&new Date(data[i].resignation[data[i].resignation.length-1].noticeDate).getTime()>new Date().getTime()){
+dataOrderResignation.push(data[i].resignation)
 }
 }
-//PENDING TASKS CODE BLOCK (fix if not code block to show no task found)
+dataOrderResignation=dataOrderResignation.sort((a,b)=>{
+  return new Date(b.noticeDate).getTime()-new Date(a.noticeDate).getTime()
+})
+console.log(dataOrderResignation)
+// dataOrderResignation.slice(0,3).forEach((resigns,i)=>{
+// pendingResignationCard.insertAdjacentHTML("beforeend",
+// `<p class="text-sm text-gray-700 bg-yellow-50 p-2 rounded flex justify-between items-center">
+//                     <span>Resignation: ${resigns.personalInfo.fullName}</span>
+//                     <span class="text-xs text-yellow-600/70 font-mono"> ${new Date(resigns.resignation[0].noticeDate).toDateString()}</span>
+//                 </p>
+// `
+// )
+// })
 
+// PENDING TASKS CODE BLOCK (fix if not code block to show no task found) {#fe8,26}
 let dataOrderTask=[]
 for (let i = 0; i < data.length; i++) {
   if(data[i].task.length!=0){
@@ -136,6 +149,7 @@ for (let j = 0; j < data[i].task.length; j++) {
 }
 
 }
+
 dataOrderTask=dataOrderTask.sort((a,b)=>{
 return new Date(a.dueDate).getTime()-new Date(b.dueDate).getTime()
 })
@@ -150,15 +164,7 @@ pendingTaskCard.insertAdjacentHTML("beforeend",
 )
 })
 
-dataOrderResignation.slice(0,3).forEach((resigns,i)=>{
-pendingResignationCard.insertAdjacentHTML("beforeend",
-`<p class="text-sm text-gray-700 bg-yellow-50 p-2 rounded flex justify-between items-center">
-                    <span>Resignation: ${resigns.personalInfo.fullName}</span>
-                    <span class="text-xs text-yellow-600/70 font-mono"> ${new Date(resigns.resignation[0].noticeDate).toDateString()}</span>
-                </p>
-`
-)
-})
+
 
 
 
