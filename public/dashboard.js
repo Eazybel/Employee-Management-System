@@ -78,14 +78,14 @@ dataContainer.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shado
 </div>`
 employeeNumber.innerText=`${data.length} : Active-employees`
 }else if(data.length!=0){
+  //  ANNOUNCEMENT LOG CONFIG SECTION{#cae,33}
   let dataOrderAnnouncement=[]
-// ANNOUNCEMENT LOG CONFIG SECTION
+
 dataOrderAnnouncement=data[0].announcements.sort((a,b)=>{
     return new Date(b.date).getTime()-new Date(a.date).getTime()
   })
-// console.log(dataOrderAnnouncement)
-for (let i = 0; i < dataOrderAnnouncement.length; i++) {
-    if (dataOrderAnnouncement[i].priorirty=="low") {
+for (let i = 0; i < 3; i++) {
+    if (dataOrderAnnouncement[i].priorirty=="Low") {
     announceLogContainer.insertAdjacentHTML("beforeend",
   `
          <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-green-500">
@@ -93,7 +93,7 @@ for (let i = 0; i < dataOrderAnnouncement.length; i++) {
           <span class="float-right text-xs text-gray-400 font-mono">${new Date(dataOrderAnnouncement[i].date).toDateString()}</span>
       </p>              
   `)
-  }else if(dataOrderAnnouncement[i].priorirty=="high"){
+  }else if(dataOrderAnnouncement[i].priorirty=="High"){
      announceLogContainer.insertAdjacentHTML("beforeend",
   `
         <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-red-500">
@@ -101,7 +101,7 @@ for (let i = 0; i < dataOrderAnnouncement.length; i++) {
           <span class="float-right text-xs text-gray-400 font-mono">${new Date(dataOrderAnnouncement[i].date).toDateString()} </span>
       </p>              
   `)
-  } else if(dataOrderAnnouncement[i].priorirty=="medium"){
+  } else if(dataOrderAnnouncement[i].priorirty=="Medium"){
      announceLogContainer.insertAdjacentHTML("beforeend",
   `
        <p class="text-sm text-gray-600 bg-gray-50 p-2 rounded border-l-4 border-yellow-500">
@@ -113,9 +113,7 @@ for (let i = 0; i < dataOrderAnnouncement.length; i++) {
 }
 
 
-
-//  PENDING RESIGNATION CODE BLOCK EDITING
-// Resignation code fix {#205,10}
+// Resignation code block fixed {#0e1,23}
 let dataOrderResignation=[]
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length!=0){
@@ -139,21 +137,15 @@ pendingResignationCard.insertAdjacentHTML("beforeend",
 `
 )
 })
-
-// PENDING TASKS CODE BLOCK (fix if not code block to show no task found) {#fe8,26}
+// PENDING TASKS CODE BLOCK (fix if not code block to show no task found) {#fe8,21}
 let dataOrderTask=[]
 for (let i = 0; i < data.length; i++) {
   if(data[i].task.length!=0){
 for (let j = 0; j < data[i].task.length; j++) {
   if(new Date(data[i].task[j].dueDate).getTime()>new Date().getTime()){
-
     dataOrderTask.push(data[i].task[j])
   }
-}
-}
-
-}
-
+}}}
 dataOrderTask=dataOrderTask.sort((a,b)=>{
 return new Date(a.dueDate).getTime()-new Date(b.dueDate).getTime()
 })
@@ -167,10 +159,16 @@ pendingTaskCard.insertAdjacentHTML("beforeend",
   `
 )
 })
+//Pending Leave Requests
+// leave request should be corrected from the start {#f9f,9}
 
-
-
-
+for (let i = 0; i < data.length; i++) {
+  if(data[i].leaveRequest.length!=0){
+    data[i].leaveRequest.forEach(leave=>{
+      console.log(leave)
+    })
+  }
+}
 
 const now=new Date()
 payRollShower.innerText=`${now.getMonth()+1-30} Days left`.replace("-","")

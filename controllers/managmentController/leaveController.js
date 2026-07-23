@@ -6,7 +6,7 @@ const leaveController=async(req,res)=>{
         const companyName=companyData.companyName
         const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
         const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
-        myEmployee.leaveRequest.push({startDate:req.body.leaveStartDate,endDate:req.body.leaveEndDate,reason:req.body.leaveReason,logStatus:false})
+        myEmployee.leaveRequest.push({startDate:req.body.leaveStartDate,endDate:req.body.leaveEndDate,reason:req.body.leaveReason,logStatus:"active"})
         await myEmployee.save()
         res.json(req.body)
 }
@@ -15,7 +15,7 @@ const logLeaveRequest=async(req,res)=>{
     const companyName=companyData.companyName
     const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
    const myEmployee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
-   myEmployee.leaveRequest[myEmployee.leaveRequest.length-1].logStatus=true
+//    myEmployee.leaveRequest[myEmployee.leaveRequest.length-1].logStatus=true
     await myEmployee.save()
     res.json(myEmployee)
 }
