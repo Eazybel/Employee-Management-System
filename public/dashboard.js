@@ -13,6 +13,7 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
 // VARIABLES ASSIHNMENT
+
 const employeeNumber=document.getElementById("employeeNumber")
 const companyName=document.getElementById("companyName")
 const companyLogo=document.getElementById("companyLogo")
@@ -118,7 +119,7 @@ for (let i = 0; i < dataOrderAnnouncement.length; i++) {
 let dataOrderResignation=[]
 for (let i = 0; i < data.length; i++) {
 if(data[i].resignation.length!=0&&data[i].resignation[0].ongoingStatus==true&&new Date(data[i].resignation[0].noticeDate).getTime()>new Date().getTime()){
-// console.log(data[i].resignation)
+console.log(data[i].resignation)
 }
 }
 //PENDING TASKS CODE BLOCK (fix if not code block to show no task found)
