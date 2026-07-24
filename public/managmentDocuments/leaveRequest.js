@@ -15,6 +15,7 @@ onAuthStateChanged(auth, (user) => {
 // VARIABLE DECLARATION
 const grantLeaveBtn=document.getElementById("grantLeaveBtn")
 const leaveRequestModal=document.getElementById("leaveRequestModal")
+const submitBtn=document.getElementById("submitBtn")
 const cancelBtn=document.getElementById("cancelBtn")
 const employeeName=document.getElementById("employeeName")
 const body=document.querySelector("body")
@@ -57,7 +58,6 @@ body.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-fu
      employee.leaveRequest.forEach(requests=>{
         // log list updater
         if(requests.logStatus==="true"){
-            console.log(requests)
             logContainer.insertAdjacentHTML("beforeend",
                 `
                  <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -117,6 +117,18 @@ employeeName.forEach(employee=>{
 
 
   }
+submitBtn.onclick=(e)=>{
+e.preventDefault()
+const leaveRequestForm=document.getElementById("leaveRequestForm")
+const form=new FormData(leaveRequestForm)
+form.append("companyUID",localStorage.getItem("UID"))
+if(leaveRequestForm.checkValidity()){
+const formDataClear=Object.fromEntries(form.entries())
+console.log(formDataClear)
+}else if(!leaveRequestForm.checkValidity()){
+leaveRequestForm.reportValidity()
+}
+}
 })
   } else {
     window.location.href="./logIn.html"
