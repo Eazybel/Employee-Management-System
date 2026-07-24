@@ -18,6 +18,8 @@ const leaveRequestModal=document.getElementById("leaveRequestModal")
 const cancelBtn=document.getElementById("cancelBtn")
 const employeeName=document.getElementById("employeeName")
 const body=document.querySelector("body")
+const logContainer=document.getElementById("logContainer")
+const activeContainer=document.getElementById("activeContainer")
 grantLeaveBtn.onclick=()=>{
     leaveRequestModal.classList.remove("hidden")
 }
@@ -46,12 +48,75 @@ body.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-fu
         Home page
     </a>
 </div>`
-    }else if(data.length!=0)[
-        data.forEach(employee=>{
+    }else if(data.length!=0){
+    data.forEach((employee,i)=>{
+        // name list update code block
   employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.personalInfo.fullName}</option>`)
+// logs and ongoing requests update block
+  if(employee.leaveRequest.length!==0){
+     employee.leaveRequest.forEach(requests=>{
+        // log list updater
+        if(requests.logStatus==="true"){
+            console.log(requests)
+            logContainer.insertAdjacentHTML("beforeend",
+                `
+                 <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <p class="text-lg font-medium text-gray-800 employeeName">Pam Beesly - <span class="font-normal text-sm text-gray-500">Sick Leave</span></p>
+                        <p class="text-sm text-gray-600">Effective: 2026-06-10 to 2026-06-12</p>
+                    </div>
+                    <div>
+                        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+                            <i class="fas fa-user mr-1.5"></i> Full Profile
+                        </button>
+                    </div>
+                </div>
+                `
+            )
+            // active list updater
+        }else if(requests.logStatus==="false"){
+          activeContainer.insertAdjacentHTML("beforeend",
+            `
+             <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <p class="text-lg font-medium text-gray-800 employeeName">Jim Halpert</p>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Pending</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Type: Vacation | From: 2026-08-01 To: 2026-08-07</p>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                        <button class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center">
+                            <i class="fas fa-check mr-1.5"></i> Approve
+                        </button>
+                        <button class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center">
+                            <i class="fas fa-times mr-1.5"></i> Deny
+                        </button>
+                    </div>
+                </div>
+            `
+          )
+        }
+     })
+  }
         })
-       
-    ]
+
+// filter action code block {#61f,12}
+body.addEventListener("keyup",(e)=>{
+const target=e.target.value.toLowerCase()
+const employeeName=document.querySelectorAll(".employeeName")
+employeeName.forEach(employee=>{
+    const text=employee.innerText.toLowerCase()
+    if(text.includes(target)){
+      employee.parentElement.parentElement.parentElement.style.display=""
+    }else{
+      employee.parentElement.parentElement.parentElement.style.display="none"
+    }
+})
+})
+
+
+  }
 })
   } else {
     window.location.href="./logIn.html"
