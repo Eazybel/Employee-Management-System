@@ -16,6 +16,7 @@ onAuthStateChanged(auth, (user) => {
 const grantLeaveBtn=document.getElementById("grantLeaveBtn")
 const leaveRequestModal=document.getElementById("leaveRequestModal")
 const cancelBtn=document.getElementById("cancelBtn")
+const employeeName=document.getElementById("employeeName")
 const body=document.querySelector("body")
 grantLeaveBtn.onclick=()=>{
     leaveRequestModal.classList.remove("hidden")
@@ -31,7 +32,7 @@ fetch("/nameData",{
 }).then(res=>{
     return res.json()
 }).then(data=>{
-    if(data.length!=0){
+    if(data.length==0){
 body.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
         No employees registered
@@ -45,8 +46,12 @@ body.innerHTML=`  <div class="text-center p-8 bg-white rounded-xl shadow-lg w-fu
         Home page
     </a>
 </div>`
-    }
-    console.log(data)
+    }else if(data.length!=0)[
+        data.forEach(employee=>{
+  employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.personalInfo.fullName}</option>`)
+        })
+       
+    ]
 })
   } else {
     window.location.href="./logIn.html"
