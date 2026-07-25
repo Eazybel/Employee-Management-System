@@ -36,7 +36,7 @@ fetch("/nameData",{
     },
     body:JSON.stringify({companyUID:localStorage.getItem("UID")})
 }).then(res=>{
-    return res.text()
+    return res.json()
 }).then(data=>{
 
     if(data.length==0){
