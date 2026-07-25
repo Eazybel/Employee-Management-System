@@ -32,10 +32,10 @@ await fetch("/logLeaveRequest",
     {
         method:"POST",
         headers:{"Content-type":"application/json","Authorization":`Bearer ${token}`},
-        body:JSON.stringify({"data":"sucess"})
+        body:JSON.stringify({"logAction":"expiryCheck"})
     }
 ).then(res=>{
-    return res.text()
+    return res.json()
 }).then(data=>{
     console.log(data)
 })
