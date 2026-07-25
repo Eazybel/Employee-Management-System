@@ -23,7 +23,16 @@ require("dotenv").config()
 const string=process.env.STRING
 const app=express()
 const admin=require("firebase-admin")
-const serviceAccount=require("./employee-managment-syste-fdd4c-firebase-adminsdk-fbsvc-31d8818c3f.json")
+let serviceAccount;
+try {
+  serviceAccount= require("./employee-managment-syste-fdd4c-firebase-adminsdk-fbsvc-31d8818c3f.json")
+} catch (error) {
+    serviceAccount = {
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+    };
+}
 admin.initializeApp({credential:admin.credential.cert(serviceAccount)})
 app.use("/uploads",express.static("uploads"))
 app.use(express.static(path.join(__dirname,"public")))
