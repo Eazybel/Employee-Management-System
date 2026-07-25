@@ -20,25 +20,35 @@ const submitBtn=document.getElementById("submitBtn")
 const cancelBtn=document.getElementById("cancelBtn")
 const employeeName=document.getElementById("employeeName")
 const body=document.querySelector("body")
-const logContainer=document.getElementById("logContainer")
 const activeContainer=document.getElementById("activeRequestsList")
+const logContainer=document.getElementById("historyRequestsList")
 grantLeaveBtn.onclick=()=>{
     leaveRequestModal.classList.remove("hidden")
 }
 cancelBtn.onclick=()=>{
     window.location.reload()
 }
+await fetch("/logLeaveRequest",
+    {
+        method:"POST",
+        headers:{"Content-type":"application/json","Authorization":`Bearer ${token}`},
+        body:JSON.stringify({"data":"sucess"})
+    }
+).then(res=>{
+    return res.text()
+}).then(data=>{
+    console.log(data)
+})
 // employee list fetcher data
-fetch("/nameData",{
+await fetch("/nameData",{
     method:"POST",
     headers:{"Content-type":"application/json",
         "Authorization":`Bearer ${token}`
-    },
-    body:JSON.stringify({companyUID:localStorage.getItem("UID")})
+    }
 }).then(res=>{
     return res.json()
 }).then(data=>{
-
+console.log(data)
     if(data.length==0){
 body.innerHTML=`<div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
@@ -56,14 +66,16 @@ body.innerHTML=`<div class="text-center p-8 bg-white rounded-xl shadow-lg w-full
     }else if(data.length!=0){
 let dataCount=0
     data.forEach((employee,i)=>{
-        // name list update code block
-  employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.personalInfo.fullName}</option>`)
 // logs and ongoing requests update block
 if(employee.leaveRequest.length!=0){
 dataCount++
+}else if(employee.leaveRequest.length==0){
+   employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.employeeName}</option>`)
 }
 })
+
 if(dataCount==0){
+// employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${requests.employeeName}</option>`)
 document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
         No employees leave request registered
@@ -77,7 +89,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
   data.forEach(employee=>{
     if(employee.leaveRequest.length!=0){
         employee.leaveRequest.forEach(requests=>{
-             if(requests.logStatus==="active"){
+ if(requests.logStatus==="active"){
                 // active container log code block
           activeContainer.insertAdjacentHTML("beforeend",
             `
@@ -87,7 +99,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
                             <p class="text-lg font-medium text-gray-800 employeeName">${requests.employeeName}</p>
                             <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Pending</span>
                         </div>
-                        <p class="text-sm text-gray-600">Type: ${requests.reason} | From: ${requests.startDate} To: ${requests.endDate}</p>
+                        <p class="text-sm text-gray-600">Type: <span class="reason">${requests.reason}</> | From: <span class="startDate">${requests.startDate}</span> To: <span class="endDate">${requests.endDate}</span></p>
                     </div>
                     <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
                         <button class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center approve">
@@ -102,13 +114,78 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
           )
 
 
+        }else if(requests.logStatus==="passive"){
+            employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
+        logContainer.insertAdjacentHTML("beforeend",
+            `
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <p class="text-lg font-medium text-gray-800">
+            Jim Halpert - <span class="font-normal text-sm text-gray-500">Personal Leave</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-gray-200 text-gray-700 rounded-full border border-gray-300">Expired</span>
+        </p>
+        <p class="text-sm text-gray-600">Effective: 2026-05-01 to 2026-05-05</p>
+    </div>
+    <div>
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+            <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+    </div>
+</div>
+            `
+        )
+        }else if(requests.logStatus==="passive"){
+            employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
+             logContainer.insertAdjacentHTML("beforeend",
+            `
+           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <p class="text-lg font-medium text-gray-800">
+            Pam Beesly - <span class="font-normal text-sm text-gray-500">Sick Leave</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
+        </p>
+        <p class="text-sm text-gray-600">Effective: 2026-06-10 to 2026-06-12</p>
+    </div>
+    <div>
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+            <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+    </div>
+</div>
+`
+        )
+        }else if(requests.logStatus==="passive"){
+             logContainer.insertAdjacentHTML("beforeend",
+            `<div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <p class="text-lg font-medium text-gray-800">
+            Dwight Schrute - <span class="font-normal text-sm text-gray-500">Vacation</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-full border border-red-200">Denied</span>
+        </p>
+        <p class="text-sm text-gray-600">Effective: 2026-06-15 to 2026-06-20</p>
+    </div>
+    <div>
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+            <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+    </div>
+</div>`
+        )
         }
         })
     }
 })
 const logBtns=document.querySelectorAll(".approve, .deny")
 logBtns.forEach(btns=>{
-    console.log(btns)
+    btns.onclick=()=>{
+        // const displayData=
+        if(btns.classList.contains("approve")){
+            
+            console.log(btns)
+        }else if(btns.classList.contains("deny")){
+                console.log(btns)
+        }
+    }
 })
 
 }
@@ -137,13 +214,12 @@ submitBtn.onclick=(e)=>{
 e.preventDefault()
 const leaveRequestForm=document.getElementById("leaveRequestForm")
 const form=new FormData(leaveRequestForm)
-form.append("companyUID",localStorage.getItem("UID"))
 if(leaveRequestForm.checkValidity()){
 const formDataClear=Object.fromEntries(form.entries())
 
 fetch("/leaveController",{
     method:"POST",
-    headers:{"Content-type":"application/json"},
+    headers:{"Content-type":"application/json","Authorization":`Bearer ${token}`},
     body:JSON.stringify(formDataClear)
 }).then(res=>{
     return res.json()
