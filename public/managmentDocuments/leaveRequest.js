@@ -178,11 +178,23 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
 const logBtns=document.querySelectorAll(".approve, .deny")
 logBtns.forEach(btns=>{
     btns.onclick=()=>{
-        // const displayData=
+// approved requests managing section code block
         if(btns.classList.contains("approve")){
-            
-            console.log(btns)
-        }else if(btns.classList.contains("deny")){
+        const employeeName=btns.parentElement.parentElement.querySelector(".employeeName").innerText
+            console.log(employeeName)
+  fetch("/logLeaveRequest",
+    {
+        method:"POST",
+        headers:{"Content-type":"application/json","Authorization":`Bearer ${token}`},
+        body:JSON.stringify({"logAction":"approved","employeeName":employeeName})
+    }
+).then(res=>{
+    return res.json()
+}).then(data=>{
+    console.log(data)
+})
+//  denyed requests managing section code block
+}else if(btns.classList.contains("deny")){
                 console.log(btns)
         }
     }
