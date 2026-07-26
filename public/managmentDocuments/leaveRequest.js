@@ -70,7 +70,7 @@ let dataCount=0
 if(employee.leaveRequest.length!=0){
 dataCount++
 }else if(employee.leaveRequest.length==0){
-   employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.employeeName}</option>`)
+   employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${employee.personalInfo.fullName}</option>`)
 }
 })
 
@@ -134,17 +134,18 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
 </div>
             `
         )
-        }else if(requests.logStatus==="passive"){
+        }else if(requests.logStatus==="approved"){
             employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
+            
              logContainer.insertAdjacentHTML("beforeend",
             `
            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
     <div>
         <p class="text-lg font-medium text-gray-800">
-            Pam Beesly - <span class="font-normal text-sm text-gray-500">Sick Leave</span>
+            ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
             <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: 2026-06-10 to 2026-06-12</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate}</p>
     </div>
     <div>
         <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
@@ -177,25 +178,49 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
 })
 const logBtns=document.querySelectorAll(".approve, .deny")
 logBtns.forEach(btns=>{
-    btns.onclick=()=>{
+    btns.onclick=async()=>{
 // approved requests managing section code block
-        if(btns.classList.contains("approve")){
-        const employeeName=btns.parentElement.parentElement.querySelector(".employeeName").innerText
-            console.log(employeeName)
-  fetch("/logLeaveRequest",
+if(btns.classList.contains("approve")){
+const employeeName=btns.parentElement.parentElement.querySelector(".employeeName").innerText
+const reason=btns.parentElement.parentElement.querySelector(".reason").innerText
+const startDate=btns.parentElement.parentElement.querySelector(".employeeName").innerText
+const endDate=btns.parentElement.parentElement.querySelector(".employeeName").innerText
+  try{
+const res=await fetch("/logLeaveRequest",
     {
         method:"POST",
         headers:{"Content-type":"application/json","Authorization":`Bearer ${token}`},
         body:JSON.stringify({"logAction":"approved","employeeName":employeeName})
     }
-).then(res=>{
-    return res.json()
-}).then(data=>{
-    console.log(data)
-})
+)
+if(res.status==200){
+logContainer.insertAdjacentHTML("beforeend",
+            `
+           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+        <p class="text-lg font-medium text-gray-800">
+            ${employeeName} - <span class="font-normal text-sm text-gray-500">${reason}</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
+        </p>
+        <p class="text-sm text-gray-600">Effective: ${startDate} to ${endDate}</p>
+    </div>
+    <div>
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+            <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+    </div>
+</div>
+`
+        )
+btns.parentElement.parentElement.style.display="none"
+}
+const data=await res.json()
+console.log(data)
+  }catch(err){
+    windows.alert("Something went wrong try again")
+  }
 //  denyed requests managing section code block
 }else if(btns.classList.contains("deny")){
-                console.log(btns)
         }
     }
 })

@@ -50,15 +50,21 @@ for (const employeeData of myEmployee) {
 
     res.status(200).send(myEmployee)
         }else if(req.body.logAction=="approved"){
-        const companyDate=await Company.findOne({companyUID:clearToken})
-        const companyName=companyDate.companyName
+        const companyData=await Company.findOne({companyUID:clearToken})
+        const companyName=companyData.companyName
         const employeesModel=mongoose.model("employeeModel",EmployeeSchema,companyName)
         const employee=await employeesModel.findOne({"personalInfo.fullName":req.body.employeeName})
         for (const employeeData of employee.leaveRequest) {
-           if(employee.leaveRequest.logStatus=="active"){
-           console.log(employee.employeeName)
+           const dataUpdate=async()=>{
+            if(employeeData.logStatus=="active"){
+           employeeData.logStatus="approved"
+          
            }
+           await employee.save()
         }
+        await dataUpdate()
+        }
+        res.status(200).send(employee)
         }else if(req.body.logAction=="denyed"){
  
             res.status(200).send("denied")
