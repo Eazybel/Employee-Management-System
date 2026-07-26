@@ -64,7 +64,7 @@ for (const employeeData of myEmployee) {
         }
         await dataUpdate()
         }
-        res.status(200).send(employee)
+        res.status(200).send(JSON.stringify({"status":"approved"}))
         }else if(req.body.logAction=="denyed"){
  
             res.status(200).send("denied")

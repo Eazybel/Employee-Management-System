@@ -94,63 +94,72 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
 activeDataCount++
                 // active container log code block
           activeContainer.insertAdjacentHTML("beforeend",
-            `
-             <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-1">
-                            <p class="text-lg font-medium text-gray-800 employeeName">${requests.employeeName}</p>
-                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Pending</span>
-                        </div>
-                        <p class="text-sm text-gray-600">Type: <span class="reason">${requests.reason}</> | From: <span class="startDate">${requests.startDate}</span> To: <span class="endDate">${requests.endDate} (${"38"}-Days)</span></p>
-                    </div>
-                    <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
-                        <button class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center approve">
-                            <i class="fas fa-check mr-1.5"></i> Approve
-                        </button>
-                        <button class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center deny">
-                            <i class="fas fa-times mr-1.5"></i> Deny
-                        </button>
-                    </div>
-                </div>
-            `
-          )
-
-
-        }else if(requests.logStatus==="expired"){
-            employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
-        logContainer.insertAdjacentHTML("beforeend",
-            `
-            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-    <div>
-        <p class="text-lg font-medium text-gray-800">
-            ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
-            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-gray-200 text-gray-700 rounded-full border border-gray-300">Expired</span>
+            `<div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="min-w-0 flex-1">
+        <div class="flex items-center space-x-2 mb-1">
+            <p class="text-lg font-medium text-gray-800 employeeName">${requests.employeeName}</p>
+            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full shrink-0">Pending</span>
+        </div>
+        <p class="text-sm text-gray-600">
+            Type: <span class="reason max-w-[150px] sm:max-w-xs truncate inline-block align-bottom" title="${requests.reason}">${requests.reason}</span> | 
+            From: <span class="startDate">${requests.startDate}</span> 
+            To: <span class="endDate">${requests.endDate} (${"38"}-Days)</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
     </div>
-    <div>
-        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+    <div class="flex items-center space-x-3 w-full sm:w-auto justify-end flex-wrap gap-y-2">
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center shrink-0">
             <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+        <button class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center approve shrink-0">
+            <i class="fas fa-check mr-1.5"></i> Approve
+        </button>
+        <button class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center deny shrink-0">
+            <i class="fas fa-times mr-1.5"></i> Deny
         </button>
     </div>
 </div>
             `
+          )
+
+
+ }else if(requests.logStatus==="expired"){
+            employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
+        logContainer.insertAdjacentHTML("beforeend",
+            `
+         <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="min-w-0 flex-1">
+        <p class="text-lg font-medium text-gray-800 flex items-center gap-2 flex-wrap sm:flex-nowrap">
+            <span>${requests.employeeName}</span> - 
+            <span class="font-normal text-sm text-gray-500 max-w-[150px] sm:max-w-xs truncate inline-block align-bottom" title="${requests.reason}">${requests.reason}</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-gray-200 text-gray-700 rounded-full border border-gray-300 shrink-0">Expired</span>
+        </p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
+    </div>
+    <div>
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center shrink-0">
+            <i class="fas fa-user mr-1.5"></i> Full Profile
+        </button>
+    </div>
+</div>`
         )
         }else if(requests.logStatus==="approved"){
             employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
             
              logContainer.insertAdjacentHTML("beforeend",
             `
-           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-    <div>
-        <p class="text-lg font-medium text-gray-800">
-            ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
-            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
+         <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="min-w-0 flex-1">
+        <p class="text-lg font-medium text-gray-800 flex items-center gap-2 flex-wrap sm:flex-nowrap">
+            <span>${requests.employeeName}</span> - 
+            <span class="font-normal text-sm text-gray-500 max-w-[150px] sm:max-w-xs truncate inline-block align-bottom" title="${requests.reason}">
+                ${requests.reason}
+            </span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200 shrink-0">Approved</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate}</p>
     </div>
     <div>
-        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center shrink-0">
             <i class="fas fa-user mr-1.5"></i> Full Profile
         </button>
     </div>
@@ -158,17 +167,21 @@ activeDataCount++
 `
         )
         }else if(requests.logStatus==="passive"){
-             logContainer.insertAdjacentHTML("beforeend",
+  logContainer.insertAdjacentHTML("beforeend",
             `<div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-    <div>
-        <p class="text-lg font-medium text-gray-800">
-            Dwight Schrute - <span class="font-normal text-sm text-gray-500">Vacation</span>
-            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-full border border-red-200">Denied</span>
+    <div class="min-w-0 flex-1">
+        <p class="text-lg font-medium text-gray-800 flex items-center gap-2 flex-wrap sm:flex-nowrap">
+            <span class="truncate">${requests.employeeName}</span> - 
+            <!-- Truncated reason span with a tooltip title to view full text on hover -->
+            <span class="font-normal text-sm text-gray-500 max-w-[150px] sm:max-w-xs truncate inline-block align-bottom" title="${requests.reason}">
+                ${requests.reason}
+            </span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-red-200 text-red-700 rounded-full border border-red-300 shrink-0">Denied</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: 2026-06-15 to 2026-06-20</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
     </div>
     <div>
-        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center shrink-0">
             <i class="fas fa-user mr-1.5"></i> Full Profile
         </button>
     </div>
@@ -185,8 +198,8 @@ logBtns.forEach(btns=>{
 if(btns.classList.contains("approve")){
 const employeeName=btns.parentElement.parentElement.querySelector(".employeeName").innerText
 const reason=btns.parentElement.parentElement.querySelector(".reason").innerText
-const startDate=btns.parentElement.parentElement.querySelector(".employeeName").innerText
-const endDate=btns.parentElement.parentElement.querySelector(".employeeName").innerText
+const startDate=btns.parentElement.parentElement.querySelector(".startDate").innerText
+const endDate=btns.parentElement.parentElement.querySelector(".endDate").innerText
   try{
 const res=await fetch("/logLeaveRequest",
     {
@@ -195,19 +208,22 @@ const res=await fetch("/logLeaveRequest",
         body:JSON.stringify({"logAction":"approved","employeeName":employeeName})
     }
 )
-if(res.status==200){
+
+const data=await res.json()
+if(data.status=="approved"){
 logContainer.insertAdjacentHTML("beforeend",
             `
-           <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-    <div>
-        <p class="text-lg font-medium text-gray-800">
-            ${employeeName} - <span class="font-normal text-sm text-gray-500">${reason}</span>
-            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
+  <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="min-w-0 flex-1">
+        <p class="text-lg font-medium text-gray-800 flex items-center gap-2 flex-wrap sm:flex-nowrap">
+            <span>${employeeName}</span> - 
+            <span class="font-normal text-sm text-gray-500 max-w-[150px] sm:max-w-xs truncate inline-block align-bottom" title="${reason}">${reason}</span>
+            <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200 shrink-0">Approved</span>
         </p>
         <p class="text-sm text-gray-600">Effective: ${startDate} to ${endDate} (${"38"}-Days)</p>
     </div>
     <div>
-        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
+        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center shrink-0">
             <i class="fas fa-user mr-1.5"></i> Full Profile
         </button>
     </div>
@@ -216,8 +232,6 @@ logContainer.insertAdjacentHTML("beforeend",
         )
 btns.parentElement.parentElement.style.display="none"
 }
-const data=await res.json()
-console.log(data)
   }catch(err){
     windows.alert("Something went wrong try again")
   }
