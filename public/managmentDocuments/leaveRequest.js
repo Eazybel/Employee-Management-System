@@ -21,6 +21,7 @@ const cancelBtn=document.getElementById("cancelBtn")
 const employeeName=document.getElementById("employeeName")
 const body=document.querySelector("body")
 const activeContainer=document.getElementById("activeRequestsList")
+const activeContainerSection=document.getElementById("activeContainerSection")
 const logContainer=document.getElementById("historyRequestsList")
 grantLeaveBtn.onclick=()=>{
     leaveRequestModal.classList.remove("hidden")
@@ -65,6 +66,7 @@ body.innerHTML=`<div class="text-center p-8 bg-white rounded-xl shadow-lg w-full
 </div>`
     }else if(data.length!=0){
 let dataCount=0
+let activeDataCount=0
     data.forEach((employee,i)=>{
 // logs and ongoing requests update block
 if(employee.leaveRequest.length!=0){
@@ -75,7 +77,6 @@ dataCount++
 })
 
 if(dataCount==0){
-// employeeName.insertAdjacentHTML("beforeend",`<option value="${employee.personalInfo.fullName}">${requests.employeeName}</option>`)
 document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
         No employees leave request registered
@@ -90,6 +91,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
     if(employee.leaveRequest.length!=0){
         employee.leaveRequest.forEach(requests=>{
  if(requests.logStatus==="active"){
+activeDataCount++
                 // active container log code block
           activeContainer.insertAdjacentHTML("beforeend",
             `
@@ -99,7 +101,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
                             <p class="text-lg font-medium text-gray-800 employeeName">${requests.employeeName}</p>
                             <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Pending</span>
                         </div>
-                        <p class="text-sm text-gray-600">Type: <span class="reason">${requests.reason}</> | From: <span class="startDate">${requests.startDate}</span> To: <span class="endDate">${requests.endDate}</span></p>
+                        <p class="text-sm text-gray-600">Type: <span class="reason">${requests.reason}</> | From: <span class="startDate">${requests.startDate}</span> To: <span class="endDate">${requests.endDate} (${"38"}-Days)</span></p>
                     </div>
                     <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
                         <button class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center approve">
@@ -124,7 +126,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
             ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
             <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-gray-200 text-gray-700 rounded-full border border-gray-300">Expired</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate}</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
     </div>
     <div>
         <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
@@ -145,7 +147,7 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
             ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
             <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate}</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate} (${"38"}-Days)</p>
     </div>
     <div>
         <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
@@ -202,7 +204,7 @@ logContainer.insertAdjacentHTML("beforeend",
             ${employeeName} - <span class="font-normal text-sm text-gray-500">${reason}</span>
             <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full border border-green-200">Approved</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: ${startDate} to ${endDate}</p>
+        <p class="text-sm text-gray-600">Effective: ${startDate} to ${endDate} (${"38"}-Days)</p>
     </div>
     <div>
         <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
@@ -224,7 +226,19 @@ console.log(data)
         }
     }
 })
+if(activeDataCount<1){
+activeContainerSection.insertAdjacentHTML("beforeend",
+    `
+    <div class="text-center p-8 bg-white rounded-xl shadow-lg w-full col-span-full">
+    <h3 class="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
+       No pending leave requests at this moment
+    </h3>
 
+
+</div>
+    `
+)
+}
 }
  
  
