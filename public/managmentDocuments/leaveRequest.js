@@ -114,17 +114,17 @@ document.querySelector("main").innerHTML=`<div class="text-center p-8 bg-white r
           )
 
 
-        }else if(requests.logStatus==="passive"){
+        }else if(requests.logStatus==="expired"){
             employeeName.insertAdjacentHTML("beforeend",`<option value="${requests.employeeName}">${requests.employeeName}</option>`)
         logContainer.insertAdjacentHTML("beforeend",
             `
             <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
     <div>
         <p class="text-lg font-medium text-gray-800">
-            Jim Halpert - <span class="font-normal text-sm text-gray-500">Personal Leave</span>
+            ${requests.employeeName} - <span class="font-normal text-sm text-gray-500">${requests.reason}</span>
             <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-gray-200 text-gray-700 rounded-full border border-gray-300">Expired</span>
         </p>
-        <p class="text-sm text-gray-600">Effective: 2026-05-01 to 2026-05-05</p>
+        <p class="text-sm text-gray-600">Effective: ${requests.startDate} to ${requests.endDate}</p>
     </div>
     <div>
         <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200 flex items-center">
